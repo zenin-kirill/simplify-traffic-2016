@@ -1,0 +1,88 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><b>Simplify Traffic</b></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown" dropdown>
+          <a href="#" class="dropdown-toggle" dropdownToggle id="mv">
+            Map view
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="mv">
+            <li role="menuitem"><a class="dropdown-item" href="#">Vehicles</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Routes</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Stops</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown" dropdown>
+          <a href="#" class="dropdown-toggle" dropdownToggle id="lv">
+            List view
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="lv">
+            <li role="menuitem"><a class="dropdown-item" href="#">Vehicles</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Routes</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#">Stops</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Company information</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Log In</a></li>
+        <li><a href="#">English</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<h3>
+  Angular 2 Simplify Traffic Application
+</h3>
+
+<button type="button"
+        class="btn btn-primary"
+        [(ngModel)]="singleModel"
+        btnCheckbox
+        btnCheckboxTrue="1"
+        btnCheckboxFalse="0">
+  Single Toggle
+</button>
+
+
+<nav>
+	<a [routerLink]=" ['/Home'] ">
+    Home
+  </a>
+  |
+	<a [routerLink]=" ['/About'] ">
+    About
+  </a>
+  |
+	<a [routerLink]=" ['/RepoBrowser/RepoList', {org: 'angular'}] ">
+    Github Repos
+  </a>
+</nav>
+
+<main>
+	<router-outlet></router-outlet>
+</main>
+
+
+<footer>
+  © 2016
+</footer>

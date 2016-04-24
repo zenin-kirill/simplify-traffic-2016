@@ -12,7 +12,8 @@
   "exclude": [
     "typings/main.d.ts",
     "typings/main",
-    "node_modules"
+    "node_modules",
+		"node_modules/ng2-material"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
