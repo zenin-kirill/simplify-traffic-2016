@@ -122,7 +122,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'SB Admin BS 4 Angular2';
+  APP_TITLE = 'Simplify Traffic';
 
   /**
    * The base folder of the applications source files.
@@ -228,13 +228,13 @@ export class SeedConfig {
    * The required NPM version to run the application.
    * @type {string}
    */
-  VERSION_NPM = '2.14.2';
+  VERSION_NPM = '2.15.8';
 
   /**
    * The required NodeJS version to run the application.
    * @type {string}
    */
-  VERSION_NODE = '4.0.0';
+  VERSION_NODE = '4.4.7';
 
   /**
    * The ruleset to be used by `codelyzer` for linting the TypeScript files.

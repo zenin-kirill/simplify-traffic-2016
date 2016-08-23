@@ -10,6 +10,11 @@ import {BSElementComponent} from '../../../pages/bootstrap-element/components/bs
 import {BlankPageComponent} from '../../../pages/blank-page/components/blank_page';
 import {NG2Component} from '../../../pages/component/components/component';
 
+import {VehiclesTableComponent} from '../../../pages/vehicles-table/components/vehicles_table';
+import {UsersTableComponent} from '../../../pages/users-table/components/users_table';
+import {CarriersTableComponent} from '../../../pages/carriers-table/components/carriers_table';
+import {RoutesTableComponent} from '../../../pages/routes-table/components/routes_table';
+
 import {TopNavComponent} from '../../../shared/topnav/topnav';
 import {SidebarComponent} from '../../../shared/sidebar/sidebar';
 
@@ -22,14 +27,18 @@ import {SidebarComponent} from '../../../shared/sidebar/sidebar';
 })
 
 @Routes([
-    { path: '/home', component: HomeComponent },
-    { path: '/chart', component: ChartComponent },
-    { path: '/table', component: TableComponent },
+  { path: '/home', component: HomeComponent },
+  { path: '/chart', component: ChartComponent },
+  { path: '/table', component: TableComponent },
 	{ path: '/forms', component: FormComponent },
 	{ path: '/element', component: BSElementComponent},
 	{ path: '/grid', component: GridComponent },
 	{ path: '/component', component: NG2Component },
-	{ path: '/blank-page', component: BlankPageComponent }
+	{ path: '/blank-page', component: BlankPageComponent },
+  { path: '/vehicles', component: VehiclesTableComponent },
+  { path: '/users', component: UsersTableComponent},
+  { path: '/carriers', component: CarriersTableComponent},
+  { path: '/routes', component: RoutesTableComponent}
 ])
 
 export class DashboardComponent { }

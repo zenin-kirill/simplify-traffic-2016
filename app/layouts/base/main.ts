@@ -1,3 +1,4 @@
+///<reference path="../../../typings/index.d.ts"/>
 import { APP_BASE_HREF } from '@angular/common';
 import { enableProdMode, provide } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
