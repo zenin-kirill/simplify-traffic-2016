@@ -12,7 +12,8 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 
 export class SidebarComponent {
 	isActive = false;
-	showMenu: string = '';
+	showMenu: string = '0';
+
 	eventCalled() {
 		this.isActive = !this.isActive;
 	}
