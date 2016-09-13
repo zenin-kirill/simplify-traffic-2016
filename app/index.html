@@ -56,10 +56,15 @@
   <!-- endinject -->
 
   <% if (ENV === 'dev') { %>
+  <!--<script>-->
+  <!--System.import('<%= BOOTSTRAP_MODULE %>')-->
+  <!--.catch(function (e) {-->
+  <!--console.error('Index error!! ', e);-->
+  <!--});-->
+  <!--</script>-->
   <script>
-  System.import('<%= BOOTSTRAP_MODULE %>')
-    .catch(function (e) {
-      console.error('Error : ', e);
+    System.import('app').catch(function (err) {
+      console.error(err);
     });
   </script>
   <% } %>

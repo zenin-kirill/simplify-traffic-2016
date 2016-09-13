@@ -1,27 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import {CORE_DIRECTIVES} from '@angular/common';
-import { AlertComponent, BUTTON_DIRECTIVES, DROPDOWN_DIRECTIVES, PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import { PROGRESSBAR_DIRECTIVES, RatingComponent, TAB_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {TOOLTIP_DIRECTIVES, TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'component-cmp',
     templateUrl: 'component.html',
-    directives: [
-		ROUTER_DIRECTIVES,
-		CORE_DIRECTIVES,
-		AlertComponent,
-		BUTTON_DIRECTIVES,
-		DROPDOWN_DIRECTIVES,
-		PAGINATION_DIRECTIVES,
-		PROGRESSBAR_DIRECTIVES,
-		RatingComponent,
-		TAB_DIRECTIVES,
-		TOOLTIP_DIRECTIVES,
-		TYPEAHEAD_DIRECTIVES
-    ],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	styles: [`
 		.tooltip.customClass .tooltip-inner {
@@ -42,7 +24,7 @@ export class NG2Component {
 	public radioModel:string = 'Middle';
 	public checkModel:any = {left: false, middle: true, right: false};
 
-	// Dropdown 
+  // Dropdown
 	public disabled:boolean = false;
 	public status:{isopen:boolean} = {isopen: false};
 	public items: Array<string> = ['The first choice!', 'And another choice for you.', 'but wait! A third!'];

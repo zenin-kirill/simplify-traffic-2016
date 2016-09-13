@@ -99,7 +99,7 @@ export class SeedConfig {
    * The default directory is `app`.
    * @type {string}
    */
-  BOOTSTRAP_DIR = 'layouts/base';
+  BOOTSTRAP_DIR = '';
 
   /**
    * The directory where the client files are located.
@@ -115,7 +115,7 @@ export class SeedConfig {
    * `hot_loader_main.ts` file will be used.
    * @type {string}
    */
-  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + (this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main');
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}` + 'app.module';
 
   /**
    * The default title of the application as used in the `<title>` tag of the
@@ -257,7 +257,8 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
+    {src: 'rxjs/bundles/Rx.umd.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT},
+    //{ src: 'ng2-bootstrap/bundles/ng2-bootstrap.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
   ];
 
   /**
@@ -292,26 +293,42 @@ export class SeedConfig {
    */
   protected SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
-    packageConfigPaths: [
-      `${this.APP_BASE}node_modules/*/package.json`,
-      `${this.APP_BASE}node_modules/**/package.json`,
-      `${this.APP_BASE}node_modules/@angular/*/package.json`
-    ],
+    // packageConfigPaths: [
+    //   `${this.APP_BASE}node_modules/*/package.json`,
+    //   `${this.APP_BASE}node_modules/**/package.json`,
+    //   `${this.APP_BASE}node_modules/@angular/*/package.json`
+    // ],
     paths: {
-      [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      '@angular/core': `${this.APP_BASE}node_modules/@angular/core/core.umd.js`,
-      '@angular/common': `${this.APP_BASE}node_modules/@angular/common/common.umd.js`,
-      '@angular/compiler': `${this.APP_BASE}node_modules/@angular/compiler/compiler.umd.js`,
-      '@angular/http': `${this.APP_BASE}node_modules/@angular/http/http.umd.js`,
-      '@angular/router': `${this.APP_BASE}node_modules/@angular/router/router.umd.js`,
-      '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/platform-browser.umd.js`,
-      '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js`,
+      //[this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
+      '@angular/core': `${this.APP_BASE}node_modules/@angular/core/bundles/core.umd.js`,
+      '@angular/common': `${this.APP_BASE}node_modules/@angular/common/bundles/common.umd.js`,
+      '@angular/compiler': `${this.APP_BASE}node_modules/@angular/compiler/bundles/compiler.umd.js`,
+      '@angular/http': `${this.APP_BASE}node_modules/@angular/http/bundles/http.umd.js`,
+      '@angular/forms': `${this.APP_BASE}node_modules/@angular/forms/bundles/forms.umd.js`,
+      '@angular/router': `${this.APP_BASE}node_modules/@angular/router/bundles/router.umd.js`,
+      '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
+      '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
       'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
-      'app/*': `/app/*`,
-      '*': `${this.APP_BASE}node_modules/*`
+      //'ng2-bootstrap': `${this.APP_BASE}node_modules/ng2-bootstrap`,
+      //'app/*': `/app/*`,
+      //'*': `${this.APP_BASE}node_modules/*`
+      '*': `/`
     },
     packages: {
-      rxjs: { defaultExtension: false }
+      app: {
+        main: `${this.APP_BASE}main.js`,
+        defaultExtension: 'js'
+      },
+      // 'node_modules/ng2-bootstrap': {
+      //   'defaultExtension': 'js'
+      // },
+      rxjs: {
+        defaultExtension: 'js'
+      }
+      // 'angular2-in-memory-web-api': {
+      //   main: './index.js',
+      //   defaultExtension: 'js'
+      // }
     }
   };
 
@@ -367,6 +384,9 @@ export class SeedConfig {
       },
       'rxjs': {
         defaultExtension: 'js'
+      },
+      'ng2-bootstrap': {
+        'defaultExtension': 'js'
       }
     }
   };

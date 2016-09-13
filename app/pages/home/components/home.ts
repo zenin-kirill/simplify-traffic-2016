@@ -1,45 +1,10 @@
 import {Component} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
-import {CAROUSEL_DIRECTIVES, DROPDOWN_DIRECTIVES, AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
-
-@Component({
-	moduleId: module.id,
-	selector: 'timeline-cmp',
-	templateUrl: 'timeline.html',
-	styleUrls: ['timeline.css'],
-})
-class TimelineComponent { }
-
-@Component({
-	moduleId: module.id,
-	selector: 'chat-cmp',
-	templateUrl: 'chat.html',
-	directives: [CORE_DIRECTIVES, DROPDOWN_DIRECTIVES]
-})
-class ChatComponent {}
-
-@Component({
-	moduleId: module.id,
-	selector: 'notifications-cmp',
-	templateUrl: 'notifications.html',
-	styleUrls: ['home.css'],
-})
-class NotificationComponent { }
-
 
 @Component({
 	moduleId: module.id,
 	selector: 'home-cmp',
 	templateUrl: 'home.html',
 	styleUrls: ['home.css'],
-	directives: [
-		AlertComponent,
-		TimelineComponent,
-		ChatComponent,
-		NotificationComponent,
-		CAROUSEL_DIRECTIVES,
-		CORE_DIRECTIVES,
-		FORM_DIRECTIVES ]
 })
 
 export class HomeComponent {

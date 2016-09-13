@@ -30,7 +30,11 @@
                 <th>Phone</th>
                 <th>Contact</th>
                 <th> </th>
-                <th><i class="fa fa-plus fa-lg"></i> </th>
+                <!--<th><a href [routerLink]="['new']"><i class="fa fa-plus fa-lg"></i></a> </th>-->
+                <th>
+                  <button type="button" class="btn btn-success-outline btn-sm" [routerLink]="['new']"><i
+                    class="fa fa-plus fa-lg"></i></button>
+                </th>
               </tr>
               </thead>
               <tbody>
@@ -39,16 +43,32 @@
                 <td>Moscow</td>
                 <td>+74956567676</td>
                 <td>Dmitry</td>
-                <td><i class="fa fa-pencil fa-lg"></i></td>
-                <td><i class="fa fa fa-trash fa-lg"></i></td>
+                <!--<td><a href [routerLink]="['edit','1']"><i class="fa fa-pencil fa-lg"></i></a> </td>-->
+                <!--<td><a href [routerLink]="['new']"><i class="fa fa-trash fa-lg"></i></a> </td>-->
+                <td>
+                  <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+                    class="fa fa-pencil fa-lg"></i></button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+                    class="fa fa fa-trash fa-lg"></i></button>
+                </td>
               </tr>
               <tr>
                 <th scope="row">MosGorTrans</th>
                 <td>Moscow</td>
                 <td>+74994562343</td>
                 <td>Svetlana</td>
-                <td><i class="fa fa-pencil fa-lg"></i></td>
-                <td><i class="fa fa fa-trash fa-lg"></i></td>
+                <!--<td><a href [routerLink]="['edit','1']"><i class="fa fa-pencil fa-lg"></i></a> </td>-->
+                <!--<td><a href [routerLink]="['new']"><i class="fa fa-trash fa-lg"></i></a> </td>-->
+                <td>
+                  <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+                    class="fa fa-pencil fa-lg"></i></button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+                    class="fa fa fa-trash fa-lg"></i></button>
+                </td>
               </tr>
               </tbody>
             </table>
