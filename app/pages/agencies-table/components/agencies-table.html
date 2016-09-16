@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xl-12 text-xs-center">
             <h2 class="page-header">
-              <i class="fa fa-sliders"></i> Agencies management
+              Agencies management
             </h2>
             <!--<ol class="breadcrumb">-->
                 <!--<li>-->
@@ -29,27 +29,25 @@
                 <th>City</th>
                 <th>Phone</th>
                 <th>Contact</th>
-                <th> </th>
                 <!--<th><a href [routerLink]="['new']"><i class="fa fa-plus fa-lg"></i></a> </th>-->
-                <th>
+                <th class="text-xs-right">
                   <button type="button" class="btn btn-success-outline btn-sm" [routerLink]="['new']"><i
                     class="fa fa-plus fa-lg"></i></button>
                 </th>
               </tr>
               </thead>
               <tbody>
-              <tr>
+              <tr [routerLink]="['1']">
                 <th scope="row">WestLine</th>
                 <td>Moscow</td>
                 <td>+74956567676</td>
                 <td>Dmitry</td>
                 <!--<td><a href [routerLink]="['edit','1']"><i class="fa fa-pencil fa-lg"></i></a> </td>-->
                 <!--<td><a href [routerLink]="['new']"><i class="fa fa-trash fa-lg"></i></a> </td>-->
-                <td>
+                <td class="text-xs-right">
                   <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
                     class="fa fa-pencil fa-lg"></i></button>
-                </td>
-                <td>
+                  &nbsp;
                   <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
                     class="fa fa fa-trash fa-lg"></i></button>
                 </td>
@@ -61,11 +59,10 @@
                 <td>Svetlana</td>
                 <!--<td><a href [routerLink]="['edit','1']"><i class="fa fa-pencil fa-lg"></i></a> </td>-->
                 <!--<td><a href [routerLink]="['new']"><i class="fa fa-trash fa-lg"></i></a> </td>-->
-                <td>
+                <td class="text-xs-right">
                   <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
                     class="fa fa-pencil fa-lg"></i></button>
-                </td>
-                <td>
+                  &nbsp;
                   <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
                     class="fa fa fa-trash fa-lg"></i></button>
                 </td>

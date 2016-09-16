@@ -82,6 +82,7 @@
   tbody tr {
     @include hover {
       background-color: $table-bg-hover;
+      cursor: default;
     }
   }
 }

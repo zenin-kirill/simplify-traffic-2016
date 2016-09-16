@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-xl-12 text-xs-center">
         <h2 class="page-header">
-          <i class="fa fa-sliders"></i> Vehicles management
+          Vehicles management
             </h2>
             <!--<ol class="breadcrumb">-->
                 <!--<li>-->
@@ -31,8 +31,10 @@
             <th>Model</th>
             <th>Agency</th>
             <th>Payed until</th>
-            <th></th>
-            <th><i class="fa fa-plus fa-lg"></i></th>
+            <th class="text-xs-right">
+              <button type="button" class="btn btn-success btn-sm" [routerLink]="['new']"><i
+                class="fa fa-plus fa-lg"></i></button>
+            </th>
           </tr>
           </thead>
           <tbody>
@@ -44,8 +46,13 @@
             <td>12555-M</td>
             <td>MosGorTrans</td>
             <td>12.03.2017</td>
-            <td><i class="fa fa-pencil fa-lg"></i></td>
-            <td><i class="fa fa fa-trash fa-lg"></i></td>
+            <td class="text-xs-right">
+              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['edit','1']"><i
+                class="fa fa-pencil fa-lg"></i></button>
+              &nbsp;
+              <button type="button" class="btn btn-danger btn-sm" [routerLink]="['new']"><i
+                class="fa fa fa-trash fa-lg"></i></button>
+            </td>
           </tr>
           <tr>
             <th scope="row">te654b77rus</th>
@@ -55,8 +62,13 @@
             <td>15552-11</td>
             <td>MosGorTrans</td>
             <td>15.03.2017</td>
-            <td><i class="fa fa-pencil fa-lg"></i></td>
-            <td><i class="fa fa fa-trash fa-lg"></i></td>
+            <td class="text-xs-right">
+              <button type="button" class="btn btn-primary btn-sm" [routerLink]="['edit','1']"><i
+                class="fa fa-pencil fa-lg"></i></button>
+              &nbsp;
+              <button type="button" class="btn btn-danger btn-sm" [routerLink]="['new']"><i
+                class="fa fa fa-trash fa-lg"></i></button>
+            </td>
           </tr>
           </tbody>
         </table>

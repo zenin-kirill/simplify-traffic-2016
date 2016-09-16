@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-xl-12 text-xs-center">
       <h2 class="page-header">
-        <i class="fa fa-sliders"></i> Users management
+        Users management
       </h2>
       <!--<ol class="breadcrumb">-->
         <!--<li>-->
@@ -30,8 +30,10 @@
             <th>Agency</th>
             <th>Role</th>
             <th>E-mail</th>
-            <th></th>
-            <th><i class="fa fa-plus fa-lg"></i></th>
+            <th class="text-xs-right">
+              <button type="button" class="btn btn-success-outline btn-sm" [routerLink]="['new']"><i
+                class="fa fa-plus fa-lg"></i></button>
+            </th>
           </tr>
           </thead>
           <tbody>
@@ -41,8 +43,13 @@
             <td>Simplify</td>
             <td>Administrator</td>
             <td>kerill.net@gmail.com</td>
-            <td><i class="fa fa-pencil fa-lg"></i></td>
-            <td><i class="fa fa fa-trash fa-lg"></i></td>
+            <td class="text-xs-right">
+              <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+                class="fa fa-pencil fa-lg"></i></button>
+              &nbsp;
+              <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+                class="fa fa fa-trash fa-lg"></i></button>
+            </td>
           </tr>
           <tr>
             <th scope="row">Damir</th>
@@ -50,8 +57,13 @@
             <td>Simplify</td>
             <td>Administrator</td>
             <td>gigadamer@gmail.com</td>
-            <td><i class="fa fa-pencil fa-lg"></i></td>
-            <td><i class="fa fa fa-trash fa-lg"></i></td>
+            <td class="text-xs-right">
+              <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+                class="fa fa-pencil fa-lg"></i></button>
+              &nbsp;
+              <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+                class="fa fa fa-trash fa-lg"></i></button>
+            </td>
           </tr>
           <tr>
             <th scope="row">Nikita</th>
@@ -59,8 +71,13 @@
             <td>Simplify</td>
             <td>Administrator</td>
             <td>slowmorf@gmail.com</td>
-            <td><i class="fa fa-pencil fa-lg"></i></td>
-            <td><i class="fa fa fa-trash fa-lg"></i></td>
+            <td class="text-xs-right">
+              <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+                class="fa fa-pencil fa-lg"></i></button>
+              &nbsp;
+              <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+                class="fa fa fa-trash fa-lg"></i></button>
+            </td>
           </tr>
           <tr>
             <th scope="row">Elizaveta</th>
@@ -68,8 +85,13 @@
             <td>Simplify</td>
             <td>Administrator</td>
             <td>foxxyrss@gmail.com</td>
-            <td><i class="fa fa-pencil fa-lg"></i></td>
-            <td><i class="fa fa fa-trash fa-lg"></i></td>
+            <td class="text-xs-right">
+              <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+                class="fa fa-pencil fa-lg"></i></button>
+              &nbsp;
+              <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+                class="fa fa fa-trash fa-lg"></i></button>
+            </td>
           </tr>
           </tbody>
         </table>

@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col-xl-12 text-xs-center">
         <h2 class="page-header">
-          <i class="fa fa-sliders"></i> Routes management
-            </h2>
+          Routes management
+        </h2>
             <!--<ol class="breadcrumb">-->
                 <!--<li>-->
                     <!--<i class="fa fa-dashboard"></i>  <a href="Javascript:void(0)" [routerLink]="['/dashboard','/home']">Dashboard</a>-->
@@ -28,8 +28,10 @@
           <th>Type</th>
           <th>Agency</th>
           <th>Description</th>
-          <th> </th>
-          <th><i class="fa fa-plus fa-lg"></i> </th>
+          <th class="text-xs-right">
+            <button type="button" class="btn btn-success-outline btn-sm" [routerLink]="['new']"><i
+              class="fa fa-plus fa-lg"></i></button>
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -38,24 +40,39 @@
           <td>Bus</td>
           <td>MosGorTrans</td>
           <td>Zelenograd - m. Rechnoy vokzal</td>
-          <td><i class="fa fa-pencil fa-lg"></i></td>
-          <td><i class="fa fa fa-trash fa-lg"></i></td>
+          <td class="text-xs-right">
+            <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+              class="fa fa-pencil fa-lg"></i></button>
+            &nbsp;
+            <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+              class="fa fa fa-trash fa-lg"></i></button>
+          </td>
         </tr>
         <tr>
           <th scope="row">851</th>
           <td>Bus</td>
           <td>MosGorTrans</td>
           <td>m. Rechnoy vokzal - Sheremet'evo F,E,D,C,B,A</td>
-          <td><i class="fa fa-pencil fa-lg"></i></td>
-          <td><i class="fa fa fa-trash fa-lg"></i></td>
+          <td class="text-xs-right">
+            <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+              class="fa fa-pencil fa-lg"></i></button>
+            &nbsp;
+            <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+              class="fa fa fa-trash fa-lg"></i></button>
+          </td>
         </tr>
         <tr>
           <th scope="row">26</th>
           <td>Train</td>
           <td>MosGorTrans</td>
           <td>m. Yniversitet - m. Leninskiy prospekt</td>
-          <td><i class="fa fa-pencil fa-lg"></i></td>
-          <td><i class="fa fa fa-trash fa-lg"></i></td>
+          <td class="text-xs-right">
+            <button type="button" class="btn btn-primary-outline btn-sm" [routerLink]="['edit','1']"><i
+              class="fa fa-pencil fa-lg"></i></button>
+            &nbsp;
+            <button type="button" class="btn btn-danger-outline btn-sm" [routerLink]="['new']"><i
+              class="fa fa fa-trash fa-lg"></i></button>
+          </td>
         </tr>
         </tbody>
       </table>
