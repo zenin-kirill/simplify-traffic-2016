@@ -28,6 +28,7 @@ import {NotificationComponent} from './pages/home/components/notifications_cmp';
 import {BSElementComponent} from './pages/bootstrap-element/components/bs_element';
 import {AgencyActionComponent} from './pages/agency-action/components/agency_action';
 import {AgencyDetailsComponent} from './pages/agency-details/components/agency_details';
+import {ErrorPageComponent} from './pages/error-page/components/error_page';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import {AgencyDetailsComponent} from './pages/agency-details/components/agency_d
     TimelineComponent,
     ChatComponent,
     NotificationComponent,
-    BSElementComponent
+    BSElementComponent,
+    ErrorPageComponent
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import {ModuleWithProviders}   from '@angular/core';
 import {Routes, RouterModule}  from '@angular/router';
 import {LoginComponent} from './pages/login/components/login';
 import {DashboardComponent} from './layouts/dashboard/components/dashboard';
+import {ErrorPageComponent} from './pages/error-page/components/error_page';
 
 import {HomeComponent} from './pages/home/components/home';
 import {ChartComponent} from './pages/charts/components/charts';
@@ -28,7 +29,7 @@ const appRoutes:Routes = [
     path: 'dashboard', component: DashboardComponent, children: [
     {path: 'home', component: HomeComponent},
     {path: 'chart', component: ChartComponent},
-    {path: 'table', component: TableComponent},
+    {path: 'tables', component: TableComponent},
     {path: 'forms', component: FormComponent},
     {path: 'element', component: BSElementComponent},
     {path: 'grid', component: GridComponent},
@@ -44,6 +45,7 @@ const appRoutes:Routes = [
     {path: 'agencies/new', component: AgencyActionComponent}
   ]
   },
+  {path: '**', component: ErrorPageComponent},
   //{path: 'error', component: ErrorComponent},
   //{path: '**', redirectTo: '/error', pathMatch: 'full'}
 ];
