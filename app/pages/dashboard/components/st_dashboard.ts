@@ -2,12 +2,11 @@ import {Component} from '@angular/core';
 
 @Component({
 	moduleId: module.id,
-	selector: 'home-cmp',
-	templateUrl: 'home.html',
-	styleUrls: ['home.css'],
+  selector: 'st-dashboard',
+  templateUrl: 'dashboard.html',
 })
 
-export class HomeComponent {
+export class DashboardComponent {
 
 	/* Carousel Variable */
 	myInterval: number = 5000;

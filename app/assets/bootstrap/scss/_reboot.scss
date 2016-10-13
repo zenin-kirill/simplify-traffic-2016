@@ -247,6 +247,12 @@ textarea {
 table {
   // Reset for nesting within parents with `background-color`.
   background-color: $table-bg;
+  border-collapse: inherit;
+}
+
+.table-bordered {
+  border: 1px solid #e5e5e5 !important;
+  border-radius: 0.25rem !important;
 }
 
 caption {
@@ -257,10 +263,50 @@ caption {
   caption-side: bottom;
 }
 
-th {
-  // Centered by default, but left-align-ed to match the `td`s below.
-  text-align: left;
+table tbody {
+  color: $gray !important;
 }
+
+table.border-inverse {
+  border: 1px solid #373a3c !important;
+  border-radius: 0.25rem;
+}
+
+thead.thead-default th {
+  background: $gray-lightest !important;
+  color: $gray-dark !important;
+}
+
+table.border-inverse tbody td, table.border-inverse tbody th {
+  border-color: #373a3c !important;
+}
+
+.table-bordered td, .table-bordered th {
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+thead th {
+  border: none !important;
+}
+
+th {
+  font-weight: normal !important;
+}
+
+td {
+  text-align: center !important;
+}
+
+.list-group-item {
+  border-right: none !important;
+  border-left: none !important;
+}
+
+//th {
+//  // Centered by default, but left-align-ed to match the `td`s below.
+//  text-align: left;
+//}
 
 
 //

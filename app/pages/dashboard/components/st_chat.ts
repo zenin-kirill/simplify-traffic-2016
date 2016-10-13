@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'chat-cmp',
+  selector: 'st-chat',
   templateUrl: 'chat.html',
 })
 

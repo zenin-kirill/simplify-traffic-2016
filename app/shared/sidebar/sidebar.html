@@ -2,8 +2,11 @@
     &#9776;
 </button>
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+  <div class="row text-xs-center" style="margin-top: 1rem; margin-bottom: 1rem;">
+    <img src="assets/img/ST-logo-noborder.png" width="125px" style="align-self: center;"/>
+  </div>
     <ul class="list-group">
-        <a [routerLink]="['home']" class="list-group-item">
+      <a [routerLink]="['dashboard']" class="list-group-item">
           <i class="fa fa-fw fa-home"></i> Dashboard
         </a>
 
@@ -29,33 +32,33 @@
 
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
-              <span><i class="fa fa-sliders"></i> &nbsp;Management</span>
+              <span><i class="fa fa-fw fa-chevron-down"></i>&nbsp;Management </span>
             </a>
             <li class="nested" [ngClass]="{'expand' : showMenu === '0' }">
                 <ul class="submenu">
                     <li>
-                      <a href [routerLink]="['/dashboard', 'agencies']">
+                      <a href [routerLink]="['agencies']">
                             <span>&nbsp;Agencies</span>
                         </a>
                     </li>
                 </ul>
               <ul class="submenu">
                     <li>
-                      <a href [routerLink]="['/dashboard', 'vehicles']">
+                      <a href [routerLink]="['vehicles']">
                             <span>&nbsp;Vehicles</span>
                         </a>
                     </li>
               </ul>
                 <ul class="submenu">
                     <li>
-                      <a href [routerLink]="['/dashboard', 'routes']">
+                      <a href [routerLink]="['routes']">
                             <span>&nbsp;Routes</span>
                         </a>
                     </li>
                 </ul>
                   <ul class="submenu">
                     <li>
-                      <a href [routerLink]="['/dashboard', 'users']">
+                      <a href [routerLink]="['users']">
                             <span>&nbsp;Users</span>
                         </a>
                     </li>
@@ -67,7 +70,7 @@
             <!--<i class="fa fa-file-o"></i> &nbsp;BlankPage-->
         <!--</a>-->
       <a href [routerLink]="['/login']" class="list-group-item">
-            <i class="fa fa-sign-out"></i> &nbsp;Sign out
+        <i class="fa fa-fw fa-sign-out"></i> &nbsp;Sign out
         </a>
       <a></a>
     </ul>

@@ -2,7 +2,7 @@ import {Component, ViewEncapsulation, ViewContainerRef} from '@angular/core';
 
 @Component({
 	moduleId: module.id,
-    selector: 'sd-app',
+  selector: 'st-app',
     templateUrl: 'base.html',
     encapsulation: ViewEncapsulation.None,
 })

@@ -5,8 +5,8 @@ import {FormsModule}   from '@angular/forms';
 import {routing, appRoutingProviders} from './app.routing';
 
 import {LoginComponent} from './pages/login/components/login';
-import {DashboardComponent} from './layouts/dashboard/components/dashboard';
-import {HomeComponent} from './pages/home/components/home';
+import {AdminPanelComponent} from './layouts/admin-panel/components/admin_panel';
+import {DashboardComponent} from './pages/dashboard/components/st_dashboard';
 import {ChartComponent} from './pages/charts/components/charts';
 import {TableComponent} from './pages/tables/components/tables';
 import {FormComponent} from './pages/forms/components/forms';
@@ -22,9 +22,9 @@ import {SidebarComponent} from './shared/sidebar/sidebar';
 import {AppComponent} from './layouts/base/base';
 import {CommonModule} from '@angular/common';
 import {Ng2BootstrapModule} from '../node_modules/ng2-bootstrap/ng2-bootstrap';
-import {TimelineComponent} from './pages/home/components/time_line';
-import {ChatComponent} from './pages/home/components/chat_cmp';
-import {NotificationComponent} from './pages/home/components/notifications_cmp';
+import {VehiclesStatusTableComponent} from './pages/dashboard/components/vehicles_status_table';
+import {ChatComponent} from './pages/dashboard/components/st_chat';
+import {NotificationsListComponent} from './pages/dashboard/components/notifications_list';
 import {BSElementComponent} from './pages/bootstrap-element/components/bs_element';
 import {AgencyActionComponent} from './pages/agency-action/components/agency_action';
 import {AgencyDetailsComponent} from './pages/agency-details/components/agency_details';
@@ -42,8 +42,8 @@ import {ErrorPageComponent} from './pages/error-page/components/error_page';
   declarations: [
     AppComponent,
     LoginComponent,
+    AdminPanelComponent,
     DashboardComponent,
-    HomeComponent,
     ChartComponent,
     TableComponent,
     FormComponent,
@@ -58,9 +58,9 @@ import {ErrorPageComponent} from './pages/error-page/components/error_page';
     RoutesTableComponent,
     TopNavComponent,
     SidebarComponent,
-    TimelineComponent,
+    VehiclesStatusTableComponent,
     ChatComponent,
-    NotificationComponent,
+    NotificationsListComponent,
     BSElementComponent,
     ErrorPageComponent
   ],

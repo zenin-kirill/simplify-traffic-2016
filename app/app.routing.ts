@@ -1,10 +1,10 @@
 import {ModuleWithProviders}   from '@angular/core';
 import {Routes, RouterModule}  from '@angular/router';
 import {LoginComponent} from './pages/login/components/login';
-import {DashboardComponent} from './layouts/dashboard/components/dashboard';
+import {AdminPanelComponent} from './layouts/admin-panel/components/admin_panel';
 import {ErrorPageComponent} from './pages/error-page/components/error_page';
 
-import {HomeComponent} from './pages/home/components/home';
+import {DashboardComponent} from './pages/dashboard/components/st_dashboard';
 import {ChartComponent} from './pages/charts/components/charts';
 import {GridComponent} from './pages/grid/components/grid';
 import {FormComponent} from './pages/forms/components/forms';
@@ -26,8 +26,8 @@ const appRoutes:Routes = [
   {path: 'login', component: LoginComponent},
   //{path: 'forgot', component: ForgotComponent},
   {
-    path: 'dashboard', component: DashboardComponent, children: [
-    {path: 'home', component: HomeComponent},
+    path: 'admin-panel', component: AdminPanelComponent, children: [
+    {path: 'dashboard', component: DashboardComponent},
     {path: 'chart', component: ChartComponent},
     {path: 'tables', component: TableComponent},
     {path: 'forms', component: FormComponent},

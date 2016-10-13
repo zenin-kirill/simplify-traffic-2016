@@ -2,9 +2,10 @@ import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'dashboard-cmp',
-  templateUrl: 'dashboard.html',
+  selector: 'admin-panel',
+  templateUrl: 'admin-panel.html',
   encapsulation: ViewEncapsulation.None,
 })
 
-export class DashboardComponent { }
+export class AdminPanelComponent {
+}
