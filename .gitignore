@@ -47,6 +47,7 @@ appveyor.yml
 /tools/**/*.map
 dist/dev
 dist/tmp
+dist/**/*.map
 dev
 docs
 lib
