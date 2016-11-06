@@ -1,7 +1,6 @@
 ///<reference path="app.routing.ts"/>
 import {NgModule}      from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule}   from '@angular/forms';
 import {routing, appRoutingProviders} from './app.routing';
 
 import {LoginComponent} from './pages/login/components/login';
@@ -11,7 +10,7 @@ import {ChartComponent} from './pages/charts/components/charts';
 import {TableComponent} from './pages/tables/components/tables';
 import {FormComponent} from './pages/forms/components/forms';
 import {GridComponent} from './pages/grid/components/grid';
-import {NG2Component} from './pages/component/components/component';
+//import {NG2Component} from './pages/component/components/component';
 import {BlankPageComponent} from './pages/blank-page/components/blank_page';
 import {VehiclesTableComponent} from './pages/vehicles-table/components/vehicles_table';
 import {UsersTableComponent} from './pages/users-table/components/users_table';
@@ -34,7 +33,6 @@ import {ErrorPageComponent} from './pages/error-page/components/error_page';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     CommonModule,
     Ng2BootstrapModule,
     routing,
@@ -48,7 +46,7 @@ import {ErrorPageComponent} from './pages/error-page/components/error_page';
     TableComponent,
     FormComponent,
     GridComponent,
-    NG2Component,
+    //NG2Component,
     BlankPageComponent,
     VehiclesTableComponent,
     UsersTableComponent,

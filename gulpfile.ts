@@ -15,9 +15,7 @@ loadTasks(PROJECT_TASKS_DIR);
 // --------------
 // Build dev.
 gulp.task('build.dev', (done: any) =>
-  runSequence(//'clean.dev',
-              'tslint',
-              //'css-lint',
+  runSequence(
               'build.assets.dev',
               'build.fonts',
               'build.html_css',
@@ -35,8 +33,7 @@ gulp.task('build.dev.watch', (done: any) =>
 // --------------
 // Build e2e.
 gulp.task('build.e2e', (done: any) =>
-  runSequence('clean.dev',
-              'tslint',
+  runSequence('clean.e2e',
               'build.assets.dev',
               'build.js.e2e',
               'build.index.dev',
@@ -45,17 +42,10 @@ gulp.task('build.e2e', (done: any) =>
 // --------------
 // Build prod.
 gulp.task('build.prod', (done: any) =>
-  runSequence('clean.prod',
-              'tslint',
-              //'css-lint',
-              'build.assets.prod',
-              'build.html_css',
+  runSequence('build.assets.prod',
+    'build.html_css.prod',
               'build.fonts',
-              'sample.task',
-              'copy.js.prod',
-              'build.js.prod',
               'build.bundles',
-              'build.bundles.app',
               'build.index.prod',
               done));
 
@@ -63,7 +53,6 @@ gulp.task('build.prod', (done: any) =>
 // Build test.
 gulp.task('build.test', (done: any) =>
   runSequence('clean.dev',
-              'tslint',
               'build.assets.dev',
               'build.fonts',
               'build.js.test',
@@ -79,8 +68,9 @@ gulp.task('build.test.watch', (done: any) =>
 
 // --------------
 // Build tools.
+// todo: посмотреть как выполнить команду командной строки в галпе
 gulp.task('build.tools', (done: any) =>
-  runSequence('clean.tools',
+  runSequence(//'clean.tools',
               'build.js.tools',
               done));
 

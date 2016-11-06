@@ -63,11 +63,8 @@ export function serveProd() {
   let root = resolve(process.cwd(), PROD_DEST);
   let server = express();
 
-  server.use(APP_BASE, serveStatic(root));
+  server.use(serveStatic(PROD_DEST, {'index': 'index.aot.html'}))
+  server.use(fallback('index.aot.html', {root}));
 
-  server.use(fallback('index.html', { root }));
-
-  server.listen(PORT, () =>
-    openResource('http://localhost:' + PORT + APP_BASE)
-  );
+  server.listen(PORT);
 };

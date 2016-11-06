@@ -8,4 +8,5 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 
 export class AdminPanelComponent {
+
 }

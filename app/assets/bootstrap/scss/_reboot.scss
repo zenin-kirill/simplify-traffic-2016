@@ -251,7 +251,7 @@ table {
 }
 
 .table-bordered {
-  border: 1px solid #e5e5e5 !important;
+  border: 1px solid $gray-morelight !important;
   border-radius: 0.25rem !important;
 }
 
@@ -265,6 +265,10 @@ caption {
 
 table tbody {
   color: $gray !important;
+}
+
+.table thead th {
+  vertical-align: middle !important;
 }
 
 table.border-inverse {
@@ -283,7 +287,9 @@ table.border-inverse tbody td, table.border-inverse tbody th {
 
 .table-bordered td, .table-bordered th {
   border-right: none !important;
+  border-left-color: $gray-morelight !important;
   border-bottom: none !important;
+  border-top-color: $gray-morelight !important;
 }
 
 thead th {
@@ -292,6 +298,15 @@ thead th {
 
 th {
   font-weight: normal !important;
+}
+
+th.th-bordered-last {
+  border-right: 1px solid $gray-morelight !important;
+  border-left: 1px solid $gray-morelight !important;
+}
+
+th.th-bordered {
+  border-left: 1px solid $gray-morelight !important;
 }
 
 td {

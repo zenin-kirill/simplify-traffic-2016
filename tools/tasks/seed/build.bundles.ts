@@ -31,6 +31,7 @@ function bundleShims() {
   return gulp.src(getShims())
     // Strip comments and sourcemaps
     .pipe(plugins.uglify({
+      minify: true,
       mangle: false
     }))
     .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))

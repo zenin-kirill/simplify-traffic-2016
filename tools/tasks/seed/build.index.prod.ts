@@ -5,7 +5,7 @@ import * as slash from 'slash';
 
 import {
   APP_BASE,
-  APP_DEST,
+  PROD_DEST,
   APP_SRC,
   CSS_DEST,
   CSS_PROD_BUNDLE,
@@ -22,11 +22,11 @@ const plugins = <any>gulpLoadPlugins();
  * environment.
  */
 export = () => {
-  return gulp.src(join(APP_SRC, 'index.html'))
+  return gulp.src(join(APP_SRC, 'index.aot.html'))
     .pipe(injectJs())
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(PROD_DEST));
 };
 
 /**
@@ -46,6 +46,7 @@ function inject(...files: Array<string>) {
 function injectJs() {
   return inject(join(JS_DEST, JS_PROD_SHIMS_BUNDLE), join(JS_DEST, JS_PROD_APP_BUNDLE));
 }
+
 
 /**
  * Injects the bundled CSS files for the production environment.

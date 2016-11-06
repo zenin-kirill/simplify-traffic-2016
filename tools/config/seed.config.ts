@@ -43,7 +43,6 @@ export class SeedConfig {
    * The default environment is `dev`, which can be overriden by the `--env` flag when running `npm start`.
    */
   ENV = getEnvironment();
-
   /**
    * The flag for the debug option of the application.
    * The default value is `false`, which can be overriden by the `--debug` flag when running `npm start`.
@@ -78,14 +77,14 @@ export class SeedConfig {
    * flag when running `npm run build.prod`.
    * @type {boolean}
    */
-  INLINE_TEMPLATES = argv['inline-template'] !== 'false';
+  INLINE_TEMPLATES = argv['inline-template'] || 'true';
 
   /**
    * The flag for the hot-loader option of the application.
    * Per default the option is not set, but can be set by the `--hot-loader` flag when running `npm start`.
    * @type {boolean}
    */
-  ENABLE_HOT_LOADING = argv['hot-loader'];
+  ENABLE_HOT_LOADING = argv['hot-loader'] || 'false';
 
   /**
    * The port where the application will run, if the `hot-loader` option mode is used.
@@ -99,7 +98,7 @@ export class SeedConfig {
    * The default directory is `app`.
    * @type {string}
    */
-  BOOTSTRAP_DIR = '';
+  BOOTSTRAP_DIR = '/';
 
   /**
    * The directory where the client files are located.
@@ -122,7 +121,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Simplify Traffic';
+  APP_TITLE = 'ST Admin Panel';
 
   /**
    * The base folder of the applications source files.
@@ -228,13 +227,13 @@ export class SeedConfig {
    * The required NPM version to run the application.
    * @type {string}
    */
-  VERSION_NPM = '2.15.8';
+  VERSION_NPM = '3.7.3';
 
   /**
    * The required NodeJS version to run the application.
    * @type {string}
    */
-  VERSION_NODE = '4.4.7';
+  VERSION_NODE = '5.9.1';
 
   /**
    * The ruleset to be used by `codelyzer` for linting the TypeScript files.
@@ -253,12 +252,11 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   NPM_DEPENDENCIES: InjectableDependency[] = [
-    { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    {src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT},
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
-    { src: 'core-js/client/shim.min.js', inject: 'shims' },
-    { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    {src: 'rxjs/bundles/Rx.umd.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT},
-    //{ src: 'ng2-bootstrap/bundles/ng2-bootstrap.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    {src: 'core-js/client/shim.js', inject: 'shims'},
+    {src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT},
+    {src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT},
   ];
 
   /**
@@ -266,7 +264,7 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   APP_ASSETS: InjectableDependency[] = [
-    { src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false },
+    {src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false}
   ];
 
   /**
@@ -308,6 +306,8 @@ export class SeedConfig {
       '@angular/router': `${this.APP_BASE}node_modules/@angular/router/bundles/router.umd.js`,
       '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
+      '@angular/compiler-cli': `${this.APP_BASE}node_modules/@angular/compiler-cli/bundles/compiler-cli.umd.js`,
+      '@angular/server': `${this.APP_BASE}node_modules/@angular/server/bundles/compiler-cli.umd.js`,
       'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
       //'ng2-bootstrap': `${this.APP_BASE}node_modules/ng2-bootstrap`,
       //'app/*': `/app/*`,
@@ -339,6 +339,7 @@ export class SeedConfig {
    */
   SYSTEM_CONFIG: any = this.SYSTEM_CONFIG_DEV;
 
+  //noinspection TsLint,TsLint
   /**
    * The system builder configuration of the application.
    * @type {any}
@@ -346,47 +347,61 @@ export class SeedConfig {
   SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
-      join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+      join(this.PROJECT_ROOT, 'node_modules', 'rxjs', 'package.json'),
+      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json'),
+      join(this.PROJECT_ROOT, 'node_modules', 'moment', 'package.json'),
+      join(this.PROJECT_ROOT, 'node_modules', 'ng2-bootstrap', 'package.json'),
+      join(this.PROJECT_ROOT, 'package.json'),
     ],
     paths: {
-      [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
-      '*': 'node_modules/*'
+      //'*': this.PROJECT_ROOT
+      '@angular/core': `${this.PROJECT_ROOT}/node_modules/@angular/core/index.js`,
+      '@angular/router': `${this.PROJECT_ROOT}/node_modules/@angular/router/index.js`,
+      '@angular/forms': `${this.PROJECT_ROOT}/node_modules/@angular/forms/index.js`,
+      '@angular/common': `${this.PROJECT_ROOT}/node_modules/@angular/common/index.js`,
+      '@angular/platform-browser': `${this.PROJECT_ROOT}/node_modules/@angular/platform-browser/index.js`,
+      'rxjs/*': `${this.PROJECT_ROOT}/node_modules/rxjs/*`,
+      'moment': `${this.PROJECT_ROOT}/node_modules/moment/src/moment.js`
     },
     packages: {
-      '@angular/core': {
-        main: 'index.js',
+      app: {
+        main: `${this.PROJECT_ROOT}/app/main.js`,
         defaultExtension: 'js'
       },
-      '@angular/compiler': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/common': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/http': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser-dynamic': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
-      '@angular/router': {
-        main: 'index.js',
-        defaultExtension: 'js'
-      },
+      // '@angular/compiler': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
+      // 'ng2-bootstrap': {
+      //   defaultExtension: 'js'
+      // },
+      // '@angular/common': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
+      // '@angular/http': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
+      // '@angular/platform-browser': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
+      // '@angular/platform-browser-dynamic': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
+      // '@angular/router': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
+      // '@angular/core': {
+      //   main: 'index.js',
+      //   defaultExtension: 'js'
+      // },
       'rxjs': {
+        main: 'index.js',
         defaultExtension: 'js'
-      },
-      'ng2-bootstrap': {
-        'defaultExtension': 'js'
       }
     }
   };
@@ -423,7 +438,7 @@ export class SeedConfig {
       middleware: [require('connect-history-api-fallback')({ index: `${this.APP_BASE}index.html` })],
       port: this.PORT,
       startPath: this.APP_BASE,
-      open: argv['b'] ? false : true,
+      open: argv['b'] ? true : false,
       injectChanges: false,
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
@@ -512,12 +527,20 @@ function customRules(): string[] {
  * Returns the environment of the application.
  */
 function getEnvironment() {
-  let base: string[] = argv['_'];
-  let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
-  let env = (argv['env'] || '').toLowerCase();
-  if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
+  // let base: string[] = argv['_'];
+  // let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
+  // let env = (argv['env'] || '').toLowerCase();
+  // if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
+  //   return ENVIRONMENTS.PRODUCTION;
+  // } else {
+  //   return ENVIRONMENTS.DEVELOPMENT;
+  // }
+  let env = argv['env'];
+  if (env === ENVIRONMENTS.PRODUCTION) {
+    console.log("Selected PRODUCTION mode");
     return ENVIRONMENTS.PRODUCTION;
   } else {
+    console.log("Selected DEVELOPMENT mode");
     return ENVIRONMENTS.DEVELOPMENT;
   }
 }

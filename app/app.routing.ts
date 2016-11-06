@@ -11,7 +11,7 @@ import {FormComponent} from './pages/forms/components/forms';
 import {TableComponent} from './pages/tables/components/tables';
 import {BSElementComponent} from './pages/bootstrap-element/components/bs_element';
 import {BlankPageComponent} from './pages/blank-page/components/blank_page';
-import {NG2Component} from './pages/component/components/component';
+//import {NG2Component} from './pages/component/components/component';
 
 import {VehiclesTableComponent} from './pages/vehicles-table/components/vehicles_table';
 import {UsersTableComponent} from './pages/users-table/components/users_table';
@@ -33,7 +33,7 @@ const appRoutes:Routes = [
     {path: 'forms', component: FormComponent},
     {path: 'element', component: BSElementComponent},
     {path: 'grid', component: GridComponent},
-    {path: 'component', component: NG2Component},
+    //{path: 'component', component: NG2Component},
     {path: 'blank-page', component: BlankPageComponent},
     {path: 'vehicles', component: VehiclesTableComponent},
     {path: 'users', component: UsersTableComponent},

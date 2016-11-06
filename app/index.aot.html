@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= APP_TITLE %></title>
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico"/>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"
+        href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600">
+  <link rel="stylesheet" href="/css/main.css?1478174996489">
+  <script>window.module = 'aot';</script>
+</head>
+<body>
+<st-app>
+  <div class="loader"></div>
+</st-app>
+<script>
+  if (!Object.hasOwnProperty('name')) {
+    Object.defineProperty(Function.prototype, 'name', {
+      get: function () {
+        var matches = this.toString().match(/^\s*function\s*((?![0-9])[a-zA-Z0-9_$]*)\s*\(/);
+        var name = matches && matches.length > 1 ? matches[1] : "";
+        Object.defineProperty(this, 'name', {value: name});
+        return name;
+      }
+    });
+  }
+</script>
+<script src="/js/shims.js?1478174996482"></script>
+<script src="/js/app.js?1478174996484"></script>
+</body>
+</html>

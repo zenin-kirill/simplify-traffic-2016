@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "declaration": false,
-    "removeComments": true,
+    "removeComments": false,
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,14 +14,28 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": [
+      "./types"
+    ]
   },
   "exclude": [
-    "node_modules",
     "dist",
     "typings/index.d.ts",
     "typings/modules",
-    "src"
+    "src",
+    "aot",
+    "tmp",
+    "node_modules",
+    "app",
+    "rollup.config.ts"
   ],
+  //	"files": [
+  //    "app/app.module.ts",
+  //    "app/main.ts",
+  //    "tools/tasks/project/",
+  //    "tools/tasks/seed/",
+  //    "gulpfile"
+  //	],
   "compileOnSave": false
 }

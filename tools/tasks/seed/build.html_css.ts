@@ -1,5 +1,4 @@
 import * as autoprefixer from 'autoprefixer';
-import * as cssnano from 'cssnano';
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
@@ -10,13 +9,13 @@ import {
   APP_SRC,
   BROWSER_LIST,
   CSS_DEST,
-  CSS_PROD_BUNDLE,
   CSS_SRC,
   DEPENDENCIES,
   ENABLE_SCSS,
-  ENV,
   TMP_DIR,
 } from '../../config';
+
+//todo: убрать лишние noop
 
 const plugins = <any>gulpLoadPlugins();
 const cleanCss = require('gulp-clean-css');
@@ -26,19 +25,6 @@ const processors = [
     browsers: BROWSER_LIST
   })
 ];
-
-const isProd = ENV === 'prod';
-
-if (isProd) {
-  processors.push(
-    cssnano({
-      discardComments: {removeAll: true},
-      discardUnused: false, // unsafe, see http://goo.gl/RtrzwF
-      zindex: false, // unsafe, see http://goo.gl/vZ4gbQ
-      reduceIdents: false // unsafe, see http://goo.gl/tNOPv0
-    })
-  );
-}
 
 /**
  * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
@@ -60,13 +46,13 @@ function processComponentStylesheets() {
  */
 function processComponentScss() {
   return gulp.src(join(APP_SRC, '**', '*.scss'))
-    .pipe(isProd ? plugins.cached('process-component-scss') : plugins.util.noop())
-    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+    .pipe(plugins.util.noop())
+    .pipe(plugins.util.noop())
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
-    .pipe(plugins.sourcemaps.write(isProd ? '.' : ''))
-    .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
+    .pipe(plugins.sourcemaps.write(''))
+    .pipe(gulp.dest(APP_DEST));
 }
 
 /**
@@ -78,9 +64,9 @@ function processComponentCss() {
     join(APP_SRC, '**', '*.css'),
     '!' + join(APP_SRC, 'assets', '**', '*.css')
   ])
-    .pipe(isProd ? plugins.cached('process-component-css') : plugins.util.noop())
+    .pipe(plugins.util.noop())
     .pipe(plugins.postcss(processors))
-    .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
+    .pipe(gulp.dest(APP_DEST));
 }
 
 /**
@@ -96,9 +82,9 @@ function processExternalStylesheets() {
  */
 function processAllExternalStylesheets() {
   return merge(getExternalCssStream(), getExternalScssStream())
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
+    .pipe(plugins.util.noop())
     .pipe(plugins.postcss(processors))
-    .pipe(isProd ? cleanCss() : plugins.util.noop())
+    .pipe(plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
 }
 
@@ -107,7 +93,7 @@ function processAllExternalStylesheets() {
  */
 function getExternalCssStream() {
   return gulp.src(getExternalCss())
-    .pipe(isProd ? plugins.cached('process-external-css') : plugins.util.noop());
+    .pipe(plugins.util.noop());
 }
 
 /**
@@ -122,8 +108,8 @@ function getExternalCss() {
  */
 function getExternalScssStream() {
   return gulp.src(getExternalScss())
-    .pipe(isProd ? plugins.cached('process-external-scss') : plugins.util.noop())
-    .pipe(isProd ? plugins.progeny() : plugins.util.noop())
+    .pipe(plugins.util.noop())
+    .pipe(plugins.util.noop())
     .pipe(plugins.sass({includePaths: ['./node_modules/']}).on('error', plugins.sass.logError));
 }
 
@@ -142,8 +128,8 @@ function getExternalScss() {
 function processExternalCss() {
   return getExternalCssStream()
     .pipe(plugins.postcss(processors))
-    .pipe(isProd ? plugins.concatCss(CSS_PROD_BUNDLE) : plugins.util.noop())
-    .pipe(isProd ? cleanCss() : plugins.util.noop())
+    .pipe(plugins.util.noop())
+    .pipe(plugins.util.noop())
     .pipe(gulp.dest(CSS_DEST));
 }
 

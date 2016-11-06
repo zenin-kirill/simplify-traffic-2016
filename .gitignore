@@ -13,6 +13,9 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+# AOT compiller directory
+aot
+
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -34,8 +37,14 @@ build/Release
 .idea
 .vscode
 *.iml
+.editorconfig
+.jshintrc
+.stylelintrc
+.travis.yml
+appveyor.yml
 
 /tools/**/*.js
+/tools/**/*.map
 dist/dev
 dist/tmp
 dev
@@ -46,4 +55,13 @@ tmp
 
 gulpfile.js
 gulpfile.js.map
+
+app/**/*.js
+app/**/*.map
+
+**/*.metadata.json
+
+
+
+
 

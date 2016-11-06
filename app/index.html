@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><%= APP_TITLE %></title>
+  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico"/>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600">
@@ -43,13 +44,12 @@
   <!-- shims:js -->
   <!-- endinject -->
 
-  <% if (ENV === 'dev') { %>
   <script>
     System.config(<%=
       JSON.stringify(SYSTEM_CONFIG, null, 2)
-    %>)
+      % >
+    )
   </script>
-  <% } %>
 
   <!-- libs:js -->
   <!-- endinject -->
@@ -57,19 +57,11 @@
   <!-- inject:js -->
   <!-- endinject -->
 
-  <% if (ENV === 'dev') { %>
-  <!--<script>-->
-  <!--System.import('<%= BOOTSTRAP_MODULE %>')-->
-  <!--.catch(function (e) {-->
-  <!--console.error('Index error!! ', e);-->
-  <!--});-->
-  <!--</script>-->
-  <script>
-    System.import('app').catch(function (err) {
-      console.error(err);
-    });
-  </script>
-  <% } %>
+<script>
+  System.import('app').catch(function (err) {
+    console.error(err);
+  });
+</script>
 
 </body>
 </html>
