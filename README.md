@@ -10,3 +10,6 @@ Features:
 - Basic Service Worker, which implements "Cache then network strategy".
 
 Bugs:
+
+- Мелкие косяки в to-do
+- Надо-бы исправить все селекторы как в диаграмме классов

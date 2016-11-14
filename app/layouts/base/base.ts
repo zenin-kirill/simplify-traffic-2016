@@ -3,8 +3,8 @@ import {Component, ViewEncapsulation, ViewContainerRef} from '@angular/core';
 @Component({
 	moduleId: module.id,
   selector: 'st-app',
-    templateUrl: 'base.html',
-    encapsulation: ViewEncapsulation.None,
+  templateUrl: 'base.html',
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class AppComponent {
@@ -14,3 +14,5 @@ export class AppComponent {
 	    this.viewContainerRef = viewContainerRef;
 	}
 }
+
+//todo: нарушена структура файлов, необходимо исправить

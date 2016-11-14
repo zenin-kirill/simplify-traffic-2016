@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class SidebarComponent {
+  // todo: переписать тут всё к чертовой матери нормальным языком
 	isActive = false;
 	showMenu: string = '0';
 
