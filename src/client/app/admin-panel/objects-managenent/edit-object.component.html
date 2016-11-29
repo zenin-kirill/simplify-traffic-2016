@@ -1,0 +1,163 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+  <div class="row text-xs-center" style="margin: 1rem;">
+
+    <h2 class="page-header">
+              New agency
+            </h2>
+  </div>
+  <div class="row">
+    <div class="col-xl-12 text-xs-center">
+            <ol class="breadcrumb">
+                <li>
+                  <a href="Javascript:void(0)" [routerLink]="['/admin-panel','agencies']"><i class="fa fa-sliders"></i>
+                    Agencies
+                  management</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-plus"></i> New agency
+                </li>
+            </ol>
+        </div>
+    </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="legalNameInput">Legal name: *</label>
+      <input type="text" class="form-control" id="legalNameInput" placeholder="OAO Vladimirskiy dorogi">
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="nameInput">Name: *</label>
+      <input type="text" class="form-control" id="nameInput" placeholder="WestLine">
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="cityDroupdown">City: *</label>
+      <select class="form-control" id="cityDroupdown" value="0">
+        <option value="0">Select your city</option>
+        <option value="1">Moscow</option>
+        <option value="2">Vladimir</option>
+        <option value="3">Berlin</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="timeZoneDroupdown">Timezone: *</label>
+      <select class="form-control" id="timeZoneDroupdown" value="0">
+        <option value="0">Select your timezone</option>
+        <option value="1">+3 GMT Moscow</option>
+        <option value="2">+2 GMT Berlin</option>
+        <option value="3">+5 GMT Ekaterinburg</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="urlInput">Web site:</label>
+      <div class="input-group">
+        <span class="input-group-addon">http://</span>
+        <input type="text" class="form-control" id="urlInput" placeholder="simplify-traffic.com">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="fareUrlInput">Fare link:</label>
+      <div class="input-group">
+        <span class="input-group-addon">http://</span>
+        <input type="text" class="form-control" id="fareUrlInput" placeholder="simplify-traffic.com/fare">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="postIndexInput">Post index: *</label>
+      <input type="text" class="form-control" id="postIndexInput" placeholder="234234">
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="contactNameInput">Contact name: *</label>
+      <input type="text" class="form-control" id="contactNameInput" placeholder="Mary">
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="phoneInput">Telephone: *</label>
+      <input type="text" class="form-control" id="phoneInput" placeholder="+79455453423">
+    </div>
+</div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="emailInput">E-mail: *</label>
+      <input type="text" class="form-control" id="emailInput" placeholder="contact@company.com">
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <fieldset class="form-group">
+        <label class="form-control-label" for="commentaryInput">Commentary:</label>
+        <textarea class="form-control" rows="6" id="commentaryInput"
+                  placeholder="This is company, who transportation passangers into Moscow from Vladimir"></textarea>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <fieldset class="form-group">
+        <label class="form-control-label" for="adressInput">Adress: *</label>
+        <textarea class="form-control" rows="2" id="adressInput"
+                  placeholder="gor. Vladimir, yl. Mira, d. 16"></textarea>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-12">
+    <div class="form-group">
+      <label class="form-control-label" for="languageDroupdown">Service language: *</label>
+      <select class="form-control" id="languageDroupdown" value="0">
+        <option value="0">Select your language</option>
+        <option value="1">Russian</option>
+        <option value="2">English</option>
+        <option value="3">Germany</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!--<div class="row">-->
+<!--<div class="col-xl-12 col-lg-12 text-xs-center">-->
+<!--<div class="form-group">-->
+<!--<button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Create agency</button>-->
+<!--&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--<button type="button" class="btn btn-danger"><i class="fa fa-remove"></i> Cancel</button>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="row">
+  <div class="col-xl-2 col-lg-4 text-xs-center"></div>
+  <div class="col-xl-4 col-lg-8 text-xs-center">
+    <button type="button" class="btn btn-success btn-block"><i class="fa fa-plus"></i> Create agency</button>
+  </div>
+  <div class="col-xl-4 col-lg-8 text-xs-center">
+    <button type="button" class="btn btn-danger btn-block"><i class="fa fa-remove"></i> Cancel</button>
+  </div>
+  <div class="col-xl-2 col-lg-4 text-xs-center"></div>
+</div>
+

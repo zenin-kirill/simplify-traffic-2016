@@ -3,39 +3,36 @@
     "target": "es5",
     "module": "commonjs",
     "declaration": false,
-    "removeComments": false,
+    "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "lib": ["es6", "es2015", "dom"],
     "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
+    "allowUnusedLabels": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
     "typeRoots": [
-      "./types"
+      "./node_modules/@types",
+      "./node_modules"
+    ],
+    "types": [
+      "core-js",
+      "express",
+      "jasmine",
+      "node",
+      "protractor",
+      "systemjs"
     ]
   },
   "exclude": [
-    "dist",
-    "typings/index.d.ts",
-    "typings/modules",
-    "src",
-    "aot",
-    "tmp",
     "node_modules",
-    "app",
-    "rollup.config.ts"
+    "dist",
+    "src"
   ],
-  //	"files": [
-  //    "app/app.module.ts",
-  //    "app/main.ts",
-  //    "tools/tasks/project/",
-  //    "tools/tasks/seed/",
-  //    "gulpfile"
-  //	],
   "compileOnSave": false
 }

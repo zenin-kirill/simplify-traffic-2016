@@ -1,15 +1,23 @@
-Simplify Traffic Front App built using Angular 2 and Bootstrap 4
+Simplify Traffic admin panel web application v.0.0.2  
 
-Features:
+- Node.js v.6.9.1
+- NPM v.3.10.8
+- Angular2 v.2.2.3
+- Angular2 Bootstrap v.1.1.16
+- Twitter Bootstrap v.4.0.0-alpha.2
+- TsLint v.4.0.2
+- TypeScript v.2.0.2
 
-- Ready to go, statically typed build system using gulp for working with TypeScript.
-- Production and development builds.
-- Development server with Livereload.
-- Following the best practices for your application’s structure.
-- Manager of your type definitions using [typings](https://github.com/typings/typings).
-- Basic Service Worker, which implements "Cache then network strategy".
-
-Bugs:
-
-- Мелкие косяки в to-do
-- Надо-бы исправить все селекторы как в диаграмме классов
+- Основная структура панели управления
+- Сборка в трех режимах (dev, prod, prod.exp)
+- Механизм unit-тестирования на основе karma (2 реальных теста)
+- Механизм e2e-тестирования на основе protracktor (1 пробный тест)
+- Оформление в лучших традициях JS, TS и Angular2
+ 
+ 0.0.2
+ 
+  - обновлены основные компоненты работы и сборки
+  - добавлены механизмы тестирования
+  - весь проект переработан в соотвествии с Angular2 style guide и проектной схемой
+  - обновлена проектная схема
+  

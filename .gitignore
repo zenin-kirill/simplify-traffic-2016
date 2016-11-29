@@ -13,9 +13,6 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# AOT compiller directory
-aot
-
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -25,8 +22,8 @@ build/Release
 # Dependency directory
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-/node_modules/
-/typings/
+node_modules
+typings
 
 # Users Environment Variables
 .lock-wscript
@@ -37,17 +34,10 @@ build/Release
 .idea
 .vscode
 *.iml
-.editorconfig
-.jshintrc
-.stylelintrc
-.travis.yml
-appveyor.yml
 
 /tools/**/*.js
-/tools/**/*.map
 dist/dev
 dist/tmp
-dist/**/*.map
 dev
 docs
 lib
@@ -57,12 +47,9 @@ tmp
 gulpfile.js
 gulpfile.js.map
 
-app/**/*.js
-app/**/*.map
+# OS X trash files
+.DS_Store
 
-**/*.metadata.json
-
-
-
-
-
+.*
+ts-node
+orbit-root
