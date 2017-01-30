@@ -41,7 +41,7 @@ let changed = (files: any) => {
   // if (ENABLE_HOT_LOADING) {
   //   ng2HotLoader.onChange(files);
   // } else {
-  //TODO: Figure out why you can't pass a file to reload
+  // Figure out why you can't pass a file to reload
   // if (onlyStylesChanged === false) {
     browserSync.reload(files);
   // } else {

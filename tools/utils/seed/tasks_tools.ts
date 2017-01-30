@@ -34,7 +34,7 @@ function registerTask(taskname: string, path: string): void {
       return taskReturnedValue;
     }
 
-    // TODO: add promise handling if needed at some point.
+    //add promise handling if needed at some point.
 
     done();
   });

@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation, ViewContainerRef} from '@angular/core';
-import {Config} from './env.config';
+import { Component, ViewContainerRef, OnInit } from '@angular/core';
+import { Config } from './env.config';
 
 @Component({
 	moduleId: module.id,
@@ -10,7 +10,8 @@ import {Config} from './env.config';
 
 export class AppComponent {
 	viewContainerRef: any = null;
-	public constructor(viewContainerRef:ViewContainerRef) {
+
+	constructor(viewContainerRef:ViewContainerRef) {
 	    // You need this small hack in order to catch application root view container ref
 	    this.viewContainerRef = viewContainerRef;
       console.log('Environment config', Config);

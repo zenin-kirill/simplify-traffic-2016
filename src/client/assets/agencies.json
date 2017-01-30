@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "type": "agency",
+      "id": "1612030001",
+      "attributes": {
+        "legalName": "GUP Mosgortrans",
+        "name": "Mosgortrans",
+        "cityId": "16120001",
+        "index": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contactName": "Galina Overbukh",
+        "webSiteUrl": "http://mosgortrans.ru",
+        "fareUrl": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company"
+      }
+    }
+  ],
+  "included": [
+    {
+      "type": "city",
+      "id": "1612040001",
+      "attributes": {
+        "countryId": "1612050001",
+        "name": "Moscow",
+        "population": "13000000"
+      }
+    }
+  ]
+}

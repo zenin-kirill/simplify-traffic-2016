@@ -339,6 +339,7 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
+      'angular2-cookie': 'node_modules/angular2-cookie',
       'rxjs/*': 'node_modules/rxjs/*',
       'app/*': '/app/*',
       // For test config
@@ -347,6 +348,10 @@ export class SeedConfig {
     },
     packages: {
       rxjs: { defaultExtension: 'js' }
+    },
+    'angular2-cookie': {
+      main: './core.js',
+      defaultExtension: 'js'
     }
   };
 
@@ -370,6 +375,7 @@ export class SeedConfig {
     ],
     paths: {
       [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
+      'angular2-cookie': 'node_modules/angular2-cookie',
       '*': 'node_modules/*'
     },
     packages: {
@@ -411,6 +417,10 @@ export class SeedConfig {
       },
       'rxjs': {
         main: 'Rx.js',
+        defaultExtension: 'js'
+      },
+      'angular2-cookie': {
+        main: './core.js',
         defaultExtension: 'js'
       }
     }

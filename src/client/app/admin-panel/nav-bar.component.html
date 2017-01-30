@@ -89,7 +89,7 @@
             </li>
             <li class="dropdown nav-item" dropdown>
                 <a href="javascript:;" id="single-button" class="nav-link dropdown-toggle" dropdownToggle >
-                  <i class="fa fa-user"></i> Zenin Kirill <b class="caret"></b>
+                  <i class="fa fa-user"></i> {{userSurname}} {{userName}}<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="single-button">
                     <li>
@@ -103,7 +103,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a class="dropdown-item" href="javascript:;" [routerLink]="['/']">
+                        <a class="dropdown-item" href="javascript:;" (click)="logOut()">
                             <i class="fa fa-fw fa-power-off"></i> Log Out
                         </a>
                     </li>

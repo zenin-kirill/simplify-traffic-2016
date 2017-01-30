@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { ObjectManagementModule} from './objects-managenent/objects-management.module';
+import { ObjectManagementModule} from '../objects-managenent/objects-management.module';
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AdminPanelComponent } from './admin-panel.component';

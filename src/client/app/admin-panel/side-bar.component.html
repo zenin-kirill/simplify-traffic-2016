@@ -45,8 +45,8 @@
 
       </li>
     </div>
-    <a href [routerLink]="['/login']" class="list-group-item">
-      <i class="fa fa-fw fa-sign-out"></i> &nbsp;Sign out
+    <a href (click)="logOut()" class="list-group-item">
+      <i class="fa fa-fw fa-sign-out"></i> &nbsp;Log out
     </a>
   </ul>
 </nav>
