@@ -1,0 +1,52 @@
+<button class="btn btn-default" id="toggle-sidebar" type="button" (click)="showSideBarChanged()">
+  &#9776;
+</button>
+<nav class="sidebar" [ngClass]="{sidebarPushRight: showSideBar}">
+  <div class="row text-xs-center" style="margin-top: 1rem; margin-bottom: 1rem;">
+    <img src="assets/img/ST-logo-noborder.png" width="125px" style="align-self: center;"/>
+  </div>
+  <ul class="list-group">
+    <a [routerLink]="['dashboard']" class="list-group-item">
+      <i class="fa fa-fw fa-home"></i> Dashboard
+    </a>
+    <div class="nested-menu">
+      <a class="list-group-item" (click)="showManagementMenuChanged()">
+        <span><i class="fa fa-fw fa-chevron-down"></i>&nbsp;Management </span>
+      </a>
+      <li class="nested" [ngClass]="{'expand' : showManagementMenu }">
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['agencies']">
+              <span>&nbsp;Agencies</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['vehicles']">
+              <span>&nbsp;Vehicles</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['routes']">
+              <span>&nbsp;Routes</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['users']">
+              <span>&nbsp;Users</span>
+            </a>
+          </li>
+        </ul>
+
+      </li>
+    </div>
+    <a href [routerLink]="['/login']" class="list-group-item">
+      <i class="fa fa-fw fa-sign-out"></i> &nbsp;Sign out
+    </a>
+  </ul>
+</nav>

@@ -138,7 +138,7 @@ gulp.task('serve.prod', (done: any) =>
 
 // --------------
 // Serve prod.exp (AOT)
-gulp.task('serve.prod', (done: any) =>
+gulp.task('serve.prod.exp', (done: any) =>
   runSequence('build.prod.exp',
               'server.prod',
               done));
