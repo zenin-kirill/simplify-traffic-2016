@@ -1,27 +1,47 @@
-import { TimezoneType, timezoneTypes } from './timezone.type';
-import { LanguageType, languageTypes } from './language.type';
-import { ManagedObject } from "./managed-object";
-import { ManagedObjectType } from "./managed-object.type";
+import { TimezoneType, timezoneTypes } from "./timezone.type";
+import { LanguageType, languageTypes } from "./language.type";
+import { ManagedObject, managedObjectAttrs } from "./managed-object";
+import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 
+/**
+ * Объект, содержащий дополнительные сведения об атрибутах класса
+ */
+export const agencyAttrs: any = {
+  legalName: {json: 'legal-name'},
+  name: {json: 'name'},
+  zipCode: {json: 'zip-code'},
+  address: {json: 'address'},
+  email: {json: 'email'},
+  phone: {json: 'phone'},
+  contactName: {json: 'contact-name'},
+  websiteUrl: {json: 'website-url'},
+  fareUrl: {json: 'fare-url'},
+  language: {json: 'language'},
+  timezone: {json: 'timezone'},
+  comment: {json: 'comment'}
+}
+
+/**
+ * Класс, описывающий сущность агенство
+ */
 export class Agency extends ManagedObject {
-  private legalName: string;
-  private name: string;
-  private index: string;
-  private address: string;
-  private email: string;
-  private phone: string;
-  private contactName: string;
-  private webSiteUrl: string;
-  private fareUrl: string;
-  private language: LanguageType;
-  private timezone: TimezoneType;
-  private comment: string;
+  private legalName: string;      // юридическое имя
+  private name: string;           // выводимое имя
+  private zipCode: string;        // почтовый индекс
+  private address: string;        // адрес (внутри города)
+  private email: string;          // электронная почта
+  private phone: string;          // номер телефона
+  private contactName: string;    // имя сотрудника
+  private websiteUrl: string;     // ссылка на сайт агенства
+  private fareUrl: string;        // ссылка на страницу с тарифами
+  private language: LanguageType; // язык
+  private timezone: TimezoneType; // часовой пояс
+  private comment: string;        // комментарий
 
-  private cityId: string;
+  private cityId: string;         // город, в котором находится агенство
 
-  constructor(agencyData: Object) {
-    super(ManagedObjectType.agencies);
-    this.setOnObject(agencyData);
+  constructor() {
+    super(ManagedObjectType.agency);
   }
 
   getLegalName(): string {
@@ -36,8 +56,8 @@ export class Agency extends ManagedObject {
     return this.cityId;
   }
 
-  getIndex(): string {
-    return this.index;
+  getZipCode(): string {
+    return this.zipCode;
   }
 
   getAddress(): string {
@@ -56,8 +76,8 @@ export class Agency extends ManagedObject {
     return this.contactName;
   }
 
-  getWebSiteUrl(): string {
-    return this.webSiteUrl;
+  getWebsiteUrl(): string {
+    return this.websiteUrl;
   }
 
   getFareUrl(): string {
@@ -89,8 +109,8 @@ export class Agency extends ManagedObject {
     this.cityId = value;
   }
 
-  setIndex(value: string) {
-    this.index = value;
+  setZipCode(value: string) {
+    this.zipCode = value;
   }
 
   setAddress(value: string) {
@@ -109,8 +129,8 @@ export class Agency extends ManagedObject {
     this.contactName = value;
   }
 
-  setWebSiteUrl(value: string) {
-    this.webSiteUrl = value;
+  setWebsiteUrl(value: string) {
+    this.websiteUrl = value;
   }
 
   setFareUrl(value: string) {
@@ -129,52 +149,52 @@ export class Agency extends ManagedObject {
     this.comment = value;
   }
 
+  /**
+   * Метод, устанавливающий данные агенства из объекта в формате JSON-API
+   * По сути, метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
+   * @param agencyData - данные объекта в формате JSON-API
+   */
   setOnObject(agencyData: any) {
-    if ((agencyData['type'] === 'agencies') &&
-        ('id' in agencyData) &&
-        ('legal-name' in agencyData['attributes']) &&
-        ('name' in agencyData['attributes']) &&
-        ('index' in agencyData['attributes']) &&
-        ('address' in agencyData['attributes']) &&
-        ('email' in agencyData['attributes']) &&
-        ('phone' in agencyData['attributes']) &&
-        ('contact-name' in agencyData['attributes']) &&
-        ('web-site-url' in agencyData['attributes']) &&
-        ('fare-url' in agencyData['attributes']) &&
-        ('language' in agencyData['attributes']) &&
-        ('timezone' in agencyData['attributes']) &&
-        ('comment' in agencyData['attributes']) &&
-        ('created-at' in agencyData['attributes']) &&
-        ('updated-at' in agencyData['attributes']) &&
-
-        ('id' in agencyData['relationships']['city']['data'])) {
-
-      this.setOnString(agencyData['id'].toString(),
-                       agencyData['attributes']['legal-name'].toString(),
-                       agencyData['attributes']['name'].toString(),
-                       agencyData['attributes']['index'].toString(),
-                       agencyData['attributes']['address'].toString(),
-                       agencyData['attributes']['email'].toString(),
-                       agencyData['attributes']['phone'].toString(),
-                       agencyData['attributes']['contact-name'].toString(),
-                       agencyData['attributes']['web-site-url'].toString(),
-                       agencyData['attributes']['fare-url'].toString(),
-                       agencyData['attributes']['language'].toString(),
-                       agencyData['attributes']['timezone'].toString(),
-                       agencyData['attributes']['comment'].toString(),
-                       agencyData['attributes']['created-at'].toString(),
-                       agencyData['attributes']['updated-at'].toString(),
-
-                       agencyData['relationships']['city']['data']['id'].toString());
-    }
-    else {
+    if (!((agencyData['type'] === managedObjectTypes.agency.json) &&
+          (managedObjectAttrs.id.json in agencyData) &&
+          (managedObjectAttrs.createdAt.json in agencyData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in agencyData['attributes']) &&
+          ('id' in agencyData['relationships']['city']['data'])))
       throw new Error('Impossible to convert an object Agency. Invalid object format');
+
+    for (let obj in agencyAttrs) {
+      if (!(agencyAttrs[obj]['json'] in agencyData['attributes']))
+        throw new Error('Impossible to convert an object Agency. Invalid agency format');
     }
+
+    this.setOnString(agencyData[managedObjectAttrs.id],
+                     agencyData['attributes'][agencyAttrs.legalName.json],
+                     agencyData['attributes'][agencyAttrs.name.json],
+                     agencyData['attributes'][agencyAttrs.zipCode.json],
+                     agencyData['attributes'][agencyAttrs.address.json],
+                     agencyData['attributes'][agencyAttrs.email.json],
+                     agencyData['attributes'][agencyAttrs.phone.json],
+                     agencyData['attributes'][agencyAttrs.contactName.json],
+                     agencyData['attributes'][agencyAttrs.websiteUrl.json],
+                     agencyData['attributes'][agencyAttrs.fareUrl.json],
+                     agencyData['attributes'][agencyAttrs.language.json],
+                     agencyData['attributes'][agencyAttrs.timezone.json],
+                     agencyData['attributes'][agencyAttrs.comment.json],
+                     agencyData['attributes'][managedObjectAttrs.createdAt],
+                     agencyData['attributes'][managedObjectAttrs.updatedAt],
+
+                     agencyData['relationships']['city']['data']['id'].toString());
   }
 
+  /**
+   * Метод, устанавливающий данные агенства из свойств в строковом формате
+   * По сути метод производит проверку и парсинг строковых значений ствойств и передает готовые
+   * значения свойств в следующий метод
+   * Входными параметрами являются все свойства объекта агенство в строковом формате
+   */
   setOnString(id: string, legalName: string, name: string,
-              index: string, address: string, email: string,
-              phone: string, contactName: string, webSiteUrl: string,
+              zipCode: string, address: string, email: string,
+              phone: string, contactName: string, websiteUrl: string,
               fareUrl: string, language: string, timezone: string,
               comment: string, createdAt: string, updatedAt: string, cityId: string) {
 
@@ -187,28 +207,32 @@ export class Agency extends ManagedObject {
 
     let languageType: LanguageType;
     for (let obj in languageTypes) {
-      if (language === obj)
-        languageType = languageTypes[obj].type;
+      if (language === languageTypes[obj]['json'])
+        languageType = languageTypes[obj]['type'];
     }
     if (languageType === null || languageType === undefined)
       throw new Error('Impossible to convert an object Agency. Invalid language type');
 
     let timezoneType: TimezoneType;
     for (let obj in timezoneTypes) {
-      if (timezone === obj)
-        timezoneType = timezoneTypes[obj].type;
+      if (timezone === timezoneTypes[obj]['json'])
+        timezoneType = timezoneTypes[obj]['type'];
     }
     if (timezoneType === null || timezoneType === undefined)
       throw new Error('Impossible to convert an object Agency. Invalid timezone type');
 
-    this.set(id, legalName, name, index, address, email, phone, contactName,
-             webSiteUrl, fareUrl, languageType, timezoneType, comment, createdAtDate,
+    this.set(id, legalName, name, zipCode, address, email, phone, contactName,
+             websiteUrl, fareUrl, languageType, timezoneType, comment, createdAtDate,
              updatedAtDate, cityId);
   }
 
+  /**
+   * Метод, устанавливающий данные агенства из свойств в исходном формате
+   * Входными параметрами являются все свойства объекта агенства в исходном формате
+   */
   set(id: string, legalName: string, name: string,
-      index: string, address: string, email: string,
-      phone: string, contactName: string, webSiteUrl: string,
+      zipCode: string, address: string, email: string,
+      phone: string, contactName: string, websiteUrl: string,
       fareUrl: string, language: LanguageType, timezone: TimezoneType,
       comment: string, createdAt: Date, updatedAt: Date, cityId: string) {
 
@@ -216,12 +240,12 @@ export class Agency extends ManagedObject {
     this.legalName   = legalName;
     this.name        = name;
     this.cityId      = cityId;
-    this.index       = index;
+    this.zipCode     = zipCode;
     this.address     = address;
     this.email       = email;
     this.phone       = phone;
     this.contactName = contactName;
-    this.webSiteUrl  = webSiteUrl;
+    this.websiteUrl  = websiteUrl;
     this.fareUrl     = fareUrl;
     this.language    = language;
     this.timezone    = timezone;

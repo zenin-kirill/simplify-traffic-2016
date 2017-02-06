@@ -1,34 +1,34 @@
 <div class="container-fluid">
-<div class="login-page">
-	<div class="row">
-		<div class="col-lg-4 col-lg-offset-4">
-      <img src="assets/img/ST-logo-noborder.png" width="160px"/>
-      <h1 style="margin-top: 40px;">{{message}}</h1>
-			<form role="form">
-				<div class="form-content">
-					<div class="form-group">
-            <input [(ngModel)]="login"
-                   name="input.login"
-                   type="text"
-                   class="form-control input-underline input-lg"
-                   id="loginInput"
-                   placeholder="E-mail">
-					</div>
+  <div class="login-page">
+    <div class="row">
+      <div class="col-lg-4 col-lg-offset-4">
+        <img src="assets/img/ST-logo-noborder.png" width="160px"/>
+        <h1 style="margin-top: 40px;">{{message}}</h1>
+        <form role="form">
+          <div class="form-content">
+            <div class="form-group">
+              <input [(ngModel)]="login"
+                     name="input.login"
+                     type="text"
+                     class="form-control input-underline input-lg"
+                     id="loginInput"
+                     placeholder="E-mail">
+            </div>
 
-					<div class="form-group">
-            <input [(ngModel)]="password"
-                   name="input.password"
-                   type="password"
-                   class="form-control input-underline input-lg"
-                   id="loginPassword"
-                   placeholder="Password">
-					</div>
-				</div>
-        <a class="btn rounded-btn" (click)="tryAuthorize()"> Log in </a>
-				&nbsp;
-				<a type="submit" class="btn rounded-btn" [routerLink]="['/']">Forgot password?</a>
-			</form>
-		</div>
-	</div>
-</div>
+            <div class="form-group">
+              <input [(ngModel)]="password"
+                     name="input.password"
+                     type="password"
+                     class="form-control input-underline input-lg"
+                     id="loginPassword"
+                     placeholder="Password">
+            </div>
+          </div>
+          <a class="btn rounded-btn" (click)="tryAuthorize()"> Log in </a>
+          &nbsp;
+          <a type="submit" class="btn rounded-btn" [routerLink]="['/']">Forgot password?</a>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

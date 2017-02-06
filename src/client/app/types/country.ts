@@ -1,3 +1,6 @@
+/**
+ * Класс, описывающий сущность страна
+ */
 export class Country {
-  private name: string;
+  private name: string;   // название
 }

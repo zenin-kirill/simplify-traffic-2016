@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Injectable } from "@angular/core";
+import { Http, Response } from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
 
 /**
  * This class provides the NameList service with methods to read names and add names.
@@ -23,14 +23,14 @@ export class NameListService {
    */
   get(): Observable<string[]> {
     return this.http.get('/assets/data.json')
-                    .map((res: Response) => res.json())
-                    .catch(this.handleError);
+               .map((res: Response) => res.json())
+               .catch(this.handleError);
   }
 
   /**
-    * Handle HTTP error
-    */
-  private handleError (error: any) {
+   * Handle HTTP error
+   */
+  private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
     let errMsg = (error.message) ? error.message :

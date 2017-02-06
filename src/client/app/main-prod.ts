@@ -1,8 +1,7 @@
 // Загрузка с использованием статического компилятора (angular AOT)
-
-import { enableProdMode } from '@angular/core';
-import { platformBrowser } from '@angular/platform-browser';
-import { AppModuleNgFactory } from './app.module.ngfactory';
+import { enableProdMode } from "@angular/core";
+import { platformBrowser } from "@angular/platform-browser";
+import { AppModuleNgFactory } from "./app.module.ngfactory";
 
 enableProdMode();
 

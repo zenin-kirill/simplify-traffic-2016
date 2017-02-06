@@ -1,29 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service'
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth.service";
 
 @Component({
-    moduleId: module.id,
-    selector: 'admin-nav-bar',
-    templateUrl: 'nav-bar.component.html',
-})
+             moduleId: module.id,
+             selector: 'admin-nav-bar',
+             templateUrl: 'nav-bar.component.html',
+           })
 
-export class NavBarComponent implements OnInit{
-  userSurname: string = '';
-  userName: string = '';
+/**
+ *  Компонент, представляющий собой верхнюю панель навигации
+ */
+export class NavBarComponent implements OnInit {
+  userSurname: string = '';   // модель, предназн. для вывода фамилии пользователя
+  userName: string    = '';      // модель, предназн. для вывода имени пользователя
 
   constructor(private authService: AuthService) {};
 
+  /**
+   * Функция, котоаря при инициализации компонента запрашивает у сервиса авторизации данные о
+   * пользователе
+   */
   ngOnInit() {
-    this.userSurname = this.authService.getAuthDataWithoutLogIn().user.getSurname();
-    this.userName = this.authService.getAuthDataWithoutLogIn().user.getName();
+    this.userSurname = this.authService.getCurrentUser().getSurname();
+    this.userName    = this.authService.getCurrentUser().getName();
   }
 
+  // todo: расшарить что это за функционал
   changeTheme(color: string): void {
     var link: any = $('<link>');
     link
-      .appendTo('head')
-      .attr({type : 'text/css', rel : 'stylesheet'})
-      .attr('href', 'themes/app-'+color+'.css');
+    .appendTo('head')
+    .attr({type: 'text/css', rel: 'stylesheet'})
+    .attr('href', 'themes/app-' + color + '.css');
   }
 
   rtl(): void {
@@ -31,8 +39,8 @@ export class NavBarComponent implements OnInit{
     body.toggleClass('rtl');
   }
 
-  sidebarToggler(): void  {
-    var sidebar: any = $('#sidebar');
+  sidebarToggler(): void {
+    var sidebar: any       = $('#sidebar');
     var mainContainer: any = $('.main-container');
     sidebar.toggleClass('sidebar-left-zero');
     mainContainer.toggleClass('main-container-ml-zero');

@@ -1,39 +1,40 @@
-import { ManagedObjectType } from './managed-object.type';
+import { ManagedObjectType } from "./managed-object.type";
 
-export class ManagedObject {
-  protected objType: ManagedObjectType;
-  protected id: string;
-  protected createdAt: Date;
-  protected updatedAt: Date;
+/**
+ * Объект, содержащий отображение свойств класса в строки по стандарту JSON-API
+ */
+export const managedObjectAttrs: any = {
+  id: {json: 'id'},
+  createdAt: {json: 'created-at'},
+  updatedAt: {json: 'updated-at'}
+}
 
-  get getUpdatedAt(): Date{
+/**
+ * Абстрактный класс, описывающий сущность управляемый объект
+ */
+export abstract class ManagedObject {
+  protected objType: ManagedObjectType;   // тип объекта
+  protected id: string;                   // идентификатор оъекта
+  protected createdAt: Date;              // дата создания
+  protected updatedAt: Date;              // дата изменения
+
+  get getUpdatedAt(): Date {
     return this.updatedAt;
   }
 
-  get getCreatedAt(): Date{
+  get getCreatedAt(): Date {
     return this.createdAt;
   }
 
-  get getId(): string{
+  get getId(): string {
     return this.id;
   }
 
-  get getObjType(): ManagedObjectType{
+  get getObjType(): ManagedObjectType {
     return this.objType;
   }
 
   constructor(objType: ManagedObjectType) {
     this.objType = objType;
   };
-
-  //constructor(objType: ManagedObjectType, id: string, createdAt: string, updatedAt: string) {
-  // this.set(objType, id, createdAt, updatedAt);
-  //}
-  //
-  //set(objType: ManagedObjectType, id: string, createdAt: string, updatedAt: string) {
-  //  this.objType   = objType;
-  //  this.id        = id;
-  //  this.createdAt = createdAt;
-  //  this.updatedAt = updatedAt;
-  //}
 }

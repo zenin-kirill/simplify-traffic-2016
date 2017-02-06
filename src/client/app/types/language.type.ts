@@ -1,15 +1,21 @@
+/**
+ * Перечисление, содержащее типы используемых в сервисе языков
+ */
 export enum LanguageType {
-  en,
-  ru,
-  de,
-  fr,
-  zh
+  en,   // английский
+  ru,   // русский
+  de,   // немецкий
+  fr,   // французкий
+  zh    // китайский
 }
 
+/**
+ * Объект, содержащий сведения о языках
+ */
 export const languageTypes: any = {
-  en: {type: LanguageType.en},
-  ru: {type: LanguageType.ru},
-  de: {type: LanguageType.de},
-  fr: {type: LanguageType.fr},
-  zh: {type: LanguageType.zh}
+  en: {json: 'en', type: LanguageType.en},
+  ru: {json: 'ru', type: LanguageType.ru},
+  de: {json: 'de', type: LanguageType.de},
+  fr: {json: 'fr', type: LanguageType.fr},
+  zh: {json: 'zh', type: LanguageType.zh}
 }

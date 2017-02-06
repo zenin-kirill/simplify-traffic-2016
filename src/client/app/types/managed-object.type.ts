@@ -1,23 +1,30 @@
+/**
+ * Перечисление, содержащее типы управляемых объектов
+ */
 export enum ManagedObjectType {
-  users,
-  countries,
-  cities,
-  agencies,
-  routes,
-  vehicles,
-  drivers,
-  stops,
-  trips
-};
+  user,       // пользователь
+  country,    // страна
+  city,       // населенный пункт
+  agency,     // агенство
+  route,      // маршрут
+  vehicle,    // ТС
+  driver,     // водитель
+  stop,       // остановка
+  trip        // рейс
+}
+;
 
+/**
+ * Объект, содержащий сведения о типах управляемых объектов
+ */
 export const managedObjectTypes: any = {
-  users: {type: ManagedObjectType.users},
-  countries: {type: ManagedObjectType.countries},
-  cities: {type: ManagedObjectType.cities},
-  agencies: {type: ManagedObjectType.agencies},
-  routes: {type: ManagedObjectType.routes},
-  vehicles: {type: ManagedObjectType.vehicles},
-  drivers: {type: ManagedObjectType.drivers},
-  stops: {type: ManagedObjectType.stops},
-  trips: {type: ManagedObjectType.trips}
+  user: {json: 'users', type: ManagedObjectType.user},
+  country: {json: 'countries', type: ManagedObjectType.country},
+  city: {json: 'cities', type: ManagedObjectType.city},
+  agency: {json: 'agencies', type: ManagedObjectType.agency},
+  route: {json: 'routes', type: ManagedObjectType.route},
+  vehicle: {json: 'vehicles', type: ManagedObjectType.vehicle},
+  driver: {json: 'drivers', type: ManagedObjectType.driver},
+  stop: {json: 'stops', type: ManagedObjectType.stop},
+  trip: {json: 'trips', type: ManagedObjectType.trip}
 };
