@@ -1,9 +1,29 @@
 <div class="container-fluid">
   <div class="login-page">
+    <div class="row  pull-xs-right">
+      <div class="col-xs-4">
+      <div class="btn-group" dropdown>
+        <button id="single-button" type="button" class="btn btn-secondary btn-block" dropdownToggle>
+          <img src=" assets/img/blank.gif" class="flag {{currentLocale.class}}" />
+          {{currentLocale.str}} <span
+          class="caret"></span>
+        </button>
+        <ul dropdownMenu role="menu" aria-labelledby="single-button">
+          <li *ngFor="let language of languageTypes; let i=index" role="menuitem">
+            <a class="dropdown-item btn-block" href="javascript:;" (click)="changeLocale(i)">
+              <img src="assets/img/blank.gif" class="flag {{language.class}}" />
+              {{language.str}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      </div>
+    </div>
+    <br/>
     <div class="row">
       <div class="col-lg-4 col-lg-offset-4">
         <img src="assets/img/ST-logo-noborder.png" width="160px"/>
-        <h1 style="margin-top: 40px;">{{message}}</h1>
+        <h1 style="margin-top: 40px;">{{'AuthComponent.title' | translate:lang}}</h1>
         <form role="form">
           <div class="form-content">
             <div class="form-group">
@@ -12,7 +32,7 @@
                      type="text"
                      class="form-control input-underline input-lg"
                      id="loginInput"
-                     placeholder="E-mail">
+                     placeholder="{{'AuthComponent.email' | translate:lang}}">
             </div>
 
             <div class="form-group">
@@ -21,12 +41,14 @@
                      type="password"
                      class="form-control input-underline input-lg"
                      id="loginPassword"
-                     placeholder="Password">
+                     placeholder="{{'AuthComponent.password' | translate:lang}}">
             </div>
           </div>
-          <a class="btn rounded-btn" (click)="tryAuthorize()"> Log in </a>
+          <a class="btn rounded-btn" (click)="tryAuthorize()">{{'AuthComponent.logIn' |
+            translate:lang}}</a>
           &nbsp;
-          <a type="submit" class="btn rounded-btn" [routerLink]="['/']">Forgot password?</a>
+          <a type="submit" class="btn rounded-btn"
+             [routerLink]="['/']">{{'AuthComponent.forgetPassword' | translate:lang}}</a>
         </form>
       </div>
     </div>

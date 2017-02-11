@@ -1,0 +1,52 @@
+{
+  "AuthComponent": {
+    "title": "Welcome to ST admin panel!",
+    "email": "E-mail",
+    "password": "Password",
+    "logIn": "Log in",
+    "forgetPassword": "Forget password?"
+  },
+
+  "DashboardComponent": {
+    "title": "Dashboard",
+    "busesOperating": "Buses operating",
+    "viewDetails": "View details",
+    "issuesWithBuses": "Issues with buses",
+    "tripsToday": "Trips today",
+    "nextPayment": "NextPayment"
+  },
+
+  "SideBarComponent": {
+    "dashboard": "Dashboard",
+    "management": "Management",
+    "agencies": "Agencies",
+    "vehicles": "Vehicles",
+    "routes": "Routes",
+    "users": "Users",
+    "cities": "Cities",
+    "countries": "Countries",
+    "drivers": "Drivers",
+    "stops": "Stops",
+    "trips": "Trips",
+    "logOut": "Log out"
+  },
+
+  "NavBarComponent": {
+    "adminPanel": "ADMIN PANEL",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logOut": "Log out"
+  },
+
+  "TripsStatusComponent": {
+    "trip": "Trip",
+    "departure": "Departure",
+    "dep": "dep.",
+    "nextStop": "Next stop",
+    "destination": "Destination",
+    "status": "Status",
+    "city": "city",
+    "arrive": "arrive",
+    "wait": "wait"
+  }
+}

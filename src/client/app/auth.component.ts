@@ -1,6 +1,9 @@
 import { Component } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
+import { languageTypes } from "./types/language.type";
+import { LocaleConfigService } from "./locale-config.service";
+import { Translation, TranslationService } from "angular-l10n";
 
 @Component({
              moduleId: module.id,
@@ -11,12 +14,33 @@ import { Router } from "@angular/router";
 /**
  *  Компонент, предоставляющий пользователю форму авторизации в сервисе
  */
-export class AuthComponent {
-  message: string  = 'Welcome to Admin panel!';   // сообщение, выводимое в заголовке на стр. автор.
-  login: string    = 'test@test.test';            // логин пользователя
-  password: string = 'testpass';                  // пароль поьлзователя
+export class AuthComponent extends Translation{
+  message: string  = '';          // сообщение, выводимое в заголовке на стр. автор.
+  login: string    = '';          // логин пользователя
+  password: string = '';          // пароль пользователя
+  languageTypes: Array<any> = []; // массив с типами поддерж. языков
+  currentLocale: any;
 
-  constructor(private authService: AuthService, private router: Router) {};
+  constructor(private authService: AuthService, private router: Router,
+              private localSevice: LocaleConfigService, public translation: TranslationService) {
+    super(translation);
+    // получение текущего языка
+    this.currentLocale = languageTypes[this.localSevice.getCurrentLanguage()];
+    // получение списка поддерж. языков
+    for (let lang in languageTypes) {
+      this.languageTypes.push(languageTypes[lang]);
+    }
+  };
+
+  /**
+   * Функция, производящая смену ткущих языка и страны
+   * @param index индекс элемента в массиве поддерж. языков
+   */
+  changeLocale(index: number) {
+    this.currentLocale = this.languageTypes[index];
+    this.localSevice.setCurrentLocation(this.languageTypes[index]['lang'],
+                                        this.languageTypes[index]['country'])
+  }
 
   /**
    * Функция, осуществляющая попытку авторизации пользователя.
