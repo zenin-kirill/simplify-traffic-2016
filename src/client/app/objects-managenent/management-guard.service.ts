@@ -32,7 +32,8 @@ export class ManagementGuardService implements CanActivate {
       return true;
     }
     else {
-      this.router.navigate(['/admin-panel', 'dashboard']);
+      this.router.navigate(['/admin-panel', 'dashboard'])
+          .catch((e) => {throw e});
       return false;
     }
   }

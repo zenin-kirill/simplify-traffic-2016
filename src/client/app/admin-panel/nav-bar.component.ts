@@ -3,6 +3,7 @@ import { AuthService } from "../auth.service";
 import { TranslationService, Localization, LocaleService } from "angular-l10n";
 import { LocaleConfigService } from "../locale-config.service";
 import { languageTypes } from "../types/language.type";
+import { Observable } from "rxjs";
 
 @Component({
              moduleId: module.id,
@@ -18,6 +19,7 @@ export class NavBarComponent extends Localization implements OnInit {
   userName: string    = '';       // модель, предназн. для вывода имени пользователя
   languageTypes: Array<any> = []; // массив, содержащий в себе все доступные в приложении языки
   currentLocale: any;             // модель, содержащая объект текущего языка
+  currentTime: Date = new Date(); // модель, содержащая текущую дату (время)
 
   constructor(private authService: AuthService, private localSevice: LocaleConfigService,
               public translation: TranslationService, public locale: LocaleService,) {
@@ -28,6 +30,11 @@ export class NavBarComponent extends Localization implements OnInit {
     for (let lang in languageTypes) {
       this.languageTypes.push(languageTypes[lang]);
     }
+    // подписка на постоянное обновление значения времени
+    let observableTime: Observable<Date> = Observable.create((observer: any) => {
+      setInterval(() => observer.next(new Date()), 5000);
+    });
+    observableTime.subscribe((time: Date) => this.currentTime = time, (e: any) => {throw e});
   };
 
 

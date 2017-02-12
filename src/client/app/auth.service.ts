@@ -133,11 +133,13 @@ export class AuthService {
    */
   completeLogIn() {
     if (this.getCurrentUrl() !== '') {
-      this.router.navigateByUrl(this.getCurrentUrl());
+      this.router.navigateByUrl(this.getCurrentUrl())
+          .catch((e) => {throw e});
       this.setCurrentUrl('');
     }
     else {
-      this.router.navigate(['/admin-panel', 'dashboard']);
+      this.router.navigate(['/admin-panel', 'dashboard'])
+          .catch((e) => {throw e});
     }
   }
 
@@ -152,7 +154,8 @@ export class AuthService {
     this.currentAgency  = null;
 
     this.cookieService.removeAll();
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/auth'])
+        .catch((e) => {throw e});
   }
 
   /**

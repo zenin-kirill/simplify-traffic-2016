@@ -46,7 +46,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   checkLogin(url: string): boolean {
     if (this.authService.getStatus()) { return true; }
     this.authService.setCurrentUrl(url);
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/auth'])
+        .catch((e) => {throw e});
     return false;
   }
 }
