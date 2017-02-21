@@ -53,9 +53,9 @@ export class Session {
   }
 
   /**
-   * Метод, устанавливающий данные сессии из объекта в формате JSON-API
-   * По сути, метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * @param sessionData - данные объекта в формате JSON-API
+   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
+   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
+   * Входным параметром является объект в формате JSON-API
    */
   setOnObject(sessionData: any) {
     if (!((sessionData['type'] === sessionAttrs.type.json) &&
@@ -82,26 +82,26 @@ export class Session {
   }
 
   /**
-   * Метод, устанавливающий данные сессии из свойств в строковом формате
-   * По сути метод производит проверку и парсинг строковых значений ствойств и передает готовые
+   * Метод, устанавливающий данные объекта класса из данных в строковом формате
+   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
    * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта агенство в строковом формате
+   * Входными параметрами являются все свойства объекта класса в строковом формате
    */
   setOnStrings(id: string, token: string, validUntil: string, createdAt: string, userId: string,
                agencyId: string) {
     let createdAtDate  = new Date(Date.parse(createdAt));
     let validUntilDate = new Date(Date.parse(validUntil));
 
-    if ((validUntilDate.getUTCDate() === NaN) ||
-        createdAtDate.getUTCDate() === NaN)
+    if ((isNaN(validUntilDate.getUTCDate())) ||
+         (isNaN(createdAtDate.getUTCDate())))
       throw new Error('Impossible to set an object Session. Invalid format of date');
 
     this.set(id, token, validUntilDate, createdAtDate, userId, agencyId)
   }
 
   /**
-   * Метод, устанавливающий данные агенства из свойств в исходном формате
-   * Входными параметрами являются все свойства объекта агенства в исходном формате
+   * Метод, устанавливающий данные класса из свойств в исходном формате
+   * Входными параметрами являются все свойства класса в исходном формате
    */
   set(id: string, token: string, validUntil: Date, createdAt: Date, userId: string,
       agencyId: string) {

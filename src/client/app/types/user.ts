@@ -75,9 +75,9 @@ export class User extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные пользователя из объекта в формате JSON-API
-   * По сути, метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * @param userData - данные объекта в формате JSON-API
+   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
+   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
+   * Входным параметром является объект в формате JSON-API
    */
   setOnObject(userData: any) {
     if (!((userData['type'] === managedObjectTypes.user.json) &&
@@ -92,23 +92,23 @@ export class User extends ManagedObject {
         throw new Error('Impossible to convert an object User. Invalid user format');
     }
 
-    this.setOnStrings(userData[managedObjectAttrs.id],
+    this.setOnStrings(userData[managedObjectAttrs.id.json],
                       userData['attributes'][userAttrs.role.json],
                       userData['attributes'][userAttrs.name.json],
                       userData['attributes'][userAttrs.surname.json],
                       userData['attributes'][userAttrs.email.json],
                       userData['attributes'][userAttrs.photoUrl.json],
-                      userData['attributes'][managedObjectAttrs.createdAt],
-                      userData['attributes'][managedObjectAttrs.updatedAt],
+                      userData['attributes'][managedObjectAttrs.createdAt.json],
+                      userData['attributes'][managedObjectAttrs.updatedAt.json],
 
                       userData['relationships']['agency']['data']['id']);
   }
 
   /**
-   * Метод, устанавливающий данные агенства из свойств в строковом формате
-   * По сути метод производит проверку и парсинг строковых значений ствойств и передает готовые
+   * Метод, устанавливающий данные объекта класса из данных в строковом формате
+   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
    * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта агенство в строковом формате
+   * Входными параметрами являются все свойства объекта класса в строковом формате
    */
   setOnStrings(id: string, role: string, name: string,
                surname: string, email: string, photoUrl: string, createdAt: string,
@@ -133,8 +133,8 @@ export class User extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные агенства из свойств в исходном формате
-   * Входными параметрами являются все свойства объекта агенства в исходном формате
+   * Метод, устанавливающий данные класса из свойств в исходном формате
+   * Входными параметрами являются все свойства класса в исходном формате
    */
   set(id: string, role: UserType, name: string,
       surname: string, email: string, photoUrl: string, createdAt: Date, updatedAt: Date,

@@ -18,23 +18,26 @@ export abstract class ManagedObject {
   protected createdAt: Date;              // дата создания
   protected updatedAt: Date;              // дата изменения
 
-  get getUpdatedAt(): Date {
+  getUpdatedAt(): Date {
     return this.updatedAt;
   }
 
-  get getCreatedAt(): Date {
+  getCreatedAt(): Date {
     return this.createdAt;
   }
 
-  get getId(): string {
+  getId(): string {
     return this.id;
   }
 
-  get getObjType(): ManagedObjectType {
+  getObjType(): ManagedObjectType {
     return this.objType;
   }
 
   constructor(objType: ManagedObjectType) {
     this.objType = objType;
+    this.id = '0';
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   };
 }

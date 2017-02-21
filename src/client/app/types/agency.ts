@@ -22,9 +22,9 @@ export const agencyAttrs: any = {
 }
 
 /**
- * Класс, описывающий сущность агенство
+ * Класс, описывающий сущность АГЕНСТВО
  */
-export class Agency extends ManagedObject {
+export class Agency extends ManagedObject{
   private legalName: string;      // юридическое имя
   private name: string;           // выводимое имя
   private zipCode: string;        // почтовый индекс
@@ -150,9 +150,9 @@ export class Agency extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные агенства из объекта в формате JSON-API
-   * По сути, метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * @param agencyData - данные объекта в формате JSON-API
+   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
+   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
+   * Входным параметром является объект в формате JSON-API
    */
   setOnObject(agencyData: any) {
     if (!((agencyData['type'] === managedObjectTypes.agency.json) &&
@@ -160,14 +160,14 @@ export class Agency extends ManagedObject {
           (managedObjectAttrs.createdAt.json in agencyData['attributes']) &&
           (managedObjectAttrs.updatedAt.json in agencyData['attributes']) &&
           ('id' in agencyData['relationships']['city']['data'])))
-      throw new Error('Impossible to convert an object Agency. Invalid object format');
+      throw new Error('Impossible to set an object Agency. Invalid object attrs format');
 
     for (let obj in agencyAttrs) {
       if (!(agencyAttrs[obj]['json'] in agencyData['attributes']))
-        throw new Error('Impossible to convert an object Agency. Invalid agency format');
+        throw new Error('Impossible to set an object Agency. Invalid agency attrs format');
     }
 
-    this.setOnString(agencyData[managedObjectAttrs.id],
+    this.setOnString(agencyData[managedObjectAttrs.id.json],
                      agencyData['attributes'][agencyAttrs.legalName.json],
                      agencyData['attributes'][agencyAttrs.name.json],
                      agencyData['attributes'][agencyAttrs.zipCode.json],
@@ -180,17 +180,17 @@ export class Agency extends ManagedObject {
                      agencyData['attributes'][agencyAttrs.language.json],
                      agencyData['attributes'][agencyAttrs.timezone.json],
                      agencyData['attributes'][agencyAttrs.comment.json],
-                     agencyData['attributes'][managedObjectAttrs.createdAt],
-                     agencyData['attributes'][managedObjectAttrs.updatedAt],
+                     agencyData['attributes'][managedObjectAttrs.createdAt.json],
+                     agencyData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     agencyData['relationships']['city']['data']['id'].toString());
+                     agencyData['relationships']['city']['data']['id']);
   }
 
   /**
-   * Метод, устанавливающий данные агенства из свойств в строковом формате
-   * По сути метод производит проверку и парсинг строковых значений ствойств и передает готовые
+   * Метод, устанавливающий данные объекта класса из данных в строковом формате
+   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
    * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта агенство в строковом формате
+   * Входными параметрами являются все свойства объекта класса в строковом формате
    */
   setOnString(id: string, legalName: string, name: string,
               zipCode: string, address: string, email: string,
@@ -201,9 +201,9 @@ export class Agency extends ManagedObject {
     let createdAtDate = new Date(Date.parse(createdAt));
     let updatedAtDate = new Date(Date.parse(updatedAt));
 
-    if ((createdAtDate.getUTCDate() === NaN) &&
-        (createdAtDate.getUTCDate() === NaN))
-      throw new Error('Impossible to set an object Agency. Invalid format of date');
+    if ((isNaN(createdAtDate.getUTCDate())) ||
+        (isNaN(createdAtDate.getUTCDate())))
+      throw new Error('Impossible to set an object Agency. Invalid date format ');
 
     let languageType: LanguageType;
     for (let obj in languageTypes) {
@@ -211,7 +211,7 @@ export class Agency extends ManagedObject {
         languageType = languageTypes[obj]['type'];
     }
     if (languageType === null || languageType === undefined)
-      throw new Error('Impossible to convert an object Agency. Invalid language type');
+      throw new Error('Impossible to set an object Agency. Invalid language type');
 
     let timezoneType: TimezoneType;
     for (let obj in timezoneTypes) {
@@ -219,7 +219,7 @@ export class Agency extends ManagedObject {
         timezoneType = timezoneTypes[obj]['type'];
     }
     if (timezoneType === null || timezoneType === undefined)
-      throw new Error('Impossible to convert an object Agency. Invalid timezone type');
+      throw new Error('Impossible to set an object Agency. Invalid timezone type');
 
     this.set(id, legalName, name, zipCode, address, email, phone, contactName,
              websiteUrl, fareUrl, languageType, timezoneType, comment, createdAtDate,
@@ -227,8 +227,8 @@ export class Agency extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные агенства из свойств в исходном формате
-   * Входными параметрами являются все свойства объекта агенства в исходном формате
+   * Метод, устанавливающий данные класса из свойств в исходном формате
+   * Входными параметрами являются все свойства класса в исходном формате
    */
   set(id: string, legalName: string, name: string,
       zipCode: string, address: string, email: string,
@@ -239,7 +239,6 @@ export class Agency extends ManagedObject {
     this.id          = id;
     this.legalName   = legalName;
     this.name        = name;
-    this.cityId      = cityId;
     this.zipCode     = zipCode;
     this.address     = address;
     this.email       = email;
@@ -252,5 +251,7 @@ export class Agency extends ManagedObject {
     this.comment     = comment;
     this.createdAt   = createdAt;
     this.updatedAt   = updatedAt;
+
+    this.cityId      = cityId;
   }
 }

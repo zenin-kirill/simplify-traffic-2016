@@ -1,4 +1,4 @@
-Simplify Traffic admin panel web application v.0.4.1
+Simplify Traffic admin panel web application v.0.4.2
 
   Текущие версии компонентов:
 
@@ -73,3 +73,7 @@ Simplify Traffic admin panel web application v.0.4.1
   
 - на панель навигации выводится и обновляется текущее время
 - при перенаравлении по другим маршрутам результат перенаправления отлеживается и обрабатывается
+
+  0.4.2
+
+- закончена реализация всех объектов сервиса, согласно проекту
