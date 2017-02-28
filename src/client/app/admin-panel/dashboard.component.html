@@ -1,9 +1,7 @@
 <div class="container-fluid">
   <div class="row" style="margin: 1rem;">
     <h1 class="page-header text-xl-center">
-      <small>Statistics</small>
-      Dashboard
-      <small>Overview</small>
+      {{'DashboardComponent.title' | translate:lang}}
     </h1>
   </div>
 
@@ -18,13 +16,15 @@
           </div>
           <div class="row text-center">
             <div class="col-xs-12 text-xs-center">
-              <div>Buses operating</div>
+              <div>{{'DashboardComponent.busesOperating' | translate:lang}}</div>
             </div>
           </div>
         </div>
         <div class="card-footer card-default">
           <a href="javascript:;">
-            <span class="pull-xs-left">View Details</span>
+            <span class="pull-xs-left">
+              {{'DashboardComponent.viewDetails' | translate:lang}}
+            </span>
             <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
           </a>
@@ -42,13 +42,15 @@
           </div>
           <div class="row text-center">
             <div class="col-xs-12 text-xs-center">
-              <div>Issues with buses</div>
+              <div>{{'DashboardComponent.issuesWithBuses' | translate:lang}}</div>
             </div>
           </div>
         </div>
         <div class="card-footer card-default">
           <a href="javascript:;">
-            <span class="pull-xs-left text-success">View Details</span>
+            <span class="pull-xs-left text-success">
+              {{'DashboardComponent.viewDetails' | translate:lang}}
+            </span>
             <span class="pull-xs-right text-success"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
           </a>
@@ -66,13 +68,15 @@
           </div>
           <div class="row text-center">
             <div class="col-xs-12 text-xs-center">
-              <div>Trips today</div>
+              <div>{{'DashboardComponent.tripsToday' | translate:lang}}</div>
             </div>
           </div>
         </div>
         <div class="card-footer card-default">
           <a href="javascript:;">
-            <span class="pull-xs-left text-info">View Details</span>
+            <span class="pull-xs-left text-info">
+              {{'DashboardComponent.viewDetails' | translate:lang}}
+            </span>
             <span class="pull-xs-right text-info"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
           </a>
@@ -85,18 +89,21 @@
         <div class="card-header card-warning">
           <div class="row text-center">
             <div class="col-xs-12 text-xs-center">
-              <span class="badge">21 nov</span>
+              <span class="badge">{{'2018-01-16' |
+                localeDate:defaultLocale:'shortDate'}}</span>
             </div>
           </div>
           <div class="row text-center">
             <div class="col-xs-12 text-xs-center">
-              <div>Next payment</div>
+              <div>{{'DashboardComponent.nextPayment' | translate:lang}}</div>
             </div>
           </div>
         </div>
         <div class="card-footer card-default">
           <a href="javascript:;">
-            <span class="pull-xs-left text-warning">View Details</span>
+            <span class="pull-xs-left text-warning">
+              {{'DashboardComponent.viewDetails' | translate:lang}}
+            </span>
             <span class="pull-xs-right text-warning"><i class="fa fa-arrow-circle-right"></i></span>
             <div class="clearfix"></div>
           </a>

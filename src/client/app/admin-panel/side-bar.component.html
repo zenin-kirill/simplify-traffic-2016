@@ -3,50 +3,96 @@
 </button>
 <nav class="sidebar" [ngClass]="{sidebarPushRight: showSideBar}">
   <div class="row text-xs-center" style="margin-top: 1rem; margin-bottom: 1rem;">
-    <img src="assets/img/ST-logo-noborder.png" width="125px" style="align-self: center;"/>
+    <img src="assets/img/ST-logo-noborder.png" width="100px" style="align-self: center;"/>
   </div>
   <ul class="list-group">
     <a [routerLink]="['dashboard']" class="list-group-item">
-      <i class="fa fa-fw fa-home"></i> Dashboard
+      <i class="fa fa-fw fa-home"></i>&nbsp;&nbsp;{{'SideBarComponent.dashboard' | translate:lang}}
     </a>
     <div class="nested-menu">
       <a class="list-group-item" (click)="showManagementMenuChanged()">
-        <span><i class="fa fa-fw fa-chevron-down"></i>&nbsp;Management </span>
+        <span><i class="fa fa-fw fa-chevron-down"></i>
+          &nbsp;{{'SideBarComponent.management' | translate:lang}}
+        </span>
       </a>
       <li class="nested" [ngClass]="{'expand' : showManagementMenu }">
+
         <ul class="submenu">
           <li>
             <a href [routerLink]="['agencies']">
-              <span>&nbsp;Agencies</span>
+              <span>&nbsp;{{'SideBarComponent.agencies' | translate:lang}}</span>
             </a>
           </li>
         </ul>
+
         <ul class="submenu">
           <li>
             <a href [routerLink]="['vehicles']">
-              <span>&nbsp;Vehicles</span>
+              <span>&nbsp;{{'SideBarComponent.vehicles' | translate:lang}}</span>
             </a>
           </li>
         </ul>
+
         <ul class="submenu">
           <li>
             <a href [routerLink]="['routes']">
-              <span>&nbsp;Routes</span>
+              <span>&nbsp;{{'SideBarComponent.routes' | translate:lang}}</span>
             </a>
           </li>
         </ul>
+
         <ul class="submenu">
           <li>
             <a href [routerLink]="['users']">
-              <span>&nbsp;Users</span>
+              <span>&nbsp;{{'SideBarComponent.users' | translate:lang}}</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['cities']">
+              <span>&nbsp;{{'SideBarComponent.cities' | translate:lang}}</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['countries']">
+              <span>&nbsp;{{'SideBarComponent.countries' | translate:lang}}</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['drivers']">
+              <span>&nbsp;{{'SideBarComponent.drivers' | translate:lang}}</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['stops']">
+              <span>&nbsp;{{'SideBarComponent.stops' | translate:lang}}</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="submenu">
+          <li>
+            <a href [routerLink]="['trips']">
+              <span>&nbsp;{{'SideBarComponent.trips' | translate:lang}}</span>
             </a>
           </li>
         </ul>
 
       </li>
     </div>
-    <a href (click)="logOut()" class="list-group-item">
-      <i class="fa fa-fw fa-sign-out"></i> &nbsp;Log out
+    <a href="javascript:;" (click)="logOut()" class="list-group-item">
+      <i class="fa fa-fw fa-sign-out"></i> &nbsp;{{'SideBarComponent.logOut' | translate:lang}}
     </a>
   </ul>
 </nav>

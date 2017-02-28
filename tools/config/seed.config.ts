@@ -339,7 +339,10 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
+      'angular-l10n': 'node_modules/angular-l10n/bundles/angular-l10n.umd.js',
       'angular2-cookie': 'node_modules/angular2-cookie',
+      'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+      'moment': 'node_modules/moment/moment.js',
       'rxjs/*': 'node_modules/rxjs/*',
       'app/*': '/app/*',
       // For test config
@@ -376,6 +379,8 @@ export class SeedConfig {
     paths: {
       [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
       'angular2-cookie': 'node_modules/angular2-cookie',
+      'ng2-bootstrap/*' : 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.min.js',
+      'angular-l10n': 'node_modules/angular-l10n/bundles/angular-l10n.umd.js',
       '*': 'node_modules/*'
     },
     packages: {

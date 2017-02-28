@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { TranslationService, LocaleService, Localization } from "angular-l10n";
 
 @Component({
              moduleId: module.id,
@@ -9,6 +10,9 @@ import { Component } from "@angular/core";
 /**
  * Компонент, представляющий собой рабочую часть панели управления
  */
-export class DashboardComponent {
+export class DashboardComponent extends Localization{
 
+  constructor(public locale: LocaleService, public translation: TranslationService) {
+    super(locale, translation);
+  }
 }

@@ -113,7 +113,6 @@ export class AuthService {
 
         // попытка разобрать и добавить полученные данные в приложение и файлы cookie
         this.addAuthDataToApp(loadedData);
-        this.addAuthDataToCookie();
 
         // если авторизация удалась, оповещаем компонент авторизации
         if (this.status === true) {
@@ -165,6 +164,7 @@ export class AuthService {
       if (loadedData['data']['type'] === 'user-sessions') {
         this.currentSession = new Session();
         this.currentSession.setOnObject(loadedData['data'])
+        this.addAuthDataToCookie('session', loadedData['data']);
       }
       else {
         throw new Error('Invalid session data');
@@ -176,10 +176,12 @@ export class AuthService {
           case 'users':
             this.currentUser = new User();
             this.currentUser.setOnObject(loadedData['included'][i]);
+            this.addAuthDataToCookie('user', loadedData['included'][i]);
             break;
           case 'agencies':
             this.currentAgency = new Agency();
             this.currentAgency.setOnObject(loadedData['included'][i]);
+            this.addAuthDataToCookie('agency', loadedData['included'][i]);
             break;
           default:
             throw new Error('Invalid included data');
@@ -204,18 +206,9 @@ export class AuthService {
   /**
    * Функция добавления текущих авторизационных данных в файлы cookie
    */
-  private addAuthDataToCookie() {
-    try {
-      this.cookieService.putObject('session', this.currentSession,
+  private addAuthDataToCookie(name: string, data: any) {
+      this.cookieService.putObject(name, data,
                                    {expires: this.currentSession.getValidUntil().toISOString()});
-      this.cookieService.putObject('user', this.currentUser,
-                                   {expires: this.currentSession.getValidUntil().toISOString()});
-      this.cookieService.putObject('agency', this.currentAgency,
-                                   {expires: this.currentSession.getValidUntil().toISOString()});
-    }
-    catch (e) {
-      throw e;
-    }
   }
 
   /**

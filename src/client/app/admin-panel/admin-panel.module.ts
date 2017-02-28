@@ -12,7 +12,10 @@ import { TripsStatusComponent } from "./trips-status.component";
 import { SideBarComponent } from "./side-bar.component";
 import { NavBarComponent } from "./nav-bar.component";
 import { LoadErrorComponent } from "./load-error.component";
-import { LocalService } from "./local.service";
+import {
+  TranslationService, TranslationModule, LocaleService, Localization,
+  LocalizationModule
+} from "angular-l10n";
 
 /**
  * Модуль панели управления
@@ -24,7 +27,9 @@ import { LocalService } from "./local.service";
               RouterModule,
               CommonModule,
               ObjectManagementModule,
-              Ng2BootstrapModule
+              Ng2BootstrapModule.forRoot(),
+              TranslationModule,
+              LocalizationModule
             ],
             declarations: [
               AdminPanelComponent,
@@ -44,7 +49,8 @@ import { LocalService } from "./local.service";
             ],
             providers: [
               DashboardService,
-              LocalService
+              TranslationService,
+              LocaleService
             ]
           })
 

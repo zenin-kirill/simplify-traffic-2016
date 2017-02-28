@@ -1,0 +1,52 @@
+{
+  "AuthComponent": {
+    "title": "Добро пожаловать в панель управления ST!",
+    "email": "Адрес эл. почты",
+    "password": "Пароль",
+    "logIn": "Войти",
+    "forgetPassword": "Забыли пароль?"
+  },
+
+  "DashboardComponent": {
+    "title": "Панель показателей",
+    "busesOperating": "Автобусов в пути",
+    "viewDetails": "Показать подробнее...",
+    "issuesWithBuses": "Происшествий",
+    "tripsToday": "Рейсов сегодня",
+    "nextPayment": "Следующая оплата"
+  },
+
+  "SideBarComponent": {
+    "dashboard": "Показатели",
+    "management": "Управление",
+    "agencies": "Агенства",
+    "vehicles": "Тр. средства",
+    "routes": "Маршруты",
+    "users": "Пользователи",
+    "cities": "Города",
+    "countries": "Страны",
+    "drivers": "Водители",
+    "stops": "Остановки",
+    "trips": "Рейсы",
+    "logOut": "Выход"
+  },
+
+  "NavBarComponent": {
+    "adminPanel": "ПАНЕЛЬ УПРАВЛЕНИЯ",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logOut": "Выход"
+  },
+
+  "TripsStatusComponent": {
+    "trip": "Рейс",
+    "departure": "Пункт отправления",
+    "dep": "отпр.",
+    "nextStop": "Следующая остановка",
+    "destination": "Пункт назначения",
+    "status": "Статус",
+    "city": "нас. п.",
+    "arrive": "приб.",
+    "wait": "осталось"
+  }
+}

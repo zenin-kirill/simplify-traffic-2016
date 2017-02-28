@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, APP_INITIALIZER } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { APP_BASE_HREF, CommonModule } from "@angular/common";
@@ -14,6 +14,13 @@ import { ForgetPasswordComponent } from "./forget-password.component";
 import { AuthService } from "./auth.service";
 import { NameListService } from "./name-list.service";
 import { AuthGuardService } from "./auth-guard.service";
+import { LocaleConfigService, initLocalization } from "./locale-config.service";
+import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
+import { Ng2BootstrapModule } from "ng2-bootstrap/ng2-bootstrap";
+
+export function cookieServiceFactory() {
+  return new CookieService();
+}
 
 /**
  * Главный модуль приложения
@@ -25,7 +32,9 @@ import { AuthGuardService } from "./auth-guard.service";
               HttpModule,
               FormsModule,
               CommonModule,
-              AdminPanelModule
+              AdminPanelModule,
+              TranslationModule,
+              Ng2BootstrapModule.forRoot()
             ],
             declarations: [
               AppComponent,
@@ -37,9 +46,21 @@ import { AuthGuardService } from "./auth-guard.service";
               provide: APP_BASE_HREF,
               useValue: '<%= APP_BASE %>'
             },
+              {
+                provide: CookieService,
+                useFactory: cookieServiceFactory
+              },
+              TranslationService,
+              LocaleService,
+              LocaleConfigService,
+              {
+                provide: APP_INITIALIZER,
+                useFactory: initLocalization,
+                deps: [LocaleConfigService],
+                multi: true
+              },
               AuthService,
               NameListService,
-              CookieService,
               AuthGuardService
             ],
             bootstrap: [AppComponent]

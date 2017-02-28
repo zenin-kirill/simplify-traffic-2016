@@ -5,8 +5,8 @@ import Config from '../../config';
 
 const BUNDLER_OPTIONS = {
   format: 'cjs',
-  minify: true,
-  mangle: false
+  minify: false,
+  mangle: true
 };
 
 /**
