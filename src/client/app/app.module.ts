@@ -17,6 +17,7 @@ import { AuthGuardService } from "./auth-guard.service";
 import { LocaleConfigService, initLocalization } from "./locale-config.service";
 import { TranslationModule, LocaleService, TranslationService } from 'angular-l10n';
 import { Ng2BootstrapModule } from "ng2-bootstrap/ng2-bootstrap";
+import { ObjectsManagementService } from "./objects-managenent/objects-management.service";
 
 export function cookieServiceFactory() {
   return new CookieService();
@@ -61,7 +62,8 @@ export function cookieServiceFactory() {
               },
               AuthService,
               NameListService,
-              AuthGuardService
+              AuthGuardService,
+              ObjectsManagementService
             ],
             bootstrap: [AppComponent]
           })

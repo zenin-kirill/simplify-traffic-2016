@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { languageTypes } from "./types/language.type";
 import { LocaleConfigService } from "./locale-config.service";
 import { Translation, TranslationService } from "angular-l10n";
+import { ObjectsManagementService } from "./objects-managenent/objects-management.service";
 
 @Component({
              moduleId: module.id,
@@ -22,7 +23,7 @@ export class AuthComponent extends Translation{
   currentLocale: any;
 
   constructor(private authService: AuthService, private router: Router,
-              private localSevice: LocaleConfigService, public translation: TranslationService) {
+              private localSevice: LocaleConfigService, public translation: TranslationService, private s: ObjectsManagementService) {
     super(translation);
     // получение текущего языка
     this.currentLocale = languageTypes[this.localSevice.getCurrentLanguage()];

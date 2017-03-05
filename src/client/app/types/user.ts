@@ -14,7 +14,14 @@ export const userAttrs: any = {
 }
 
 /**
- * Класс, описывающий сущность пользователь
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const userRel: any = {
+  agency: managedObjectTypes.agency
+}
+
+/**
+ * Класс, описывающий сущность ПОЛЬЗОВАТЕЛЬ
  */
 export class User extends ManagedObject {
   private role: UserType;   // роль пользователя (тип)
@@ -79,29 +86,33 @@ export class User extends ManagedObject {
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(userData: any) {
-    if (!((userData['type'] === managedObjectTypes.user.json) &&
-          (managedObjectAttrs.id.json in userData) &&
-          (managedObjectAttrs.createdAt.json in userData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in userData['attributes']) &&
-          ('id' in userData['relationships']['agency']['data'])))
-      throw new Error('Impossible to convert an object User. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][userRel.agency.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in userAttrs) {
-      if (!(userAttrs[obj]['json'] in userData['attributes']))
-        throw new Error('Impossible to convert an object User. Invalid user format');
+      if (!(userAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnStrings(userData[managedObjectAttrs.id.json],
-                      userData['attributes'][userAttrs.role.json],
-                      userData['attributes'][userAttrs.name.json],
-                      userData['attributes'][userAttrs.surname.json],
-                      userData['attributes'][userAttrs.email.json],
-                      userData['attributes'][userAttrs.photoUrl.json],
-                      userData['attributes'][managedObjectAttrs.createdAt.json],
-                      userData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnStrings(jsonData[managedObjectAttrs.id.json],
+                      jsonData['attributes'][userAttrs.role.json],
+                      jsonData['attributes'][userAttrs.name.json],
+                      jsonData['attributes'][userAttrs.surname.json],
+                      jsonData['attributes'][userAttrs.email.json],
+                      jsonData['attributes'][userAttrs.photoUrl.json],
+                      jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                      jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                      userData['relationships']['agency']['data']['id']);
+                      jsonData['relationships'][userRel.agency.jsonRel]['data']['id']);
   }
 
   /**
@@ -119,7 +130,9 @@ export class User extends ManagedObject {
 
     if ((createdAtDate.getUTCDate() === NaN) ||
         (updatedAtDate.getUTCDate() === NaN))
-      throw new Error('Impossible to set an object User. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     let userType: UserType;
     for (let obj in userTypes) {
@@ -127,7 +140,9 @@ export class User extends ManagedObject {
         userType = userTypes[obj]['type'];
     }
     if (userType === null || userType === undefined)
-      throw new Error('Impossible to convert an object User. Invalid user role');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid role format');
 
     this.set(id, userType, name, surname, email, photoUrl, createdAtDate, updatedAtDate, agencyId);
   }

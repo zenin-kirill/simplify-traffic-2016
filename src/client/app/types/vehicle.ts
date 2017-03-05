@@ -13,12 +13,20 @@ export const vehicleAttrs: any = {
   dateManufactured: {json: 'date-manufactured'},
   payedUntil: {json: 'payed-until'},
   licensePlate: {json: 'license-plate'},
-  photoUrl: {json: 'photo-url'}
+  photoUrl: {json: 'photo-url'},
+  bikesAllowed: {json: 'bikes-allowed'},
+  wheelchairAccess: {json: 'wheelchair-accessible'}
 }
 
+/**
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const vehicleRel: any = {
+  agency: managedObjectTypes.agency
+}
 
 /**
- * Класс, описывающий сущность ТС
+ * Класс, описывающий сущность ТРАНСПОРТНОЕ СРЕДСТВО
  */
 export class Vehicle extends ManagedObject {
   private invertoryId: string;      // инвертарный идентификатор
@@ -29,6 +37,8 @@ export class Vehicle extends ManagedObject {
   private payedUntil: Date;         // пропалчен до...
   private licensePlate: string;     // регистрационный номер
   private photoUrl: string;         // сслыка на фото
+  private bikesAllowed: boolean;    // ТС пригодно для велосипедистов?
+  private wheelchairAccess: boolean;// ТС пригодно для инвалидов?
 
   private agencyId: string;         // агенство, котормоу принадлежит ТС
 
@@ -100,6 +110,22 @@ export class Vehicle extends ManagedObject {
     this.photoUrl = photoUrl;
   }
 
+  getBikesAllowed(): boolean {
+    return this.bikesAllowed;
+  }
+
+  setBikesAllowed(bikesAllowed: boolean) {
+    this.bikesAllowed = bikesAllowed;
+  }
+
+  getWheelchairAccess(): boolean {
+    return this.wheelchairAccess;
+  }
+
+  setWheelchairAccess(wheelchairAccess: boolean) {
+    this.wheelchairAccess = wheelchairAccess;
+  }
+
   getAgencyId(): string {
     return this.agencyId;
   }
@@ -113,32 +139,38 @@ export class Vehicle extends ManagedObject {
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(vehicleData: any) {
-    if (!((vehicleData['type'] === managedObjectTypes.vehicle.json) &&
-          (managedObjectAttrs.id.json in vehicleData) &&
-          (managedObjectAttrs.createdAt.json in vehicleData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in vehicleData['attributes']) &&
-          ('id' in vehicleData['relationships']['agency']['data'])))
-      throw new Error('Impossible to convert an object Vehicle. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][vehicleRel.agency.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in vehicleAttrs) {
-      if (!(vehicleAttrs[obj]['json'] in vehicleData['attributes']))
-        throw new Error('Impossible to convert an object Vehicle. Invalid vehicle format');
+      if (!(vehicleAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnStrings(vehicleData[managedObjectAttrs.id.json],
-                      vehicleData['attributes'][vehicleAttrs.invertoryId.json],
-                      vehicleData['attributes'][vehicleAttrs.type.json],
-                      vehicleData['attributes'][vehicleAttrs.manufacturer.json],
-                      vehicleData['attributes'][vehicleAttrs.vehicleModel.json],
-                      vehicleData['attributes'][vehicleAttrs.dateManufactured.json],
-                      vehicleData['attributes'][vehicleAttrs.payedUntil.json],
-                      vehicleData['attributes'][vehicleAttrs.licensePlate.json],
-                      vehicleData['attributes'][vehicleAttrs.photoUrl.json],
-                      vehicleData['attributes'][managedObjectAttrs.createdAt.json],
-                      vehicleData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnStrings(jsonData[managedObjectAttrs.id.json],
+                      jsonData['attributes'][vehicleAttrs.invertoryId.json],
+                      jsonData['attributes'][vehicleAttrs.type.json],
+                      jsonData['attributes'][vehicleAttrs.manufacturer.json],
+                      jsonData['attributes'][vehicleAttrs.vehicleModel.json],
+                      jsonData['attributes'][vehicleAttrs.dateManufactured.json],
+                      jsonData['attributes'][vehicleAttrs.payedUntil.json],
+                      jsonData['attributes'][vehicleAttrs.licensePlate.json],
+                      jsonData['attributes'][vehicleAttrs.photoUrl.json],
+                      jsonData['attributes'][vehicleAttrs.bikesAllowed.json],
+                      jsonData['attributes'][vehicleAttrs.wheelchairAccess.json],
+                      jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                      jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                      vehicleData['relationships']['agency']['data']['id']);
+                      jsonData['relationships'][vehicleRel.agency.jsonRel]['data']['id']);
   }
 
   /**
@@ -149,8 +181,8 @@ export class Vehicle extends ManagedObject {
    */
   setOnStrings(id: string, invertoryId: string, type: string, manufacturer: string,
                vehicleModel: string, dateManufactured: string, payedUntil: string,
-               licensePlate: string, photoUrl: string, createdAt: string, updatedAt: string,
-               agencyId: string) {
+               licensePlate: string, photoUrl: string, bikesAllowed: string, wheelchairAccess: string,
+               createdAt: string, updatedAt: string, agencyId: string) {
 
     let createdAtDate  = new Date(Date.parse(createdAt));
     let updatedAtDate  = new Date(Date.parse(updatedAt));
@@ -158,11 +190,15 @@ export class Vehicle extends ManagedObject {
     if ((createdAtDate.getUTCDate() === NaN) ||
         (updatedAtDate.getUTCDate() === NaN) ||
         (payedUntilDate.getUTCDate() === NaN))
-      throw new Error('Impossible to set an object User. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     let dateManufacturedNumber = parseInt(dateManufactured);
     if (isNaN(dateManufacturedNumber))
-      throw new Error('Impossible to set an object Stop. Invalid format of years');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid year format');
 
     let vehicleType: VehicleType;
     for (let obj in vehicleTypes) {
@@ -170,11 +206,31 @@ export class Vehicle extends ManagedObject {
         vehicleType = vehicleTypes[obj]['type'];
     }
     if (vehicleType === null || vehicleType === undefined)
-      throw new Error('Impossible to convert an object Route. Invalid vehicle type');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid type format');
+
+    let bikesAllowedBool: boolean;
+    switch (bikesAllowed) {
+      case 'true': bikesAllowedBool = true; break;
+      case 'false': bikesAllowedBool = false; break;
+      default: throw new Error('Impossible to set an object "'
+                               + managedObjectTypes[this.getObjTypeStr()].name
+                               +'". Invalid boolean format');
+    }
+
+    let wheelchairAccessBool: boolean;
+    switch (wheelchairAccess) {
+      case 'true': wheelchairAccessBool = true; break;
+      case 'false': wheelchairAccessBool = false; break;
+      default: throw new Error('Impossible to set an object "'
+                               + managedObjectTypes[this.getObjTypeStr()].name
+                               +'". Invalid boolean format');
+    }
 
     this.set(id, invertoryId, vehicleType, manufacturer, vehicleModel,
-             dateManufacturedNumber, payedUntilDate, licensePlate, photoUrl,
-             createdAtDate, updatedAtDate, agencyId);
+             dateManufacturedNumber, payedUntilDate, licensePlate, photoUrl, bikesAllowedBool,
+             wheelchairAccessBool, createdAtDate, updatedAtDate, agencyId);
   }
 
   /**
@@ -184,7 +240,7 @@ export class Vehicle extends ManagedObject {
   set(id: string, invertoryId: string, type: VehicleType, manufacturer: string,
       vehicleModel: string,
       dateManufactured: number, payedUntil: Date, licensePlate: string, photoUrl: string,
-      createdAt: Date, updatedAt: Date, agencyId: string) {
+      bikesAllowed: boolean, wheelchairAccess: boolean, createdAt: Date, updatedAt: Date, agencyId: string) {
     this.id               = id;
     this.invertoryId      = invertoryId;
     this.type             = type;
@@ -194,6 +250,8 @@ export class Vehicle extends ManagedObject {
     this.payedUntil       = payedUntil;
     this.licensePlate     = licensePlate;
     this.photoUrl         = photoUrl;
+    this.bikesAllowed = bikesAllowed;
+    this.wheelchairAccess = wheelchairAccess;
     this.createdAt        = createdAt;
     this.updatedAt        = updatedAt;
 

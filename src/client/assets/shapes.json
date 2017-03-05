@@ -1,0 +1,119 @@
+{
+  "data": [
+    {
+      "type": "shapes",
+      "id": "0001",
+      "attributes": {
+        "pt-lat": "31,03453453",
+        "pt-lon": "58,546775",
+        "pt-sequence": "1",
+        "dist-traveled": "1000",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/shapes/0001"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/shape/0001/relationships/route",
+            "related": "/shape/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "shapes",
+      "id": "0002",
+      "attributes": {
+        "pt-lat": "32,03453453",
+        "pt-lon": "58,546775",
+        "pt-sequence": "2",
+        "dist-traveled": "1200",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/shapes/0002"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/shape/0001/relationships/route",
+            "related": "/shape/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "shapes",
+      "id": "0003",
+      "attributes": {
+        "pt-lat": "33,03453453",
+        "pt-lon": "58,546775",
+        "pt-sequence": "3",
+        "dist-traveled": "1300",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/shapes/0003"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/shape/0001/relationships/route",
+            "related": "/shape/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "routes",
+      "id": "0001",
+      "attributes": {
+        "type": "bus",
+        "short-name": "401",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0001/relationships/agency",
+            "related": "/route/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "data": [
+    {
+      "type": "drivers",
+      "id": "0001",
+      "attributes": {
+        "name": "Aleksey1",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/drivers/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/driver/0001/relationships/agency",
+            "related": "/driver/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "drivers",
+      "id": "0002",
+      "attributes": {
+        "name": "Aleksey2",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/drivers/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/driver/0002/relationships/agency",
+            "related": "/driver/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "drivers",
+      "id": "0003",
+      "attributes": {
+        "name": "Aleksey3",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/drivers/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/driver/0003/relationships/agency",
+            "related": "/driver/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "agencies",
+      "id": "0001",
+      "attributes": {
+        "legal-name": "GUP Mosgortrans 1",
+        "name": "Mosgortrans",
+        "zip-code": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contact-name": "Galina Overbukh",
+        "website-url": "http://mosgortrans.ru",
+        "fare-url": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/agencies/0001"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/agency/0001/relationships/city",
+            "related": "/agency/0001/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "agencies",
+      "id": "0002",
+      "attributes": {
+        "legal-name": "GUP Mosgortrans 2",
+        "name": "Mosgortrans",
+        "zip-code": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contact-name": "Galina Overbukh",
+        "website-url": "http://mosgortrans.ru",
+        "fare-url": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/agencies/0002"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/agency/0002/relationships/city",
+            "related": "/agency/0002/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "agencies",
+      "id": "0003",
+      "attributes": {
+        "legal-name": "GUP Mosgortrans 3",
+        "name": "Mosgortrans",
+        "zip-code": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contact-name": "Galina Overbukh",
+        "website-url": "http://mosgortrans.ru",
+        "fare-url": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/agencies/0003"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/agency/0003/relationships/city",
+            "related": "/agency/0003/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ]
+}

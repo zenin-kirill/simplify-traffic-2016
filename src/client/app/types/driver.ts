@@ -12,7 +12,14 @@ export const driverAttrs: any = {
 }
 
 /**
- * Класс описывающий сущность водитель
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const driverRel: any = {
+  agency: managedObjectTypes.agency
+}
+
+/**
+ * Класс описывающий сущность ВОДИТЕЛЬ
  */
 export class Driver extends ManagedObject {
   private name: string;           // имя
@@ -79,29 +86,33 @@ export class Driver extends ManagedObject {
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(driverData: any) {
-    if (!((driverData['type'] === managedObjectTypes.driver.json) &&
-          (managedObjectAttrs.id.json in driverData) &&
-          (managedObjectAttrs.createdAt.json in driverData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in driverData['attributes']) &&
-          ('id' in driverData['relationships']['agency']['data'])))
-      throw new Error('Impossible to convert an object Driver. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][driverRel.agency.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in driverAttrs) {
-      if (!(driverAttrs[obj]['json'] in driverData['attributes']))
-        throw new Error('Impossible to convert an object Driver. Invalid driver format');
+      if (!(driverAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnString(driverData[managedObjectAttrs.id.json],
-                     driverData['attributes'][driverAttrs.name.json],
-                     driverData['attributes'][driverAttrs.surname.json],
-                     driverData['attributes'][driverAttrs.birthDate.json],
-                     driverData['attributes'][driverAttrs.licenseNumber.json],
-                     driverData['attributes'][driverAttrs.photoUrl.json],
-                     driverData['attributes'][managedObjectAttrs.createdAt.json],
-                     driverData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnString(jsonData[managedObjectAttrs.id.json],
+                     jsonData['attributes'][driverAttrs.name.json],
+                     jsonData['attributes'][driverAttrs.surname.json],
+                     jsonData['attributes'][driverAttrs.birthDate.json],
+                     jsonData['attributes'][driverAttrs.licenseNumber.json],
+                     jsonData['attributes'][driverAttrs.photoUrl.json],
+                     jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                     jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     driverData['relationships']['agency']['data']['id']);
+                     jsonData['relationships'][driverRel.agency.jsonRel]['data']['id']);
   }
 
   /**
@@ -121,7 +132,9 @@ export class Driver extends ManagedObject {
     if ((isNaN(createdAtDate.getUTCDate())) ||
          (isNaN(createdAtDate.getUTCDate())) ||
          (isNaN(birthDateDate.getUTCDate())))
-      throw new Error('Impossible to set an object Driver. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     this.set(id, name, surname, birthDateDate, licenseNumber,
              photoUrl, createdAtDate, updatedAtDate, agencyId);

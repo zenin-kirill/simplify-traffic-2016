@@ -1,38 +1,40 @@
 {
-  "data": {
-    "type": "user-sessions",
-    "id": "1",
-    "attributes": {
-      "token": "ZMxDEOAEvChiVTlchXRQwRyXaJsuHjTFaJmCLVSkxYqsaldXuX",
-      "valid-until": "2018-01-23 11:11:40 UTC",
-      "created-at": "2017-01-23 11:11:40 UTC"
-    },
-    "links": {
-      "self": "/user-sessions/1"
-    },
-    "relationships": {
-      "user": {
-        "links": {
-          "self": "/user-sessions/1/relationships/user",
-          "related": "/user-sessions/1/user"
-        },
-        "data": {
-          "type": "users",
-          "id": "1"
-        }
+  "data": [
+    {
+      "type": "user-sessions",
+      "id": "1",
+      "attributes": {
+        "token": "ZMxDEOAEvChiVTlchXRQwRyXaJsuHjTFaJmCLVSkxYqsaldXuX",
+        "valid-until": "2018-01-23 11:11:40 UTC",
+        "created-at": "2017-01-23 11:11:40 UTC"
       },
-      "agency": {
-        "links": {
-          "self": "/user-sessions/1/relationships/agency",
-          "related": "/user-sessions/1/agency"
+      "links": {
+        "self": "/user-sessions/1"
+      },
+      "relationships": {
+        "user": {
+          "links": {
+            "self": "/user-sessions/1/relationships/user",
+            "related": "/user-sessions/1/user"
+          },
+          "data": {
+            "type": "users",
+            "id": "1"
+          }
         },
-        "data": {
-          "type": "agencies",
-          "id": "1"
+        "agency": {
+          "links": {
+            "self": "/user-sessions/1/relationships/agency",
+            "related": "/user-sessions/1/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "1"
+          }
         }
       }
     }
-  },
+  ],
   "included": [
     {
       "type": "users",

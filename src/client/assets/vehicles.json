@@ -1,0 +1,212 @@
+{
+  "data": [
+    {
+      "type": "vehicles",
+      "id": "0001",
+      "attributes": {
+        "invertory-id": "301",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
+        "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/vehicles/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/vehicle/0001/relationships/agency",
+            "related": "/vehicle/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicles",
+      "id": "0002",
+      "attributes": {
+        "invertory-id": "302",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
+        "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/vehicles/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/vehicle/0002/relationships/agency",
+            "related": "/vehicle/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicles",
+      "id": "0003",
+      "attributes": {
+        "invertory-id": "303",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
+        "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/vehicles/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/vehicle/0003/relationships/agency",
+            "related": "/vehicle/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "agencies",
+      "id": "0001",
+      "attributes": {
+        "legal-name": "GUP Mosgortrans 1",
+        "name": "Mosgortrans",
+        "zip-code": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contact-name": "Galina Overbukh",
+        "website-url": "http://mosgortrans.ru",
+        "fare-url": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/agencies/0001"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/agency/0001/relationships/city",
+            "related": "/agency/0001/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "agencies",
+      "id": "0002",
+      "attributes": {
+        "legal-name": "GUP Mosgortrans 2",
+        "name": "Mosgortrans",
+        "zip-code": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contact-name": "Galina Overbukh",
+        "website-url": "http://mosgortrans.ru",
+        "fare-url": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/agencies/0002"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/agency/0002/relationships/city",
+            "related": "/agency/0002/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "agencies",
+      "id": "0003",
+      "attributes": {
+        "legal-name": "GUP Mosgortrans 3",
+        "name": "Mosgortrans",
+        "zip-code": "234987",
+        "address": "12, Profsouznaya street",
+        "email": "info@mosgortrans.ru",
+        "phone": "+78003453456",
+        "contact-name": "Galina Overbukh",
+        "website-url": "http://mosgortrans.ru",
+        "fare-url": "http://mosgortrans.ru/fare",
+        "language": "ru",
+        "timezone": "UTC0300",
+        "comment": "Moscow transport company",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/agencies/0003"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/agency/0003/relationships/city",
+            "related": "/agency/0003/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ]
+}

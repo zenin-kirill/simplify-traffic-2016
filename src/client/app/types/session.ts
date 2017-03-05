@@ -1,39 +1,41 @@
+import { managedObjectTypes } from "./managed-object.type";
+import { unmanagedObjectTypes, UnmanagedObjectType } from "./unmanaged-object.type";
+import { UnmanagedObject, unmanagedObjectAttrs } from "./unmanaged-object";
 /**
  * Объект, содержащий дополнительные сведения об атрибутах класса
  */
 export const sessionAttrs: any = {
-  id: {json: 'id'},
-  type: {json: 'user-sessions'},
   token: {json: 'token'},
   validUntil: {json: 'valid-until'},
-  createdAt: {json: 'created-at'}
 }
 
 /**
- * Класс, описывающий сущность сессия работы пользователя
+ * Объект содержащий доп. сведения о зависимостях класса
  */
-export class Session {
-  private id: string;         // идентификатор сессии
+export const sessionRel: any = {
+  user: managedObjectTypes.user,
+  agency: managedObjectTypes.agency
+}
+
+const minTokenLength: number = 15;   // мин. длина ключ. слова
+const maxTokenLength: number = 50;   // макс. длина ключ. слова
+
+/**
+ * Класс, описывающий сущность СЕССИЯ РАБОТЫ ПОЛЬЗОВАТЕЛЯ
+ */
+export class Session extends UnmanagedObject{
   private token: string;      // ключевое слово
   private validUntil: Date;   // срок действия сессии
-  private createdAt: Date;    // дата создания сессии
 
   private userId: string;     // идентификатор пользоватея, для которого создана сессия
   private agencyId: string;   // агенство, на которое работает вошедший вользователь
 
-  private readonly minTokenLength: number = 15;   // мин. длина ключ. слова
-  private readonly maxTokenLength: number = 50;   // макс. длина ключ. слова
-
-  //constructor() {
-  //  this.set('', '00000000000000000000', new Date(), new Date(), '', '')
-  //}
+  constructor() {
+    super(UnmanagedObjectType.session);
+  }
 
   getValidUntil(): Date {
     return this.validUntil;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
   }
 
   getToken(): string {
@@ -48,37 +50,35 @@ export class Session {
     return this.agencyId;
   }
 
-  getId(): string {
-    return this.id;
-  }
-
   /**
    * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(sessionData: any) {
-    if (!((sessionData['type'] === sessionAttrs.type.json) &&
-          ( sessionAttrs.id.json in sessionData) &&
-          ('id' in sessionData['relationships']['user']['data']) &&
-          ('id' in sessionData['relationships']['agency']['data'])))
-      throw new Error('Impossible to convert an object Session. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === unmanagedObjectTypes[this.getObjTypeStr()].json) &&
+          (unmanagedObjectAttrs.id.json in jsonData) &&
+          (unmanagedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][sessionRel.user.jsonRel]['data']) &&
+          ('id' in jsonData['relationships'][sessionRel.agency.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + unmanagedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in  sessionAttrs) {
-      if ((obj.toString() === 'id') ||
-          (obj.toString() === 'type'))
-        continue;
-      if (!( sessionAttrs[obj]['json'] in sessionData['attributes']))
-        throw new Error('Impossible to convert an object User. Invalid user format');
+      if (!( sessionAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + unmanagedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnStrings(sessionData[sessionAttrs.id.json],
-                      sessionData['attributes'][sessionAttrs.token.json],
-                      sessionData['attributes'][sessionAttrs.validUntil.json],
-                      sessionData['attributes'][sessionAttrs.createdAt.json],
+    this.setOnStrings(jsonData[unmanagedObjectAttrs.id.json],
+                      jsonData['attributes'][sessionAttrs.token.json],
+                      jsonData['attributes'][sessionAttrs.validUntil.json],
+                      jsonData['attributes'][unmanagedObjectAttrs.createdAt.json],
 
-                      sessionData['relationships']['user']['data']['id'],
-                      sessionData['relationships']['agency']['data']['id'])
+                      jsonData['relationships'][sessionRel.user.jsonRel]['data']['id'],
+                      jsonData['relationships'][sessionRel.agency.jsonRel]['data']['id'])
   }
 
   /**
@@ -94,7 +94,9 @@ export class Session {
 
     if ((isNaN(validUntilDate.getUTCDate())) ||
          (isNaN(createdAtDate.getUTCDate())))
-      throw new Error('Impossible to set an object Session. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + unmanagedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     this.set(id, token, validUntilDate, createdAtDate, userId, agencyId)
   }
@@ -105,9 +107,11 @@ export class Session {
    */
   set(id: string, token: string, validUntil: Date, createdAt: Date, userId: string,
       agencyId: string) {
-    if ((token.length <= this.minTokenLength) &&
-        (token.length >= this.maxTokenLength))
-      throw new Error('Impossible to set an object Session. Invalid format of token');
+    if ((token.length <= minTokenLength) &&
+        (token.length >= maxTokenLength))
+      throw new Error('Impossible to set an object "'
+                      + unmanagedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid token format');
 
     this.id         = id;
     this.token      = token;

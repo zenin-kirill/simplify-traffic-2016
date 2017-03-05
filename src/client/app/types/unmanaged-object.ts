@@ -1,26 +1,19 @@
-import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
-
+import { UnmanagedObjectType, unmanagedObjectTypes } from "./unmanaged-object.type";
 /**
  * Объект, содержащий отображение свойств класса в строки по стандарту JSON-API
  */
-export const managedObjectAttrs: any = {
+export const unmanagedObjectAttrs: any = {
   id: {json: 'id'},
-  createdAt: {json: 'created-at'},
-  updatedAt: {json: 'updated-at'}
+  createdAt: {json: 'created-at'}
 }
 
 /**
  * Абстрактный класс, описывающий сущность УПРАВЛЯЕМЫЙ ОБЪЕКТ
  */
-export abstract class ManagedObject {
-  protected objType: ManagedObjectType;   // тип объекта
+export abstract class UnmanagedObject {
+  protected objType: UnmanagedObjectType; // тип объекта
   protected id: string;                   // идентификатор оъекта
   protected createdAt: Date;              // дата создания
-  protected updatedAt: Date;              // дата изменения
-
-  getUpdatedAt(): Date {
-    return this.updatedAt;
-  }
 
   getCreatedAt(): Date {
     return this.createdAt;
@@ -30,18 +23,17 @@ export abstract class ManagedObject {
     return this.id;
   }
 
-  getObjType(): ManagedObjectType {
+  getObjType(): UnmanagedObjectType {
     return this.objType;
   }
 
   getObjTypeStr(): string {
-    return ManagedObjectType[this.objType];
+    return UnmanagedObjectType[this.objType];
   }
 
-  constructor(objType: ManagedObjectType) {
+  constructor(objType: UnmanagedObjectType) {
     this.objType = objType;
     this.id = '0';
     this.createdAt = new Date();
-    this.updatedAt = new Date();
   };
 }

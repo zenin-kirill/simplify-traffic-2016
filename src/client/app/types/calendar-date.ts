@@ -1,53 +1,57 @@
-import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 import { ManagedObject, managedObjectAttrs } from "./managed-object";
+import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
+import { ExceptionDateType, exceptionDateTypes } from "./exception-date.type";
 
 /**
  * Объект, содержащий дополнительные сведения об атрибутах класса
  */
-export const cityAttrs: any = {
-  name: {json: 'name'},
-  population: {json: 'population'}
+export const calendarDateAttrs: any = {
+  date: {json: 'date'},
+  exceptionType: {json: 'exception-type'}
 }
 
 /**
  * Объект содержащий доп. сведения о зависимостях класса
  */
-export const cityRel: any = {
-  country: managedObjectTypes.country
+export const calendarDateRel: any = {
+  route: managedObjectTypes.route
 }
 
 /**
- * Класс, описывающий сущность НАСЕЛЕННЫЙ ПУНКТ (в виде города)
+ * Класс, описывающий сущность ОСОБАЯ ДАТА КАЛЕНДАРЯ
  */
-export class City extends ManagedObject{
-  private name: string;         // название
-  private population: string;   // численность населения
+export class CalendarDate extends ManagedObject {
+  private date: Date;             // особая дата
+  private exceptionType: ExceptionDateType;  // тип особого дня
 
-  private countyId: string;     // страна, в которой находится данный город
+  private routeId: string;        // машрут, подверженный изменениям
 
   constructor() {
-    super(ManagedObjectType.city);
+    super(ManagedObjectType.calendarDate);
   }
 
-  getName() : string {
-    return this.name;
-  }
-  setName(name: string) {
-    this.name = name;
+  getDate(): Date {
+    return this.date;
   }
 
-  getPopulation() : string {
-    return this.population;
-  }
-  setPopulation(population: string) {
-    this.population = population;
+  setDate(date: Date) {
+    this.date = date;
   }
 
-  getCountryId() : string {
-    return this.countyId;
+  getExceptionType(): ExceptionDateType {
+    return this.exceptionType;
   }
-  setCountryId(countryId: string) {
-    this.countyId = countryId;
+
+  setExceptionType(exceptionType: ExceptionDateType) {
+    this.exceptionType = exceptionType;
+  }
+
+  getRouteId(): string {
+    return this.routeId;
+  }
+
+  setRouteId(routeId: string) {
+    this.routeId = routeId;
   }
 
   /**
@@ -60,25 +64,25 @@ export class City extends ManagedObject{
           (managedObjectAttrs.id.json in jsonData) &&
           (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
           (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][cityRel.country.jsonRel]['data'])))
+          ('id' in jsonData['relationships'][calendarDateRel.route.jsonRel]['data'])))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
                       +'". Invalid common attrs format');
 
-    for (let obj in cityAttrs) {
-      if (!(cityAttrs[obj]['json'] in jsonData['attributes']))
+    for (let obj in calendarDateAttrs) {
+      if (!(calendarDateAttrs[obj]['json'] in jsonData['attributes']))
         throw new Error('Impossible to set an object "'
                         + managedObjectTypes[this.getObjTypeStr()].name
                         +'". Invalid object attrs format');
     }
 
     this.setOnString(jsonData[managedObjectAttrs.id.json],
-                     jsonData['attributes'][cityAttrs.name.json],
-                     jsonData['attributes'][cityAttrs.population.json],
+                     jsonData['attributes'][calendarDateAttrs.date.json],
+                     jsonData['attributes'][calendarDateAttrs.exceptionType.json],
                      jsonData['attributes'][managedObjectAttrs.createdAt.json],
                      jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     jsonData['relationships'][cityRel.country.jsonRel]['data']['id']);
+                     jsonData['relationships'][calendarDateRel.route.jsonRel]['data']['id']);
   }
 
   /**
@@ -87,34 +91,48 @@ export class City extends ManagedObject{
    * значения свойств в следующий метод
    * Входными параметрами являются все свойства объекта класса в строковом формате
    */
-  setOnString(id: string, name: string,
-              population: string, createdAt: string, updatedAt: string, countryId: string) {
+  setOnString(id: string, date: string,
+              exceptionTypeString: string, createdAt: string, updatedAt: string,
+              routeId: string) {
 
+    let dateDate      = new Date(Date.parse(date));
     let createdAtDate = new Date(Date.parse(createdAt));
     let updatedAtDate = new Date(Date.parse(updatedAt));
 
-    if ((isNaN(createdAtDate.getUTCDate())) ||
+    if ((isNaN(dateDate.getUTCDate())) ||
+        (isNaN(createdAtDate.getUTCDate())) ||
         (isNaN(createdAtDate.getUTCDate())))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
                       +'". Invalid date format');
 
-    this.set(id, name, population, createdAtDate, updatedAtDate, countryId);
+    let exceptionType: ExceptionDateType;
+    for (let obj in exceptionDateTypes) {
+      if (exceptionTypeString === exceptionDateTypes[obj]['json'])
+        exceptionType = exceptionDateTypes[obj]['type'];
+    }
+    if (exceptionType === null || exceptionType === undefined)
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid exception type format');
+
+    this.set(id, dateDate, exceptionType, createdAtDate, updatedAtDate, routeId);
   }
 
   /**
    * Метод, устанавливающий данные класса из свойств в исходном формате
    * Входными параметрами являются все свойства класса в исходном формате
    */
-  set(id: string, name: string,
-      population: string, createdAt: Date, updatedAt: Date, countryId: string) {
+  set(id: string, date: Date,
+      exceptionTypeString: ExceptionDateType, createdAt: Date, updatedAt: Date, routeId: string) {
 
-    this.id          = id;
-    this.name        = name;
-    this.population  = population;
-    this.createdAt   = createdAt;
-    this.updatedAt   = updatedAt;
+    this.id            = id;
+    this.date          = date;
+    this.exceptionType = exceptionTypeString;
+    this.createdAt     = createdAt;
+    this.updatedAt     = updatedAt;
 
-    this.countyId    = countryId;
+    this.routeId = routeId;
   }
 }
+

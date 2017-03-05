@@ -11,17 +11,28 @@ export const routeAttrs: any = {
   longName: {json: 'long-name'},
   color: {json: 'color'},
   description: {json: 'description'},
+  bikesAllowed: {json: 'bikes-allowed'},
+  wheelchairAccess: {json: 'wheelchair-accessible'}
 }
 
 /**
- * Класс описывающий сущность маршрут
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const routeRel: any = {
+  agency: managedObjectTypes.agency
+}
+
+/**
+ * Класс описывающий сущность МАРШРУТ
  */
 export class Route extends ManagedObject {
   private type: VehicleType;          // тип ТС, кур. на маршруте
   private shortName: string;          // по сути номер маршрута
   private longName: string;           // краткая информация о маршруте
-  private color: string;               // цвет линии маршрута
+  private color: string;              // цвет линии маршрута
   private description: string;        // полная информация о маршруте
+  private bikesAllowed: boolean;      // по умолчанию маршрут подойдет для велосипедистов?
+  private wheelchairAccess: boolean;  // по умолчанию рейс подойдет для инвалидов?
 
   private agencyId: string;           // агенство, обслуживающее данный маршрут
 
@@ -69,34 +80,64 @@ export class Route extends ManagedObject {
     this.description = description;
   }
 
+  getBikesAllowed(): boolean {
+    return this.bikesAllowed;
+  }
+
+  setBikesAllowed(bikesAllowed: boolean) {
+    this.bikesAllowed = bikesAllowed;
+  }
+
+  getWheelchairAccess(): boolean {
+    return this.wheelchairAccess;
+  }
+
+  setWheelchairAccess(wheelchairAccess: boolean) {
+    this.wheelchairAccess = wheelchairAccess;
+  }
+
+  getAgencyId(): string {
+    return this.agencyId;
+  }
+
+  setAgencyId(agencyId: string) {
+    this.agencyId = agencyId;
+  }
+
   /**
    * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(routeData: any) {
-    if (!((routeData['type'] === managedObjectTypes.route.json) &&
-          (managedObjectAttrs.id.json in routeData) &&
-          (managedObjectAttrs.createdAt.json in routeData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in routeData['attributes']) &&
-          ('id' in routeData['relationships']['agency']['data'])))
-      throw new Error('Impossible to convert an object Route. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][routeRel.agency.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in routeAttrs) {
-      if (!(routeAttrs[obj]['json'] in routeData['attributes']))
-        throw new Error('Impossible to convert an object Route. Invalid route format');
+      if (!(routeAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnString(routeData[managedObjectAttrs.id.json],
-                     routeData['attributes'][routeAttrs.type.json],
-                     routeData['attributes'][routeAttrs.shortName.json],
-                     routeData['attributes'][routeAttrs.longName.json],
-                     routeData['attributes'][routeAttrs.color.json],
-                     routeData['attributes'][routeAttrs.description.json],
-                     routeData['attributes'][managedObjectAttrs.createdAt.json],
-                     routeData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnString(jsonData[managedObjectAttrs.id.json],
+                     jsonData['attributes'][routeAttrs.type.json],
+                     jsonData['attributes'][routeAttrs.shortName.json],
+                     jsonData['attributes'][routeAttrs.longName.json],
+                     jsonData['attributes'][routeAttrs.color.json],
+                     jsonData['attributes'][routeAttrs.description.json],
+                     jsonData['attributes'][routeAttrs.bikesAllowed.json],
+                     jsonData['attributes'][routeAttrs.wheelchairAccess.json],
+                     jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                     jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     routeData['relationships']['agency']['data']['id']);
+                     jsonData['relationships'][routeRel.agency.jsonRel]['data']['id']);
   }
 
   /**
@@ -107,14 +148,16 @@ export class Route extends ManagedObject {
    */
   setOnString(id: string, type: string,
               shortName: string, longName: string, color: string,
-              description: string, createdAt: string, updatedAt: string, agencyId: string) {
+              description: string, bikesAllowed: string, wheelchairAccess: string, createdAt: string, updatedAt: string, agencyId: string) {
 
     let createdAtDate = new Date(Date.parse(createdAt));
     let updatedAtDate = new Date(Date.parse(updatedAt));
 
     if ((isNaN(createdAtDate.getUTCDate())) ||
          (isNaN(createdAtDate.getUTCDate())))
-      throw new Error('Impossible to set an object Route. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     let vehicleType: VehicleType;
     for (let obj in vehicleTypes) {
@@ -122,10 +165,30 @@ export class Route extends ManagedObject {
         vehicleType = vehicleTypes[obj]['type'];
     }
     if (vehicleType === null || vehicleType === undefined)
-      throw new Error('Impossible to convert an object Route. Invalid vehicle type');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid type format');
+
+    let bikesAllowedBool: boolean;
+    switch (bikesAllowed) {
+      case 'true': bikesAllowedBool = true; break;
+      case 'false': bikesAllowedBool = false; break;
+      default: throw new Error('Impossible to set an object "'
+                               + managedObjectTypes[this.getObjTypeStr()].name
+                               +'". Invalid boolean format');
+    }
+
+    let wheelchairAccessBool: boolean;
+    switch (wheelchairAccess) {
+      case 'true': wheelchairAccessBool = true; break;
+      case 'false': wheelchairAccessBool = false; break;
+      default: throw new Error('Impossible to set an object "'
+                               + managedObjectTypes[this.getObjTypeStr()].name
+                               +'". Invalid boolean format');
+    }
 
     this.set(id, vehicleType, shortName, longName, color,
-             description, createdAtDate, updatedAtDate, agencyId);
+             description, bikesAllowedBool, wheelchairAccessBool, createdAtDate, updatedAtDate, agencyId);
   }
 
   /**
@@ -134,11 +197,13 @@ export class Route extends ManagedObject {
    */
   set(id: string, type: VehicleType,
       shortName: string, longName: string, color: string,
-      description: string, createdAt: Date, updatedAt: Date, agencyId: string) {
+      description: string, bikesAllowed: boolean, wheelchairAccess: boolean, createdAt: Date, updatedAt: Date, agencyId: string) {
 
     // проверка корректности данных цвета (в шестн. формате)
     if (color.search(/[a-f0-9]{6}/i) === -1)
-      throw new Error('Impossible to convert an object Route.Invalid format of color');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid color format');
 
     this.id          = id;
     this.type = type;
@@ -146,6 +211,8 @@ export class Route extends ManagedObject {
     this.longName    = longName;
     this.color       = color;
     this.description = description;
+    this.bikesAllowed = bikesAllowed;
+    this.wheelchairAccess = wheelchairAccess;
     this.createdAt   = createdAt;
     this.updatedAt   = updatedAt;
 

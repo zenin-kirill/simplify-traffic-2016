@@ -1,0 +1,533 @@
+{
+  "data": [
+    {
+      "type": "vehicle-statuses",
+      "id": "0001",
+      "attributes": {
+        "latitude": "39.43254",
+        "longtitude": "58,4353",
+        "speed": "45",
+        "height": "344",
+        "acceleration": "5,4353",
+        "created-at": "08.11.2016"
+      },
+      "links": {
+        "self": "/vehicle-statuses/0001"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/vehicle-status/0001/relationships/trip",
+            "related": "/vehicle-status/0001/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0001"
+          }
+        },
+        "route": {
+          "links": {
+            "self": "/vehicle-status/0001/relationships/route",
+            "related": "/vehicle-status/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        },
+        "driver": {
+          "links": {
+            "self": "/vehicle-status/0001/relationships/driver",
+            "related": "/vehicle-status/0001/driver"
+          },
+          "data": {
+            "type": "drivers",
+            "id": "0001"
+          }
+        },
+        "vehicle": {
+          "links": {
+            "self": "/vehicle-status/0001/relationships/vehicle",
+            "related": "/vehicle-status/0001/vehicle"
+          },
+          "data": {
+            "type": "vehicles",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicle-statuses",
+      "id": "0002",
+      "attributes": {
+        "latitude": "39.43254",
+        "longtitude": "58,4353",
+        "speed": "45",
+        "height": "344",
+        "acceleration": "5,4353",
+        "created-at": "08.11.2016"
+      },
+      "links": {
+        "self": "/vehicle-statuses/0002"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/vehicle-status/0002/relationships/trip",
+            "related": "/vehicle-status/0002/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0002"
+          }
+        },
+        "route": {
+          "links": {
+            "self": "/vehicle-status/0002/relationships/route",
+            "related": "/vehicle-status/0002/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0002"
+          }
+        },
+        "driver": {
+          "links": {
+            "self": "/vehicle-status/0002/relationships/driver",
+            "related": "/vehicle-status/0002/driver"
+          },
+          "data": {
+            "type": "drivers",
+            "id": "0002"
+          }
+        },
+        "vehicle": {
+          "links": {
+            "self": "/vehicle-status/0002/relationships/vehicle",
+            "related": "/vehicle-status/0002/vehicle"
+          },
+          "data": {
+            "type": "vehicles",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicle-statuses",
+      "id": "0003",
+      "attributes": {
+        "latitude": "39.43254",
+        "longtitude": "58,4353",
+        "speed": "45",
+        "height": "344",
+        "acceleration": "5,4353",
+        "created-at": "08.11.2016"
+      },
+      "links": {
+        "self": "/vehicle-statuses/0003"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/vehicle-status/0003/relationships/trip",
+            "related": "/vehicle-status/0003/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0003"
+          }
+        },
+        "route": {
+          "links": {
+            "self": "/vehicle-status/0003/relationships/route",
+            "related": "/vehicle-status/0003/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0003"
+          }
+        },
+        "driver": {
+          "links": {
+            "self": "/vehicle-status/0003/relationships/driver",
+            "related": "/vehicle-status/0003/driver"
+          },
+          "data": {
+            "type": "drivers",
+            "id": "0003"
+          }
+        },
+        "vehicle": {
+          "links": {
+            "self": "/vehicle-status/0003/relationships/vehicle",
+            "related": "/vehicle-status/0003/vehicle"
+          },
+          "data": {
+            "type": "vehicles",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "trips",
+      "id": "0001",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "401",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0001"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/trip/0001/relationships/route",
+            "related": "/trip/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "trips",
+      "id": "0002",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "402",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0002"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/trip/0002/relationships/route",
+            "related": "/trip/0002/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "trips",
+      "id": "0003",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "403",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0003"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/trip/0003/relationships/route",
+            "related": "/trip/0003/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0003"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicles",
+      "id": "0001",
+      "attributes": {
+        "invertory-id": "301",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
+        "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/vehicles/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/vehicle/0001/relationships/agency",
+            "related": "/vehicle/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicles",
+      "id": "0002",
+      "attributes": {
+        "invertory-id": "302",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
+        "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/vehicles/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/vehicle/0002/relationships/agency",
+            "related": "/vehicle/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "vehicles",
+      "id": "0003",
+      "attributes": {
+        "invertory-id": "303",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
+        "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/vehicles/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/vehicle/0003/relationships/agency",
+            "related": "/vehicle/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0001",
+      "attributes": {
+        "type": "bus",
+        "short-name": "401",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0001/relationships/agency",
+            "related": "/route/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0002",
+      "attributes": {
+        "type": "bus",
+        "short-name": "402",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0002/relationships/agency",
+            "related": "/route/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0003",
+      "attributes": {
+        "type": "bus",
+        "short-name": "403",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0003/relationships/agency",
+            "related": "/route/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    },
+    {
+      "type": "drivers",
+      "id": "0001",
+      "attributes": {
+        "name": "Aleksey1",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/drivers/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/driver/0001/relationships/agency",
+            "related": "/driver/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "drivers",
+      "id": "0002",
+      "attributes": {
+        "name": "Aleksey2",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/drivers/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/driver/0002/relationships/agency",
+            "related": "/driver/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "drivers",
+      "id": "0003",
+      "attributes": {
+        "name": "Aleksey3",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/drivers/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/driver/0003/relationships/agency",
+            "related": "/driver/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -77,9 +77,9 @@ export class AuthService {
         this.currentUser    = new User();
         this.currentAgency  = new Agency();
 
-        this.currentSession.setOnObject(sessionData);
-        this.currentUser.setOnObject(userData);
-        this.currentAgency.setOnObject(agencyData);
+        this.currentSession.setOnJsonObject(sessionData);
+        this.currentUser.setOnJsonObject(userData);
+        this.currentAgency.setOnJsonObject(agencyData);
 
         this.status = true;
 
@@ -166,7 +166,7 @@ export class AuthService {
     try {
       if (loadedData['data']['type'] === 'user-sessions') {
         this.currentSession = new Session();
-        this.currentSession.setOnObject(loadedData['data'])
+        this.currentSession.setOnJsonObject(loadedData['data'])
         this.addAuthDataToCookie('session', loadedData['data']);
       }
       else {
@@ -178,12 +178,12 @@ export class AuthService {
         switch (loadedData['included'][i]['type']) {
           case 'users':
             this.currentUser = new User();
-            this.currentUser.setOnObject(loadedData['included'][i]);
+            this.currentUser.setOnJsonObject(loadedData['included'][i]);
             this.addAuthDataToCookie('user', loadedData['included'][i]);
             break;
           case 'agencies':
             this.currentAgency = new Agency();
-            this.currentAgency.setOnObject(loadedData['included'][i]);
+            this.currentAgency.setOnJsonObject(loadedData['included'][i]);
             this.addAuthDataToCookie('agency', loadedData['included'][i]);
             break;
           default:
@@ -221,9 +221,9 @@ export class AuthService {
    * @returns Observable<Any> наблюдаемый объект с данными в формате JSON-API
    */
   private dowloadAuthData(login: string, password: string): Observable<any> {
-    //return this.http.post('http://api.simplify-traffic.com/v1/users/authentication',
-    //                     {'email': login, 'password': password})
-    return this.http.get('../assets/auth.json')
+    return this.http.post('http://api.simplify-traffic.com/v1/users/authentication',
+                         {'email': login, 'password': password})
+    //return this.http.get('../assets/auth.json')
                .timeout(this.requestTimeout)
                .map((res: Response) => res.json())
                .catch(AuthService.authDataHandleError);

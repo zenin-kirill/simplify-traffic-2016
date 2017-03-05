@@ -14,7 +14,15 @@ export const stopAttrs: any = {
 }
 
 /**
- * Класс, описывающий сущность остановка
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const stopRel: any = {
+  city: managedObjectTypes.city,
+  stop: managedObjectTypes.stop
+}
+
+/**
+ * Класс, описывающий сущность ОСТАНОВКА
  */
 export class Stop extends ManagedObject {
   private type: VehicleType;        // тип ТС, для кот. преназначена остановка
@@ -91,31 +99,35 @@ export class Stop extends ManagedObject {
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(stopData: any) {
-    if (!((stopData['type'] === managedObjectTypes.stop.json) &&
-          (managedObjectAttrs.id.json in stopData) &&
-          (managedObjectAttrs.createdAt.json in stopData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in stopData['attributes']) &&
-          ('id' in stopData['relationships']['city']['data']) &&
-          ('id' in stopData['relationships']['stop']['data'])))
-      throw new Error('Impossible to convert an object Stop. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][stopRel.city.jsonRel]['data']) &&
+          ('id' in jsonData['relationships'][stopRel.stop.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in stopAttrs) {
-      if (!(stopAttrs[obj]['json'] in stopData['attributes']))
-        throw new Error('Impossible to convert an object Stop. Invalid stop format');
+      if (!(stopAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnString(stopData[managedObjectAttrs.id.json],
-                     stopData['attributes'][stopAttrs.type.json],
-                     stopData['attributes'][stopAttrs.name.json],
-                     stopData['attributes'][stopAttrs.latitude.json],
-                     stopData['attributes'][stopAttrs.longtitude.json],
-                     stopData['attributes'][stopAttrs.photoUrl.json],
-                     stopData['attributes'][managedObjectAttrs.createdAt.json],
-                     stopData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnString(jsonData[managedObjectAttrs.id.json],
+                     jsonData['attributes'][stopAttrs.type.json],
+                     jsonData['attributes'][stopAttrs.name.json],
+                     jsonData['attributes'][stopAttrs.latitude.json],
+                     jsonData['attributes'][stopAttrs.longtitude.json],
+                     jsonData['attributes'][stopAttrs.photoUrl.json],
+                     jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                     jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     stopData['relationships']['city']['data']['id'],
-                     stopData['relationships']['stop']['data']['id']);
+                     jsonData['relationships'][stopRel.city.jsonRel]['data']['id'],
+                     jsonData['relationships'][stopRel.stop.jsonRel]['data']['id']);
   }
 
   /**
@@ -133,14 +145,18 @@ export class Stop extends ManagedObject {
 
     if ((isNaN(createdAtDate.getUTCDate())) ||
          (isNaN(createdAtDate.getUTCDate())))
-      throw new Error('Impossible to set an object Stop. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     let latitudeNumber   = parseFloat(latitude);
     let longtitudeNumber = parseFloat(longtitude);
 
     if ((isNaN(latitudeNumber)) ||
         (isNaN(longtitudeNumber)))
-      throw new Error('Impossible to set an object Stop. Invalid format of coords');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid coords format');
 
     let vehicleType: VehicleType;
     for (let obj in vehicleTypes) {
@@ -148,7 +164,9 @@ export class Stop extends ManagedObject {
         vehicleType = vehicleTypes[obj]['type'];
     }
     if (vehicleType === null || vehicleType === undefined)
-      throw new Error('Impossible to convert an object Route. Invalid vehicle type');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid type format');
 
 
     this.set(id, vehicleType, name, latitudeNumber, longtitudeNumber,

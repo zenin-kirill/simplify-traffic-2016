@@ -10,7 +10,7 @@ export const countryAttrs: any = {
 }
 
 /**
- * Класс, описывающий сущность страна
+ * Класс, описывающий сущность СТРАНА
  */
 export class Country extends ManagedObject {
   private name: string;   // название
@@ -39,23 +39,27 @@ export class Country extends ManagedObject {
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(countryData: any) {
-    if (!((countryData['type'] === managedObjectTypes.country.json) &&
-          (managedObjectAttrs.id.json in countryData) &&
-          (managedObjectAttrs.createdAt.json in countryData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in countryData['attributes'])))
-      throw new Error('Impossible to convert an object Country. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in countryAttrs) {
-      if (!(countryAttrs[obj]['json'] in countryData['attributes']))
-        throw new Error('Impossible to convert an object Country. Invalid country format');
+      if (!(countryAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnString(countryData[managedObjectAttrs.id.json],
-                     countryData['attributes'][countryAttrs.name.json],
-                     countryData['attributes'][countryAttrs.isoStr.json],
-                     countryData['attributes'][managedObjectAttrs.createdAt.json],
-                     countryData['attributes'][managedObjectAttrs.updatedAt.json]);
+    this.setOnString(jsonData[managedObjectAttrs.id.json],
+                     jsonData['attributes'][countryAttrs.name.json],
+                     jsonData['attributes'][countryAttrs.isoStr.json],
+                     jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                     jsonData['attributes'][managedObjectAttrs.updatedAt.json]);
   }
 
   /**
@@ -72,7 +76,9 @@ export class Country extends ManagedObject {
 
     if ((isNaN(createdAtDate.getUTCDate())) ||
         (isNaN(createdAtDate.getUTCDate())))
-      throw new Error('Impossible to set an object Country. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     this.set(id, name, isoStr, createdAtDate, updatedAtDate);
   }

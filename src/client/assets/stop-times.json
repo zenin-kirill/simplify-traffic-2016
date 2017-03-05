@@ -1,0 +1,270 @@
+{
+  "data": [
+    {
+      "type": "stop-times",
+      "id": "0001",
+      "attributes": {
+        "arrival-time": "09.01.2017 12:00",
+        "departure-time": "09.01.2017 12:02",
+        "stop-sequence": "1",
+        "stop-headsign": "1111",
+        "pickup-type": "1",
+        "drop-off-type": "1",
+        "shape-dist-traveled": "111",
+        "time-point": "",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/stop-times/0001"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/stop-time/0001/relationships/trip",
+            "related": "/stop-time/0001/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0001"
+          }
+        },
+        "stop": {
+          "links": {
+            "self": "/stop/0001/relationships/stop",
+            "related": "/stop/0001/stop"
+          },
+          "data": {
+            "type": "stops",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "stop-times",
+      "id": "0002",
+      "attributes": {
+        "arrival-time": "09.02.2017 12:00",
+        "departure-time": "09.02.2017 12:02",
+        "stop-sequence": "2",
+        "stop-headsign": "1112",
+        "pickup-type": "2",
+        "drop-off-type": "2",
+        "shape-dist-traveled": "12",
+        "time-point": "0",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/stop-times/0002"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/stop-time/0002/relationships/trip",
+            "related": "/stop-time/0002/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0001"
+          }
+        },
+        "stop": {
+          "links": {
+            "self": "/stop/0001/relationships/stop",
+            "related": "/stop/0001/stop"
+          },
+          "data": {
+            "type": "stops",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "stop-times",
+      "id": "0003",
+      "attributes": {
+        "arrival-time": "09.03.2017 12:00",
+        "departure-time": "09.03.2017 12:02",
+        "stop-sequence": "3",
+        "stop-headsign": "1113",
+        "pickup-type": "3",
+        "drop-off-type": "3",
+        "shape-dist-traveled": "113",
+        "time-point": "2",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/stop-times/0003"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/stop-time/0003/relationships/trip",
+            "related": "/stop-time/0003/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0001"
+          }
+        },
+        "stop": {
+          "links": {
+            "self": "/stop/0003/relationships/stop",
+            "related": "/stop/0003/stop"
+          },
+          "data": {
+            "type": "stops",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "type": "trips",
+      "id": "0001",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "401",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0001"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/trip/0001/relationships/route",
+            "related": "/trip/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "stops",
+      "id": "0001",
+      "attributes": {
+        "type": "bus",
+        "name": "m. Okean1",
+        "latitude": "49.234324",
+        "longtitude": "58.35656",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/stops/0001"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/stop/0001/relationships/city",
+            "related": "/stop/0001/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0001"
+          }
+        },
+        "stops": {
+          "links": {
+            "self": "/stop/0001/relationships/stop",
+            "related": "/stop/0001/stop"
+          },
+          "data": {
+            "type": "stops",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "stops",
+      "id": "0002",
+      "attributes": {
+        "type": "bus",
+        "name": "m. Okean2",
+        "latitude": "49.234324",
+        "longtitude": "58.35656",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/stops/0002"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/stop/0002/relationships/city",
+            "related": "/stop/0002/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0002"
+          }
+        },
+        "stops": {
+          "links": {
+            "self": "/stop/0002/relationships/stop",
+            "related": "/stop/0002/stop"
+          },
+          "data": {
+            "type": "stops",
+            "id": "0003"
+          }
+        }
+      }
+    },
+    {
+      "type": "stops",
+      "id": "0003",
+      "attributes": {
+        "type": "bus",
+        "name": "m. Okean3",
+        "latitude": "49.234324",
+        "longtitude": "58.35656",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/stops/0003"
+      },
+      "relationships": {
+        "city": {
+          "links": {
+            "self": "/stop/0003/relationships/city",
+            "related": "/stop/0003/city"
+          },
+          "data": {
+            "type": "cities",
+            "id": "0003"
+          }
+        },
+        "stops": {
+          "links": {
+            "self": "/stop/0003/relationships/stop",
+            "related": "/stop/0003/stop"
+          },
+          "data": {
+            "type": "stops",
+            "id": "0001"
+          }
+        }
+      }
+    }
+  ]
+}

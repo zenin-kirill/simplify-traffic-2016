@@ -5,19 +5,29 @@ import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
  * Объект, содержащий дополнительные сведения об атрибутах класса
  */
 export const tripAttrs: any = {
-  headsign: {json: 'name'},
-  shortName: {json: 'population'}
+  headsign: {json: 'headsign'},
+  shortName: {json: 'short-name'},
+  bikesAllowed: {json: 'bikes-allowed'},
+  wheelchairAccess: {json: 'wheelchair-accessible'}
 }
 
 /**
- * Класс, описывающий сущность рейс
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const tripRel: any = {
+  route: managedObjectTypes.route
+}
+
+/**
+ * Класс, описывающий сущность РЕЙС
  */
 export class Trip extends ManagedObject {
-  private headsign: string;   // заголовок
-  private shortName: string;  // котороткое описание рейса
+  private headsign: string;         // заголовок
+  private shortName: string;        // котороткое описание рейса
+  private bikesAllowed: boolean;    // рейс подойдет для велосипедистов?
+  private wheelchairAccess: boolean;// рейс подойдет для инвалидов
 
-  private routeId: string;    // машрут по которотму проводится рейс
-  private serviceId: string;  // todo: узнать что это такое
+  private routeId: string;          // машрут по которотму проводится рейс
 
   constructor() {
     super(ManagedObjectType.trip);
@@ -29,6 +39,22 @@ export class Trip extends ManagedObject {
 
   setHeadsign(headsign: string) {
     this.headsign = headsign;
+  }
+
+  getBikesAllowed(): boolean {
+    return this.bikesAllowed;
+  }
+
+  setBikesAllowed(bikesAllowed: boolean) {
+    this.bikesAllowed = bikesAllowed;
+  }
+
+  getWheelchairAccess(): boolean {
+    return this.wheelchairAccess;
+  }
+
+  setWheelchairAccess(wheelchairAccess: boolean) {
+    this.wheelchairAccess = wheelchairAccess;
   }
 
   getShortName(): string {
@@ -47,41 +73,37 @@ export class Trip extends ManagedObject {
     this.routeId = routeId;
   }
 
-  getServiceId(): string {
-    return this.serviceId;
-  }
-
-  setServiceId(serviceId: string) {
-    this.serviceId = serviceId;
-  }
-
   /**
    * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(tripData: any) {
-    if (!((tripData['type'] === managedObjectTypes.trip.json) &&
-          (managedObjectAttrs.id.json in tripData) &&
-          (managedObjectAttrs.createdAt.json in tripData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in tripData['attributes']) &&
-          ('id' in tripData['relationships']['route']['data']) &&
-          ('id' in tripData['relationships']['service']['data'])))
-      throw new Error('Impossible to convert an object Trip. Invalid object format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][tripRel.route.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in tripAttrs) {
-      if (!(tripAttrs[obj]['json'] in tripData['attributes']))
-        throw new Error('Impossible to convert an object Trip. Invalid trip format');
+      if (!(tripAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnString(tripData[managedObjectAttrs.id.json],
-                     tripData['attributes'][tripAttrs.headsign.json],
-                     tripData['attributes'][tripAttrs.shortName.json],
-                     tripData['attributes'][managedObjectAttrs.createdAt.json],
-                     tripData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnString(jsonData[managedObjectAttrs.id.json],
+                     jsonData['attributes'][tripAttrs.headsign.json],
+                     jsonData['attributes'][tripAttrs.shortName.json],
+                     jsonData['attributes'][tripAttrs.bikesAllowed.json],
+                     jsonData['attributes'][tripAttrs.wheelchairAccess.json],
+                     jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                     jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     tripData['relationships']['route']['data']['id'],
-                     tripData['relationships']['service']['data']['id']);
+                     jsonData['relationships'][tripRel.route.jsonRel]['data']['id']);
   }
 
   /**
@@ -91,17 +113,37 @@ export class Trip extends ManagedObject {
    * Входными параметрами являются все свойства объекта класса в строковом формате
    */
   setOnString(id: string, headsign: string,
-              shortName: string, createdAt: string, updatedAt: string,
-              routeId: string, serviceId: string) {
+              shortName: string, bikesAllowed: string, wheelchairAccess: string,  createdAt: string, updatedAt: string,
+              routeId: string) {
 
     let createdAtDate = new Date(Date.parse(createdAt));
     let updatedAtDate = new Date(Date.parse(updatedAt));
 
     if ((isNaN(createdAtDate.getUTCDate())) ||
         (isNaN(createdAtDate.getUTCDate())))
-      throw new Error('Impossible to set an object City. Invalid format of date');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
-    this.set(id, headsign, shortName, createdAtDate, updatedAtDate, routeId, serviceId);
+    let bikesAllowedBool: boolean;
+    switch (bikesAllowed) {
+      case 'true': bikesAllowedBool = true; break;
+      case 'false': bikesAllowedBool = false; break;
+      default: throw new Error('Impossible to set an object "'
+                               + managedObjectTypes[this.getObjTypeStr()].name
+                               +'". Invalid boolean format');
+    }
+
+    let wheelchairAccessBool: boolean;
+    switch (wheelchairAccess) {
+      case 'true': wheelchairAccessBool = true; break;
+      case 'false': wheelchairAccessBool = false; break;
+      default: throw new Error('Impossible to set an object "'
+                               + managedObjectTypes[this.getObjTypeStr()].name
+                               +'". Invalid boolean format');
+    }
+
+    this.set(id, headsign, shortName, bikesAllowedBool, wheelchairAccessBool, createdAtDate, updatedAtDate, routeId);
   }
 
   /**
@@ -109,15 +151,17 @@ export class Trip extends ManagedObject {
    * Входными параметрами являются все свойства класса в исходном формате
    */
   set(id: string, headsign: string,
-      shortName: string, createdAt: Date, updatedAt: Date, routeId: string, serviceId: string) {
+      shortName: string, bikesAllowed: boolean, wheelchairAccess: boolean, createdAt: Date,
+      updatedAt: Date, routeId: string) {
 
     this.id        = id;
     this.headsign  = headsign;
     this.shortName = shortName;
+    this.bikesAllowed = bikesAllowed;
+    this.wheelchairAccess = wheelchairAccess;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
 
     this.routeId   = routeId;
-    this.serviceId = serviceId;
   }
 }

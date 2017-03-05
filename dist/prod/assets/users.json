@@ -1,6 +1,94 @@
 {
   "data": [
     {
+      "type": "users",
+      "id": "0001",
+      "attributes": {
+        "role": "administrator",
+        "name": "Sashok1",
+        "surname": "Redkov",
+        "email": "redkov@mail.ru",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/users/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/user/0001/relationships/agency",
+            "related": "/user/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "users",
+      "id": "0002",
+      "attributes": {
+        "role": "administrator",
+        "name": "Sashok2",
+        "surname": "Redkov",
+        "email": "redkov@mail.ru",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/users/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/user/0002/relationships/agency",
+            "related": "/user/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "users",
+      "id": "0002",
+      "attributes": {
+        "role": "administrator",
+        "name": "Sashok1",
+        "surname": "Redkov",
+        "email": "redkov@mail.ru",
+        "photo-url": "lalala",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/users/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/user/0002/relationships/agency",
+            "related": "/user/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
       "type": "agencies",
       "id": "0001",
       "attributes": {
@@ -35,7 +123,6 @@
         }
       }
     },
-
     {
       "type": "agencies",
       "id": "0002",
@@ -71,7 +158,6 @@
         }
       }
     },
-
     {
       "type": "agencies",
       "id": "0003",
@@ -102,88 +188,6 @@
           },
           "data": {
             "type": "cities",
-            "id": "0003"
-          }
-        }
-      }
-    }
-  ],
-
-
-
-  "included": [
-    {
-      "type": "cities",
-      "id": "0001",
-      "attributes": {
-        "name": "Moscow1",
-        "population": "13000000",
-        "created-at": "08.11.2016",
-        "updated-at": "10.11.2016"
-      },
-      "links": {
-        "self": "/cities/0001"
-      },
-      "relationships": {
-        "country": {
-          "links": {
-            "self": "/city/0001/relationships/country",
-            "related": "/city/0001/country"
-          },
-          "data": {
-            "type": "countries",
-            "id": "0001"
-          }
-        }
-      }
-    },
-
-    {
-      "type": "cities",
-      "id": "0002",
-      "attributes": {
-        "name": "Moscow2",
-        "population": "13000000",
-        "created-at": "08.11.2016",
-        "updated-at": "10.11.2016"
-      },
-      "links": {
-        "self": "/cities/0002"
-      },
-      "relationships": {
-        "country": {
-          "links": {
-            "self": "/city/0002/relationships/country",
-            "related": "/city/0002/country"
-          },
-          "data": {
-            "type": "countries",
-            "id": "0002"
-          }
-        }
-      }
-    },
-
-    {
-      "type": "cities",
-      "id": "0003",
-      "attributes": {
-        "name": "Moscow3",
-        "population": "13000000",
-        "created-at": "08.11.2016",
-        "updated-at": "10.11.2016"
-      },
-      "links": {
-        "self": "/cities/0003"
-      },
-      "relationships": {
-        "country": {
-          "links": {
-            "self": "/city/0003/relationships/country",
-            "related": "/city/0003/country"
-          },
-          "data": {
-            "type": "countries",
             "id": "0003"
           }
         }

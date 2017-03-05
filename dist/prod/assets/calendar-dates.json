@@ -1,0 +1,173 @@
+{
+  "data": [
+    {
+      "type": "calendar-dates",
+      "id": "0001",
+      "attributes": {
+        "date": "11.01.2017",
+        "exception-type": "1",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/calendar-dates/0001"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/calendar-date/0001/relationships/route",
+            "related": "/calendar-date/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "calendar-dates",
+      "id": "0002",
+      "attributes": {
+        "date": "11.02.2017",
+        "exception-type": "2",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/calendar-dates/0002"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/calendar-date/0002/relationships/route",
+            "related": "/calendar-date/0002/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "calendar-dates",
+      "id": "0003",
+      "attributes": {
+        "date": "11.03.2017",
+        "exception-type": "1",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/calendar-dates/0003"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/calendar-date/0003/relationships/route",
+            "related": "/calendar-date/0003/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "routes",
+      "id": "0001",
+      "attributes": {
+        "type": "bus",
+        "short-name": "401",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0001/relationships/agency",
+            "related": "/route/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0002",
+      "attributes": {
+        "type": "bus",
+        "short-name": "402",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0002/relationships/agency",
+            "related": "/route/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0003",
+      "attributes": {
+        "type": "bus",
+        "short-name": "403",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0003/relationships/agency",
+            "related": "/route/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -22,6 +22,13 @@ export const agencyAttrs: any = {
 }
 
 /**
+ * Объект содержащий доп. сведения о зависимостях класса
+ */
+export const agencyRel: any = {
+  city: managedObjectTypes.city
+}
+
+/**
  * Класс, описывающий сущность АГЕНСТВО
  */
 export class Agency extends ManagedObject{
@@ -154,36 +161,40 @@ export class Agency extends ManagedObject{
    * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
    * Входным параметром является объект в формате JSON-API
    */
-  setOnObject(agencyData: any) {
-    if (!((agencyData['type'] === managedObjectTypes.agency.json) &&
-          (managedObjectAttrs.id.json in agencyData) &&
-          (managedObjectAttrs.createdAt.json in agencyData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in agencyData['attributes']) &&
-          ('id' in agencyData['relationships']['city']['data'])))
-      throw new Error('Impossible to set an object Agency. Invalid object attrs format');
+  setOnJsonObject(jsonData: any) {
+    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
+          (managedObjectAttrs.id.json in jsonData) &&
+          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
+          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
+          ('id' in jsonData['relationships'][agencyRel.city.jsonRel]['data'])))
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid common attrs format');
 
     for (let obj in agencyAttrs) {
-      if (!(agencyAttrs[obj]['json'] in agencyData['attributes']))
-        throw new Error('Impossible to set an object Agency. Invalid agency attrs format');
+      if (!(agencyAttrs[obj]['json'] in jsonData['attributes']))
+        throw new Error('Impossible to set an object "'
+                        + managedObjectTypes[this.getObjTypeStr()].name
+                        +'". Invalid object attrs format');
     }
 
-    this.setOnString(agencyData[managedObjectAttrs.id.json],
-                     agencyData['attributes'][agencyAttrs.legalName.json],
-                     agencyData['attributes'][agencyAttrs.name.json],
-                     agencyData['attributes'][agencyAttrs.zipCode.json],
-                     agencyData['attributes'][agencyAttrs.address.json],
-                     agencyData['attributes'][agencyAttrs.email.json],
-                     agencyData['attributes'][agencyAttrs.phone.json],
-                     agencyData['attributes'][agencyAttrs.contactName.json],
-                     agencyData['attributes'][agencyAttrs.websiteUrl.json],
-                     agencyData['attributes'][agencyAttrs.fareUrl.json],
-                     agencyData['attributes'][agencyAttrs.language.json],
-                     agencyData['attributes'][agencyAttrs.timezone.json],
-                     agencyData['attributes'][agencyAttrs.comment.json],
-                     agencyData['attributes'][managedObjectAttrs.createdAt.json],
-                     agencyData['attributes'][managedObjectAttrs.updatedAt.json],
+    this.setOnString(jsonData[managedObjectAttrs.id.json],
+                     jsonData['attributes'][agencyAttrs.legalName.json],
+                     jsonData['attributes'][agencyAttrs.name.json],
+                     jsonData['attributes'][agencyAttrs.zipCode.json],
+                     jsonData['attributes'][agencyAttrs.address.json],
+                     jsonData['attributes'][agencyAttrs.email.json],
+                     jsonData['attributes'][agencyAttrs.phone.json],
+                     jsonData['attributes'][agencyAttrs.contactName.json],
+                     jsonData['attributes'][agencyAttrs.websiteUrl.json],
+                     jsonData['attributes'][agencyAttrs.fareUrl.json],
+                     jsonData['attributes'][agencyAttrs.language.json],
+                     jsonData['attributes'][agencyAttrs.timezone.json],
+                     jsonData['attributes'][agencyAttrs.comment.json],
+                     jsonData['attributes'][managedObjectAttrs.createdAt.json],
+                     jsonData['attributes'][managedObjectAttrs.updatedAt.json],
 
-                     agencyData['relationships']['city']['data']['id']);
+                     jsonData['relationships'][agencyRel.city.jsonRel]['data']['id']);
   }
 
   /**
@@ -203,7 +214,9 @@ export class Agency extends ManagedObject{
 
     if ((isNaN(createdAtDate.getUTCDate())) ||
         (isNaN(createdAtDate.getUTCDate())))
-      throw new Error('Impossible to set an object Agency. Invalid date format ');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid date format');
 
     let languageType: LanguageType;
     for (let obj in languageTypes) {
@@ -211,7 +224,9 @@ export class Agency extends ManagedObject{
         languageType = languageTypes[obj]['type'];
     }
     if (languageType === null || languageType === undefined)
-      throw new Error('Impossible to set an object Agency. Invalid language type');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid language format');
 
     let timezoneType: TimezoneType;
     for (let obj in timezoneTypes) {
@@ -219,7 +234,9 @@ export class Agency extends ManagedObject{
         timezoneType = timezoneTypes[obj]['type'];
     }
     if (timezoneType === null || timezoneType === undefined)
-      throw new Error('Impossible to set an object Agency. Invalid timezone type');
+      throw new Error('Impossible to set an object "'
+                      + managedObjectTypes[this.getObjTypeStr()].name
+                      +'". Invalid timezone format');
 
     this.set(id, legalName, name, zipCode, address, email, phone, contactName,
              websiteUrl, fareUrl, languageType, timezoneType, comment, createdAtDate,

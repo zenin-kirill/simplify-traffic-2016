@@ -1,0 +1,188 @@
+{
+  "data": [
+    {
+      "type": "trip-statuses",
+      "id": "0001",
+      "attributes": {
+        "route-short-name": "400 Zelenograd - Moskva",
+        "departure": "Zelenograd",
+        "depart": "11.01.2017 11:03",
+        "dist-from-depart": "10",
+        "next-stop": "Khimki",
+        "arrive-to-next-stop": "11.01.2017 11:13",
+        "dist-to-next-stop": "20",
+        "destination": "Rech vokz",
+        "arrive-to-destination": "11.01.2017 11:33",
+        "dist-to-destination": "50",
+        "status": "scheduled",
+        "created-at": "08.11.2016"
+      },
+      "links": {
+        "self": "/trip-statuses/0001"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/trip-status/0001/relationships/trip",
+            "related": "/trip-status/0001/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "trip-statuses",
+      "id": "0002",
+      "attributes": {
+        "route-short-name": "402 Zelenograd - Moskva",
+        "departure": "Zelenograd",
+        "depart": "11.01.2017 11:03",
+        "dist-from-depart": "10",
+        "next-stop": "Khimki",
+        "arrive-to-next-stop": "11.01.2017 11:13",
+        "dist-to-next-stop": "20",
+        "destination": "Rech vokz",
+        "arrive-to-destination": "11.01.2017 11:33",
+        "dist-to-destination": "50",
+        "status": "scheduled",
+        "created-at": "08.11.2016"
+      },
+      "links": {
+        "self": "/trip-statuses/0002"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/trip-status/0002/relationships/trip",
+            "related": "/trip-status/0002/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "trip-statuses",
+      "id": "0003",
+      "attributes": {
+        "route-short-name": "403 Zelenograd - Moskva",
+        "departure": "Zelenograd",
+        "depart": "11.01.2017 11:03",
+        "dist-from-depart": "10",
+        "next-stop": "Khimki",
+        "arrive-to-next-stop": "11.01.2017 11:13",
+        "dist-to-next-stop": "20",
+        "destination": "Rech vokz",
+        "arrive-to-destination": "11.01.2017 11:33",
+        "dist-to-destination": "50",
+        "status": "scheduled",
+        "created-at": "08.11.2016"
+      },
+      "links": {
+        "self": "/trip-statuses/0003"
+      },
+      "relationships": {
+        "trip": {
+          "links": {
+            "self": "/trip-status/0003/relationships/trip",
+            "related": "/trip-status/0003/trip"
+          },
+          "data": {
+            "type": "trips",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "trips",
+      "id": "0001",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "401",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0001"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/trip/0001/relationships/route",
+            "related": "/trip/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "trips",
+      "id": "0002",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "402",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0002"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/trip/0002/relationships/route",
+            "related": "/trip/0002/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "trips",
+      "id": "0003",
+      "attributes": {
+        "headsign": "400 Zelenograd - Moskva",
+        "short-name": "403",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/trips/0003"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/trip/0003/relationships/route",
+            "related": "/trip/0003/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ]
+}
