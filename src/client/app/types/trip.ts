@@ -2,7 +2,7 @@ import { ManagedObject, managedObjectAttrs } from "./managed-object";
 import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const tripAttrs: any = {
   headsign: {json: 'headsign'},
@@ -12,22 +12,22 @@ export const tripAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const tripRel: any = {
   route: managedObjectTypes.route
 }
 
 /**
- * Класс, описывающий сущность РЕЙС
+ * Class describing entity TRIP
  */
 export class Trip extends ManagedObject {
-  private headsign: string;         // заголовок
-  private shortName: string;        // котороткое описание рейса
-  private bikesAllowed: boolean;    // рейс подойдет для велосипедистов?
-  private wheelchairAccess: boolean;// рейс подойдет для инвалидов
+  private headsign: string;         // headsign on vehicle
+  private shortName: string;        // short name
+  private bikesAllowed: boolean;    // trip is suitable for cyclists?
+  private wheelchairAccess: boolean;// trip is suitable for invalids?
 
-  private routeId: string;          // машрут по которотму проводится рейс
+  private routeId: string;  // route on which the trip is carried out
 
   constructor() {
     super(ManagedObjectType.trip);
@@ -74,19 +74,25 @@ export class Trip extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][tripRel.route.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][tripRel.route.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in tripAttrs) {
       if (!(tripAttrs[obj]['json'] in jsonData['attributes']))
@@ -107,10 +113,10 @@ export class Trip extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnString(id: string, headsign: string,
               shortName: string, bikesAllowed: string, wheelchairAccess: string,  createdAt: string, updatedAt: string,
@@ -147,8 +153,8 @@ export class Trip extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, headsign: string,
       shortName: string, bikesAllowed: boolean, wheelchairAccess: boolean, createdAt: Date,

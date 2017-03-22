@@ -1,16 +1,16 @@
 /**
- * Перечисление, содержащее типы используемых в сервисе языков
+ * Enumeration containing types of using languages
  */
 export enum LanguageType {
-  en,   // английский
-  ru,   // русский
-  de,   // немецкий
-  fr,   // французкий
-  zh    // китайский
+  en,   // english
+  ru,   // russian
+  de,   // german
+  fr,   // french
+  zh    // chinese
 }
 
 /**
- * Объект, содержащий сведения о языках
+ * Object containing additional information about types of using languages
  */
 export const languageTypes: any = {
   en: {

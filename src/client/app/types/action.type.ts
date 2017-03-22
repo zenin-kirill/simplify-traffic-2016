@@ -1,13 +1,13 @@
 /**
- * Перечисление, содежащее типы действий над управляемыми объектами
+ * Enumeration containing actions types with managed objects
  */
 export enum ActionType {
-  addNew,    // добавление нового
-  editExist  // редактирование старого
+  addNew,    // adding a new
+  editExist  // editing an existing
 }
 
 /**
- * Объект, содержащий дополнительные сведения о типах действий
+ * Object containing additional information about actions types
  */
 export const actionTypes: any = {
   addNew: {json: 'add-new', type: ActionType.addNew},

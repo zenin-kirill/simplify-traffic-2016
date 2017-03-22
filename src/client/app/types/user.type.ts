@@ -1,14 +1,14 @@
 /**
- * Перечисление, содержащее виды пользователей
+ * Enumeration containing types of users
  */
 export enum UserType {
-  administrator,   // администратор
-  contentManager,  // общий модератор
-  agencyManager    // менеджер транс. компании
+  administrator,   // administrator
+  contentManager,  // content manager
+  agencyManager    // agency manager (operator)
 }
 
 /**
- * Объект, содержащий сведения о видах пользователей
+ * Object containing additional information about types of users
  */
 export const userTypes: any = {
   administrator: {json: 'administrator', type: UserType.administrator},

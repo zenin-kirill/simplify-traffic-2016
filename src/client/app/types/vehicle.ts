@@ -3,7 +3,7 @@ import { ManagedObject, managedObjectAttrs } from "./managed-object";
 import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const vehicleAttrs: any = {
   invertoryId: {json: 'invertory-id'},
@@ -19,28 +19,28 @@ export const vehicleAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const vehicleRel: any = {
   agency: managedObjectTypes.agency
 }
 
 /**
- * Класс, описывающий сущность ТРАНСПОРТНОЕ СРЕДСТВО
+ * Class describing entity VEHICLE
  */
 export class Vehicle extends ManagedObject {
-  private invertoryId: string;      // инвертарный идентификатор
-  private type: VehicleType;        // тип ТС
-  private manufacturer: string;     // производитель
-  private vehicleModel: string;     // модель
-  private dateManufactured: number; // год производства
-  private payedUntil: Date;         // пропалчен до...
-  private licensePlate: string;     // регистрационный номер
-  private photoUrl: string;         // сслыка на фото
-  private bikesAllowed: boolean;    // ТС пригодно для велосипедистов?
-  private wheelchairAccess: boolean;// ТС пригодно для инвалидов?
+  private invertoryId: string;      // inventory identifier
+  private type: VehicleType;        // vehicle type
+  private manufacturer: string;     // manufacturer
+  private vehicleModel: string;     // model
+  private dateManufactured: number; // year of manufactured
+  private payedUntil: Date;         // payed until to...
+  private licensePlate: string;     // state registration number
+  private photoUrl: string;         // photo link
+  private bikesAllowed: boolean;    // suitable for bicyclists?
+  private wheelchairAccess: boolean;// suitable for invalids?
 
-  private agencyId: string;         // агенство, котормоу принадлежит ТС
+  private agencyId: string;     // agency that owns the vehicle
 
   constructor() {
     super(ManagedObjectType.vehicle);
@@ -135,16 +135,22 @@ export class Vehicle extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][vehicleRel.agency.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][vehicleRel.agency.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
                       +'". Invalid common attrs format');
@@ -174,10 +180,10 @@ export class Vehicle extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnStrings(id: string, invertoryId: string, type: string, manufacturer: string,
                vehicleModel: string, dateManufactured: string, payedUntil: string,
@@ -234,8 +240,8 @@ export class Vehicle extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, invertoryId: string, type: VehicleType, manufacturer: string,
       vehicleModel: string,

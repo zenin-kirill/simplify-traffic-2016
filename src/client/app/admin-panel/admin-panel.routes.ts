@@ -5,7 +5,7 @@ import { objectsManagementRoutes } from "../objects-managenent/objects-managemen
 import { AuthGuardService } from "../auth-guard.service";
 
 /**
- * Объект, содержащий маршруты панели управления
+ * Object that contains routes of admin panel
  */
 export const adminPanelRoutes: Routes = [
   {

@@ -8,7 +8,7 @@ import { TranslationService, LocaleService, Localization } from "angular-l10n";
            })
 
 /**
- * Компонент, представляющий собой рабочую часть панели управления
+ * Component that is working part of control panel
  */
 export class DashboardComponent extends Localization{
 

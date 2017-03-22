@@ -12,25 +12,25 @@ import { Observable } from "rxjs";
            })
 
 /**
- *  Компонент, представляющий собой верхнюю панель навигации
+ *  Component, which is top navigation bar
  */
 export class NavBarComponent extends Localization implements OnInit {
-  userSurname: string = '';       // модель, предназн. для вывода фамилии пользователя
-  userName: string    = '';       // модель, предназн. для вывода имени пользователя
-  languageTypes: Array<any> = []; // массив, содержащий в себе все доступные в приложении языки
-  currentLocale: any;             // модель, содержащая объект текущего языка
-  currentTime: Date = new Date(); // модель, содержащая текущую дату (время)
+  userSurname: string = '';       // user surname
+  userName: string    = '';       // user name
+  languageTypes: Array<any> = []; // array containing using languages
+  currentLocale: any;             // current locale
+  currentTime: Date = new Date(); // current time (tick-tick)
 
   constructor(private authService: AuthService, private localSevice: LocaleConfigService,
               public translation: TranslationService, public locale: LocaleService,) {
-    super(locale, translation);   // конструктор локализации
-    // получение текущего языка из сервиса локал.
+    super(locale, translation);   // localization constructor
+    // receiving current language from localization service
     this.currentLocale = languageTypes[this.localSevice.getCurrentLanguage()];
-    // добавление в массив всех поддерживаемых приложением языков
+    // add to array of using languages
     for (let lang in languageTypes) {
       this.languageTypes.push(languageTypes[lang]);
     }
-    // подписка на постоянное обновление значения времени
+    // subscription for regular updating of time values
     let observableTime: Observable<Date> = Observable.create((observer: any) => {
       setInterval(() => observer.next(new Date()), 5000);
     });
@@ -39,8 +39,7 @@ export class NavBarComponent extends Localization implements OnInit {
 
 
   /**
-   * Функция, котоаря при инициализации компонента запрашивает у сервиса авторизации данные о
-   * пользователе
+   * When initialized, function requests authorization service for user data
    */
   ngOnInit() {
     this.userSurname = this.authService.getCurrentUser().getSurname();
@@ -69,15 +68,15 @@ export class NavBarComponent extends Localization implements OnInit {
   }
 
   /**
-   * Функция, выполняющая выход из текущего польз. аккаунта
+   * Function that exits from the current user account
    */
   logOut() {
     this.authService.logOut();
   }
 
   /**
-   * Функция, производящая смену текущих языка и страны
-   * @param index индекс элемента в массиве поддерж. языков
+   * Function that changes the current language and country
+   * @param index index of an element in an array of using languages
    */
   changeLocale(index: number) {
     this.currentLocale = this.languageTypes[index];

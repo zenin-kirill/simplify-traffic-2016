@@ -2,7 +2,7 @@ import { ManagedObject, managedObjectAttrs } from "./managed-object";
 import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const shapeAttrs: any = {
   ptLatitude: {json: 'pt-lat'},
@@ -12,22 +12,22 @@ export const shapeAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const shapeRel: any = {
   route: managedObjectTypes.route
 }
 
 /**
- * Класс, описывающий сущность ФИГУРА
+ * Class describing entity SHAPE
  */
 export class Shape extends ManagedObject {
-  private ptLatitude: number;         // широта точки
-  private ptLongtitude: number;       // долгота точки
-  private ptSequence: number;         // порядковый номер точки
-  private distTraveled: number;       // расстояние от самой первой точки всей фигуры
+  private ptLatitude: number;         // point latitude
+  private ptLongtitude: number;       // point longtitude
+  private ptSequence: number;         // point sequential number
+  private distTraveled: number;       // distance from first point of figure
 
-  private routeId: string;        // машрут, подверженный изменениям
+  private routeId: string;        // route described by shape
 
   constructor() {
     super(ManagedObjectType.shape);
@@ -74,25 +74,31 @@ export class Shape extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][shapeRel.route.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][shapeRel.route.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in shapeAttrs) {
       if (!(shapeAttrs[obj]['json'] in jsonData['attributes']))
         throw new Error('Impossible to set an object "'
                         + managedObjectTypes[this.getObjTypeStr()].name
-                        +'". Invalid object attrs format');
+                        + '". Invalid object attrs format');
     }
 
     this.setOnString(jsonData[managedObjectAttrs.id.json],
@@ -107,10 +113,10 @@ export class Shape extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnString(id: string, ptLatitude: string,
               ptLongtitude: string, ptSequence: string, distTraveled: string,
@@ -123,11 +129,11 @@ export class Shape extends ManagedObject {
         (isNaN(createdAtDate.getUTCDate())))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid date format');
+                      + '". Invalid date format');
 
     let ptLatitudeNumber   = parseFloat(ptLatitude);
     let ptLongtitudeNumber = parseFloat(ptLongtitude);
-    let ptSequenceNumber = parseFloat(ptSequence);
+    let ptSequenceNumber   = parseFloat(ptSequence);
     let distTraveledNumber = parseFloat(distTraveled);
 
     if ((isNaN(ptLatitudeNumber)) ||
@@ -136,15 +142,15 @@ export class Shape extends ManagedObject {
         (isNaN(distTraveledNumber)))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid number format');
+                      + '". Invalid number format');
 
     this.set(id, ptLatitudeNumber, ptLongtitudeNumber, ptSequenceNumber,
              distTraveledNumber, createdAtDate, updatedAtDate, routeId);
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, ptLatitude: number,
       ptLongtitude: number, ptSequence: number, distTraveled: number,

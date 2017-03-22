@@ -13,21 +13,20 @@ import "rxjs/add/operator/timeout";
 import "rxjs/add/observable/throw";
 
 /**
- * Сервис, реализующий функционал авторизации
+ * Service that implements the authorization functionality
  */
 @Injectable()
 export class AuthService {
-  private status: boolean    = false;  // статус авторизации
-  private currentUrl: string = '';  // адрес страницы, на которой был польз. до авторизации
-  private currentSession: Session;
-  private currentUser: User;
-  private currentAgency: Agency;
+  private status: boolean    = false;   // authorization status
+  private currentUrl: string = '';      // address from which user routed
+  private currentSession: Session;      // current user session
+  private currentUser: User;            // current user
+  private currentAgency: Agency;        // current agency
 
-  private readonly requestTimeout: number = 10000;  // значение таймаута для выполн. запроса
+  private readonly requestTimeout: number = 10000;  // request timeout value
 
   /**
-   * Конструктор, при инициализации сервиса, пытается считать авторизационные данные из файлов
-   * cookie
+   * Constructor, when initializing service, tries to read authorization data from cookie files
    */
   constructor(private http: Http, private cookieService: CookieService, private router: Router) {
     try {
@@ -63,8 +62,7 @@ export class AuthService {
   }
 
   /**
-   * Функция, производящая попытку получить авторизационные данные из файлов cookie без ввода
-   * данных для входа
+   * Function that tries to get authorization data from cookies without entering login data
    */
   getAuthDataWithoutLogIn() {
     if (this.status === false) {
@@ -95,26 +93,25 @@ export class AuthService {
   }
 
   /**
-   * Функция, производящая попытку выполнить вход при помощи ввода авторизационных данных
-   * пользователя
-   * @param login логин пользователя
-   * @param password пароль пользователя
-   * @returns Observable<null> наблюдаемый объект (результат выполнения)
+   * Function that tries to log in by entering user authorization data
+   * @param login
+   * @param password
+   * @returns Observable<null> the observed object (result of execution)
    */
   getAuthDataWithLogIn(login: string, password: string): Observable<null> {
-    // подписка на получение давторизац. данных с сервера
+    // subscription to receive authorization data from the server
     this.dowloadAuthData(login, password).subscribe();
     return this.dowloadAuthData(login, password).map(
-      // проверка полученных данных
+      // verification of received data
       (loadedData: any) => {
         if (loadedData === null || loadedData === undefined) {
           throw new Error('Impossible to load auth data from server');
         }
 
-        // попытка разобрать и добавить полученные данные в приложение и файлы cookie
+        // try to parse and add new data to application and cookies
         this.addAuthDataToApp(loadedData);
 
-        // если авторизация удалась, оповещаем компонент авторизации
+        // if the authorization is successful, notify the authorization component
         if (this.status === true) {
           return Observable.of<null>();
         }
@@ -127,9 +124,9 @@ export class AuthService {
   }
 
   /**
-   * Функция, завершающая процесс авторизации, путем перевода пользователя на главную или
-   * предыдущую страницу (в зависимости от того, на какую страницу пользователь собирался зайти,
-   * если прямиком на страницу авторизации - попадет на главную)
+   * The function that completes the authorization process by redirect the user to the main or
+   * previous page (depending on which page the user was going to visit, if immediately to the
+   * authorization page - get to the main page)
    */
   completeLogIn() {
     if (this.getCurrentUrl() !== '') {
@@ -144,8 +141,7 @@ export class AuthService {
   }
 
   /**
-   * Функция производящая выход из-под текущего пользователя, при этом все данные пользователя
-   * удаляются
+   * Function that makes exit from current user, with all user data being deleted
    */
   logOut() {
     this.status         = false;
@@ -159,8 +155,8 @@ export class AuthService {
   }
 
   /**
-   * Функция разбора и добавления авторизационных данных в приложение
-   * @param loadedData загруженные с сервера авторизационные данные
+   * Function of parsing and adding authorization data to the application
+   * @param loadedData authorization data downloaded from server
    */
   private addAuthDataToApp(loadedData: any) {
     try {
@@ -173,7 +169,7 @@ export class AuthService {
         throw new Error('Invalid session data');
       }
 
-      // перебор и поиск небходимых включенных объектов
+      // search of the necessary included objects
       for (let i = 0; i < loadedData['included'].length; i++) {
         switch (loadedData['included'][i]['type']) {
           case 'users':
@@ -207,22 +203,22 @@ export class AuthService {
   }
 
   /**
-   * Функция добавления текущих авторизационных данных в файлы cookie
+   * Function of adding current authorization data to cookies
    */
   private addAuthDataToCookie(name: string, data: any) {
-      this.cookieService.putObject(name, data,
-                                   {expires: this.currentSession.getValidUntil().toISOString()});
+    this.cookieService.putObject(name, data,
+                                 {expires: this.currentSession.getValidUntil().toISOString()});
   }
 
   /**
-   * Функция загрузки авторизационных данных с сервера
-   * @param login логин пользователя
-   * @param password пароль пользователя
-   * @returns Observable<Any> наблюдаемый объект с данными в формате JSON-API
+   * Function of loading authorization data from server
+   * @param login
+   * @param password
+   * @returns Observable<Any> observed object with data in JSON-API format
    */
   private dowloadAuthData(login: string, password: string): Observable<any> {
     return this.http.post('http://api.simplify-traffic.com/v1/users/authentication',
-                         {'email': login, 'password': password})
+                          {'email': login, 'password': password})
     //return this.http.get('../assets/auth.json')
                .timeout(this.requestTimeout)
                .map((res: Response) => res.json())
@@ -230,9 +226,9 @@ export class AuthService {
   }
 
   /**
-   * Функция-обработчик ошибок получения данных с сервера
-   * @param error перехваченное исключение
-   * @returns Observable<Error> объект ошибки, возвращаемый вместо наблюдаемого объекта
+   * Error-handling function for retrieving data from server
+   * @param error intercepted exception
+   * @returns Observable<Error> observed object with error data
    */
   private static authDataHandleError(error: any): Observable<Error> {
     let errMsg = (error.message) ? error.message :

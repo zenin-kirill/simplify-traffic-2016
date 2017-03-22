@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 
 /**
- * Компонент, представляющий собой всю панель управления
+ * Component that represents entire control panel
  */
 @Component({
              moduleId: module.id,

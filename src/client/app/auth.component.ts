@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { languageTypes } from "./types/language.type";
 import { LocaleConfigService } from "./locale-config.service";
 import { Translation, TranslationService } from "angular-l10n";
-import { ObjectsManagementService } from "./objects-managenent/objects-management.service";
 
 @Component({
              moduleId: module.id,
@@ -13,29 +12,29 @@ import { ObjectsManagementService } from "./objects-managenent/objects-managemen
            })
 
 /**
- *  Компонент, предоставляющий пользователю форму авторизации в сервисе
+ *  Component that provides authorization form for user
  */
-export class AuthComponent extends Translation{
-  message: string  = '';          // сообщение, выводимое в заголовке на стр. автор.
-  login: string    = '';          // логин пользователя
-  password: string = '';          // пароль пользователя
-  languageTypes: Array<any> = []; // массив с типами поддерж. языков
-  currentLocale: any;
+export class AuthComponent extends Translation {
+  message: string           = '';   // message displayed in title
+  login: string             = '';   // login for log in
+  password: string          = '';   // pass for log in
+  languageTypes: Array<any> = [];   // array with using languages
+  currentLocale: any;               // current locale
 
   constructor(private authService: AuthService, private router: Router,
-              private localSevice: LocaleConfigService, public translation: TranslationService, private s: ObjectsManagementService) {
+              private localSevice: LocaleConfigService, public translation: TranslationService) {
     super(translation);
-    // получение текущего языка
+    // get current locale
     this.currentLocale = languageTypes[this.localSevice.getCurrentLanguage()];
-    // получение списка поддерж. языков
+    // get list of using languages
     for (let lang in languageTypes) {
       this.languageTypes.push(languageTypes[lang]);
     }
   };
 
   /**
-   * Функция, производящая смену ткущих языка и страны
-   * @param index индекс элемента в массиве поддерж. языков
+   * Function that changes current language and country
+   * @param index Index of an element in an array of using languages
    */
   changeLocale(index: number) {
     this.currentLocale = this.languageTypes[index];
@@ -44,18 +43,18 @@ export class AuthComponent extends Translation{
   }
 
   /**
-   * Функция, осуществляющая попытку авторизации пользователя.
+   * A function that attempts to authenticate a user.
    */
   tryAuthorize() {
     this.message = 'Authorization...';
     this.authService.getAuthDataWithLogIn(this.login, this.password)
-        .subscribe( // подписываемся на выполнение авторизации и ожиданием результат
-                    () => {   // если получилось - перенаправляемся на главную или предыдущую страницу
+        .subscribe( // Subscribe to authorization and waiting for the result
+                    () => {   // if it works, we redirect to the main or previous page
                       this.message = 'Authorization complete!';
                       this.authService.completeLogIn();
                     },
 
-                    (e: any) => { // если не получилось - выводим ошибку
+                    (e: any) => { // if it didn't work - write error
                       this.message = 'Authorization error, try again!';
                       console.log('AuthComponent: ' + e.message);
                       if (e.stack !== undefined) {

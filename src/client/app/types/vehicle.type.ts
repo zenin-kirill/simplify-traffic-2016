@@ -1,14 +1,14 @@
 /**
- * Перечисление, содержащее виды ТС
+ * Enumeration containing types of vehicles
  */
 export enum VehicleType {
-  bus,    // автобус
-  tram,   // трамвай
-  trolley // троллейбус
+  bus,    // bus
+  tram,   // tram
+  trolley // trolley
 }
 
 /**
- * Объект, содержащий сведения о видах ТС
+ * Object containing additional information about types of vehicles
  */
 export const vehicleTypes: any = {
   bus: {json: 'bus', type: VehicleType.bus},

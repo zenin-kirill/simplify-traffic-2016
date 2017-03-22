@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
            })
 
 /**
- * Компонент предназначенный для вывода пользователю страницы с ошибкой
+ * Component intended for outputting to user page with error
  */
 export class RouteErrorComponent {
 }

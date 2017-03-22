@@ -1,13 +1,13 @@
 /**
- * Перечисление, содежащее типы исключительных дней
+ * Enumeration containing types of exception dates
  */
 export enum ExceptionDateType {
-  added,   // рабочий день добавлен
-  removed  // рабочий день удален
+  added,   // work day added
+  removed  // work day removed
 }
 
 /**
- * Объект, содержащий дополнительные сведения о типах особых дней
+ * Object containing additional information about types of exception dates
  */
 export const exceptionDateTypes: any = {
   added: {json: '1', type: ExceptionDateType.added},

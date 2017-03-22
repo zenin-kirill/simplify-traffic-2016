@@ -1,4 +1,4 @@
-// Загрузка с использованием динамического компилятора (на основе SystemJS)
+// load using a dynamic compiler (based on SystemJS)
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { AppModule } from "./app.module";
 

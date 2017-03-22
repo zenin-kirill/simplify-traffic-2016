@@ -2,9 +2,10 @@ import { TimezoneType, timezoneTypes } from "./timezone.type";
 import { LanguageType, languageTypes } from "./language.type";
 import { ManagedObject, managedObjectAttrs } from "./managed-object";
 import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
+import { throws } from "assert";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const agencyAttrs: any = {
   legalName: {json: 'legal-name'},
@@ -22,30 +23,30 @@ export const agencyAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const agencyRel: any = {
   city: managedObjectTypes.city
 }
 
 /**
- * Класс, описывающий сущность АГЕНСТВО
+ * Class describing entity AGENCY
  */
-export class Agency extends ManagedObject{
-  private legalName: string;      // юридическое имя
-  private name: string;           // выводимое имя
-  private zipCode: string;        // почтовый индекс
-  private address: string;        // адрес (внутри города)
-  private email: string;          // электронная почта
-  private phone: string;          // номер телефона
-  private contactName: string;    // имя сотрудника
-  private websiteUrl: string;     // ссылка на сайт агенства
-  private fareUrl: string;        // ссылка на страницу с тарифами
-  private language: LanguageType; // язык
-  private timezone: TimezoneType; // часовой пояс
-  private comment: string;        // комментарий
+export class Agency extends ManagedObject {
+  private legalName: string;      // legal name org.
+  private name: string;           // display name
+  private zipCode: string;        // zip code
+  private address: string;        // address (in the city)
+  private email: string;          // e-mail
+  private phone: string;          // phone number
+  private contactName: string;    // contact employee name
+  private websiteUrl: string;     // link to the website
+  private fareUrl: string;        // link to fare page
+  private language: LanguageType; // company language
+  private timezone: TimezoneType; // company timezone
+  private comment: string;        // comment about agency
 
-  private cityId: string;         // город, в котором находится агенство
+  private cityId: string;         // city where the agency is located
 
   constructor() {
     super(ManagedObjectType.agency);
@@ -157,19 +158,25 @@ export class Agency extends ManagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][agencyRel.city.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][agencyRel.city.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in agencyAttrs) {
       if (!(agencyAttrs[obj]['json'] in jsonData['attributes']))
@@ -198,10 +205,10 @@ export class Agency extends ManagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnString(id: string, legalName: string, name: string,
               zipCode: string, address: string, email: string,
@@ -244,8 +251,8 @@ export class Agency extends ManagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, legalName: string, name: string,
       zipCode: string, address: string, email: string,

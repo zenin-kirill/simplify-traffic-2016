@@ -2,7 +2,7 @@ import { managedObjectTypes } from "./managed-object.type";
 import { UnmanagedObject, unmanagedObjectAttrs } from "./unmanaged-object";
 import { UnmanagedObjectType, unmanagedObjectTypes } from "./unmanaged-object.type";
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const vehicleStatusAttrs: any = {
   latitude: {json: 'latitude'},
@@ -13,7 +13,7 @@ export const vehicleStatusAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const vehicleStatusRel: any = {
   vehicle: managedObjectTypes.vehicle,
@@ -23,19 +23,19 @@ export const vehicleStatusRel: any = {
 }
 
 /**
- * Класс, описывающий сущность СТАТУС ТС
+ * Class describing entity VEHICLE STATUS
  */
 export class VehicleStatus extends UnmanagedObject {
-  private latitude: number;     // широта
-  private longtitude: number;   // долгота
-  private speed: number;        // отправление
-  private height: number;       // высота
-  private acceleration: number; // ускорение
+  private latitude: number;     // GPS: latitude (float)
+  private longtitude: number;   // GPS: longtitude (float)
+  private speed: number;        // speed (int)
+  private height: number;       // height (int)
+  private acceleration: number; // acceleration (int)
 
-  private vehicleId: string;    // автобус, чье состояние
-  private driverId: string;     // водитель на этом автобусе
-  private routeId: string;      // маршрут по которому идет автобус
-  private tripId: string;       // рейс, выполняемый автобусом по маршруту
+  private vehicleId: string;    // vehicle, whose state
+  private driverId: string;     // driver on this vehicle
+  private routeId: string;      // route performed by vehicle
+  private tripId: string;       // trip performed by a vehicle
 
   constructor() {
     super(UnmanagedObjectType.vehicleStatus);
@@ -78,27 +78,27 @@ export class VehicleStatus extends UnmanagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === unmanagedObjectTypes[this.getObjTypeStr()].json) &&
-          (unmanagedObjectAttrs.id.json in jsonData) &&
-          (unmanagedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][vehicleStatusRel.vehicle.jsonRel]['data']) &&
-          ('id' in jsonData['relationships'][vehicleStatusRel.driver.jsonRel]['data']) &&
-          ('id' in jsonData['relationships'][vehicleStatusRel.route.jsonRel]['data']) &&
-          ('id' in jsonData['relationships'][vehicleStatusRel.trip.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if (('id' in jsonData['relationships'][vehicleStatusRel.vehicle.jsonRel]['data']) &&
+        ('id' in jsonData['relationships'][vehicleStatusRel.driver.jsonRel]['data']) &&
+        ('id' in jsonData['relationships'][vehicleStatusRel.route.jsonRel]['data']) &&
+        ('id' in jsonData['relationships'][vehicleStatusRel.trip.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in  vehicleStatusAttrs) {
       if (!( vehicleStatusAttrs[obj]['json'] in jsonData['attributes']))
         throw new Error('Impossible to set an object "'
                         + unmanagedObjectTypes[this.getObjTypeStr()].name
-                        +'". Invalid object attrs format');
+                        + '". Invalid object attrs format');
     }
 
     this.setOnStrings(jsonData[unmanagedObjectAttrs.id.json],
@@ -116,10 +116,10 @@ export class VehicleStatus extends UnmanagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnStrings(id: string, latitude: string, longtitude: string, speed: string, height: string,
                acceleration: string, createdAt: string, vehicleId: string,
@@ -131,7 +131,7 @@ export class VehicleStatus extends UnmanagedObject {
     if (isNaN(createdAtDate.getUTCDate()))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid date format')
+                      + '". Invalid date format')
 
     let latitudeNumber     = parseFloat(latitude);
     let longtitudeNumber   = parseFloat(longtitude);
@@ -146,7 +146,7 @@ export class VehicleStatus extends UnmanagedObject {
         (isNaN(accelerationNumber)))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid numbers format')
+                      + '". Invalid numbers format')
 
     this.set(id, latitudeNumber, longtitudeNumber, speedNumber, heightNumber,
              accelerationNumber, createdAtDate, vehicleId, driverId,
@@ -154,8 +154,8 @@ export class VehicleStatus extends UnmanagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, latitude: number, longtitude: number, speed: number, height: number,
       acceleration: number, createdAt: Date, vehicleId: string, driverId: string,

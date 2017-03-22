@@ -11,14 +11,13 @@ import { DashboardService } from "./dashboard.service";
 import { TripsStatusComponent } from "./trips-status.component";
 import { SideBarComponent } from "./side-bar.component";
 import { NavBarComponent } from "./nav-bar.component";
-import { LoadErrorComponent } from "./load-error.component";
 import {
   TranslationService, TranslationModule, LocaleService, Localization,
   LocalizationModule
 } from "angular-l10n";
 
 /**
- * Модуль панели управления
+ * Module of admin panel
  */
 @NgModule({
             imports: [
@@ -37,7 +36,6 @@ import {
               TripsStatusComponent,
               SideBarComponent,
               NavBarComponent,
-              LoadErrorComponent,
             ],
             exports: [
               AdminPanelComponent,
@@ -45,7 +43,6 @@ import {
               TripsStatusComponent,
               SideBarComponent,
               NavBarComponent,
-              LoadErrorComponent,
             ],
             providers: [
               DashboardService,

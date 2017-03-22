@@ -3,14 +3,14 @@ import { TranslationService, LocaleService } from "angular-l10n";
 import { languageTypes } from "./types/language.type";
 
 /**
- * Сервис, реализующий функционал многоязычности
+ * Service that implements multilingual functionality
  */
 @Injectable()
 export class LocaleConfigService {
   constructor(public locale: LocaleService, public translation: TranslationService) { }
 
   /**
-   * Функция, производящая конфигурацию механизма локализации
+   * Function that configures localization mechanism
    */
   load(): Promise<any> {
     this.locale.AddConfiguration()
@@ -21,7 +21,7 @@ export class LocaleConfigService {
                         languageTypes.fr.lang,
                         languageTypes.zh.lang
                       ])
-        .SetCookieExpiration(30)    // срок хранения куки локализации (дней)
+        .SetCookieExpiration(30)    // shelf life of localization cookies (days)
         .DefineDefaultLocale(languageTypes.en.lang, languageTypes.en.country)
         .DefineCurrency('EUR');
     this.locale.init();
@@ -40,17 +40,17 @@ export class LocaleConfigService {
   }
 
   /**
-   * Функция смены текущих параметров местоположения
-   * @param lang язык
-   * @param country страна
+   * Function of changing current location settings
+   * @param lang
+   * @param country
    */
   setCurrentLocation(lang: string, country: string) {
     this.locale.setDefaultLocale(lang, country);
   }
 
   /**
-   * Функция получения текущего языка
-   * @returns {string} два или три символа, обоз. язык по стандарту
+   * Function of getting current language
+   * @returns {string} two or three symbols indicating the language according to the standard
    */
   getCurrentLanguage() : string {
     return this.locale.getCurrentLanguage();
@@ -58,7 +58,7 @@ export class LocaleConfigService {
 }
 
 /**
- * Функция инциализации локализации
+ * Localization initialization function
  */
 export function initLocalization(localService: LocaleConfigService): Function {
   return () => localService.load();

@@ -1,7 +1,7 @@
 import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 import { ManagedObject, managedObjectAttrs } from "./managed-object";
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const driverAttrs: any = {
   name: {json: 'name'},
@@ -12,23 +12,23 @@ export const driverAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const driverRel: any = {
   agency: managedObjectTypes.agency
 }
 
 /**
- * Класс описывающий сущность ВОДИТЕЛЬ
+ * Class describing entity DRIVER
  */
 export class Driver extends ManagedObject {
-  private name: string;           // имя
-  private surname: string;        // фамилия
-  private birthDate: Date;        // день рождания
-  private licenseNumber: string;  // номер ВУ
-  private photoUrl: string;       // ссылка на фото пользователя
+  private name: string;             // name
+  private surname: string;          // surname
+  private birthDate: Date;          // birth date
+  private licenseNumber: string;    // license number
+  private photoUrl: string;         // photo link
 
-  private agencyId: string;       // агенство, в котором нанят водитель
+  private agencyId: string;  // agency in which driver works
 
   constructor() {
     super(ManagedObjectType.driver);
@@ -37,6 +37,7 @@ export class Driver extends ManagedObject {
   getName(): string {
     return this.name;
   }
+
   setName(name: string) {
     this.name = name;
   }
@@ -82,25 +83,31 @@ export class Driver extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][driverRel.agency.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][driverRel.agency.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in driverAttrs) {
       if (!(driverAttrs[obj]['json'] in jsonData['attributes']))
         throw new Error('Impossible to set an object "'
                         + managedObjectTypes[this.getObjTypeStr()].name
-                        +'". Invalid object attrs format');
+                        + '". Invalid object attrs format');
     }
 
     this.setOnString(jsonData[managedObjectAttrs.id.json],
@@ -116,10 +123,10 @@ export class Driver extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnString(id: string, name: string,
               surname: string, birthDate: string, licenseNumber: string,
@@ -130,19 +137,19 @@ export class Driver extends ManagedObject {
     let birthDateDate = new Date(Date.parse(birthDate));
 
     if ((isNaN(createdAtDate.getUTCDate())) ||
-         (isNaN(createdAtDate.getUTCDate())) ||
-         (isNaN(birthDateDate.getUTCDate())))
+        (isNaN(createdAtDate.getUTCDate())) ||
+        (isNaN(birthDateDate.getUTCDate())))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid date format');
+                      + '". Invalid date format');
 
     this.set(id, name, surname, birthDateDate, licenseNumber,
              photoUrl, createdAtDate, updatedAtDate, agencyId);
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, name: string,
       surname: string, birthDate: Date, licenseNumber: string,

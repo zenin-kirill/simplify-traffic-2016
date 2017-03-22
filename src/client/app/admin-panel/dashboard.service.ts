@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 /**
- * Сервис, обеспечивающий работу панели управления
+ * Service that provides work of control panel
  */
 @Injectable()
 export class DashboardService {

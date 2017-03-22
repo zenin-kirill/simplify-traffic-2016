@@ -3,7 +3,7 @@ import { ManagedObject, managedObjectAttrs } from "./managed-object";
 import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const userAttrs: any = {
   role: {json: 'role'},
@@ -14,23 +14,23 @@ export const userAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const userRel: any = {
   agency: managedObjectTypes.agency
 }
 
 /**
- * Класс, описывающий сущность ПОЛЬЗОВАТЕЛЬ
+ * Class describing entity USER
  */
 export class User extends ManagedObject {
-  private role: UserType;   // роль пользователя (тип)
-  private name: string;     // имя
-  private surname: string;  // фамилия
-  private email: string;    // емэйл
-  private photoUrl: string; // ссылка на фото
+  private role: UserType;   // user role (permissions)
+  private name: string;     // name
+  private surname: string;  // surname
+  private email: string;    // e-mail
+  private photoUrl: string; // photo link
 
-  private agencyId: string; // агенство, в котором работает пользователь
+  private agencyId: string; // agency in which the user works
 
 
   constructor() {
@@ -82,19 +82,25 @@ export class User extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][userRel.agency.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][userRel.agency.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in userAttrs) {
       if (!(userAttrs[obj]['json'] in jsonData['attributes']))
@@ -116,10 +122,10 @@ export class User extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnStrings(id: string, role: string, name: string,
                surname: string, email: string, photoUrl: string, createdAt: string,
@@ -148,8 +154,8 @@ export class User extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, role: UserType, name: string,
       surname: string, email: string, photoUrl: string, createdAt: Date, updatedAt: Date,

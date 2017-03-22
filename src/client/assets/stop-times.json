@@ -11,7 +11,7 @@
         "pickup-type": "1",
         "drop-off-type": "1",
         "shape-dist-traveled": "111",
-        "time-point": "",
+        "timepoint": "",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
@@ -52,7 +52,7 @@
         "pickup-type": "2",
         "drop-off-type": "2",
         "shape-dist-traveled": "12",
-        "time-point": "0",
+        "timepoint": "0",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
@@ -93,7 +93,7 @@
         "pickup-type": "3",
         "drop-off-type": "3",
         "shape-dist-traveled": "113",
-        "time-point": "2",
+        "timepoint": "2",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },

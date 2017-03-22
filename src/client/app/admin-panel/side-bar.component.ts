@@ -9,32 +9,32 @@ import { Translation, TranslationService } from "angular-l10n";
            })
 
 /**
- * Компонент, представляющий собой боковую выдвижную панель
+ * Component, which is a side sliding panel
  */
 export class SideBarComponent extends Translation{
-  showSideBar: boolean        = false;       // модель, отвечающая за скрытие/показ панели
-  showManagementMenu: boolean = true; // модель, отвечающая за скрытие/показ подменю управления
+  showSideBar: boolean        = false;   // hide / show panel
+  showManagementMenu: boolean = true;    // hiding / displaying management submenu
 
   constructor(private authService: AuthService, public translation: TranslationService) {
       super(translation);
   };
 
   /**
-   * Функция - обработчик, изменяет состояние панели
+   * Function-handler, changes status of side panel
    */
   showSideBarChanged() {
     this.showSideBar = !this.showSideBar;
   }
 
   /**
-   * Функция - обработчик, изменяет состояние подменю управления
+   * Function-handler, changes state of management submenu
    */
   showManagementMenuChanged() {
     this.showManagementMenu = !this.showManagementMenu;
   }
 
   /**
-   * Функция, выполняющая выход из панели управления
+   * Function that exits control panel
    */
   logOut() {
     this.authService.logOut();

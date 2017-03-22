@@ -5,7 +5,7 @@ import { RouteErrorComponent } from "./route-error.component";
 import { adminPanelRoutes } from "./admin-panel/admin-panel.routes";
 
 /**
- * Объект содержащий описание маршрутов главного модуля
+ * Object containing description of routes of main module
  */
 export const appRoutes: Routes = [
   {path: '', redirectTo: '/auth', pathMatch: 'full'},

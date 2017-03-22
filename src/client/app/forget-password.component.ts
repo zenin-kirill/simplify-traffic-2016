@@ -7,7 +7,7 @@ import { Component } from "@angular/core";
            })
 
 /**
- * Компонент, предназначенный для восстановления пароля пользователей
+ * Component for recovering user password
  */
 export class ForgetPasswordComponent {
 }

@@ -8,7 +8,7 @@ import { TranslationService, Translation } from "angular-l10n";
            })
 
 /**
- * Компопнет, представляющий из себя таблицу, содержащую данные о текущих рейсах
+ * Component representing a table containing data on current trips
  */
 export class TripsStatusComponent extends Translation{
   constructor(public translation: TranslationService) {

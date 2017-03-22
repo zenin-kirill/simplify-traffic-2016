@@ -2,7 +2,7 @@ import { managedObjectTypes } from "./managed-object.type";
 import { unmanagedObjectTypes, UnmanagedObjectType } from "./unmanaged-object.type";
 import { UnmanagedObject, unmanagedObjectAttrs } from "./unmanaged-object";
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const sessionAttrs: any = {
   token: {json: 'token'},
@@ -10,7 +10,7 @@ export const sessionAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const sessionRel: any = {
   user: managedObjectTypes.user,
@@ -21,14 +21,14 @@ const minTokenLength: number = 15;   // мин. длина ключ. слова
 const maxTokenLength: number = 50;   // макс. длина ключ. слова
 
 /**
- * Класс, описывающий сущность СЕССИЯ РАБОТЫ ПОЛЬЗОВАТЕЛЯ
+ * Class describing entity USER SESSION
  */
-export class Session extends UnmanagedObject{
-  private token: string;      // ключевое слово
-  private validUntil: Date;   // срок действия сессии
+export class Session extends UnmanagedObject {
+  private token: string;      // key token
+  private validUntil: Date;   // session valid until
 
-  private userId: string;     // идентификатор пользоватея, для которого создана сессия
-  private agencyId: string;   // агенство, на которое работает вошедший вользователь
+  private userId: string;     // logged in user
+  private agencyId: string;   // agency of logged in user
 
   constructor() {
     super(UnmanagedObjectType.session);
@@ -51,25 +51,25 @@ export class Session extends UnmanagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === unmanagedObjectTypes[this.getObjTypeStr()].json) &&
-          (unmanagedObjectAttrs.id.json in jsonData) &&
-          (unmanagedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][sessionRel.user.jsonRel]['data']) &&
-          ('id' in jsonData['relationships'][sessionRel.agency.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if (('id' in jsonData['relationships'][sessionRel.user.jsonRel]['data']) &&
+        ('id' in jsonData['relationships'][sessionRel.agency.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in  sessionAttrs) {
       if (!( sessionAttrs[obj]['json'] in jsonData['attributes']))
         throw new Error('Impossible to set an object "'
                         + unmanagedObjectTypes[this.getObjTypeStr()].name
-                        +'". Invalid object attrs format');
+                        + '". Invalid object attrs format');
     }
 
     this.setOnStrings(jsonData[unmanagedObjectAttrs.id.json],
@@ -82,10 +82,10 @@ export class Session extends UnmanagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnStrings(id: string, token: string, validUntil: string, createdAt: string, userId: string,
                agencyId: string) {
@@ -93,17 +93,17 @@ export class Session extends UnmanagedObject{
     let validUntilDate = new Date(Date.parse(validUntil));
 
     if ((isNaN(validUntilDate.getUTCDate())) ||
-         (isNaN(createdAtDate.getUTCDate())))
+        (isNaN(createdAtDate.getUTCDate())))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid date format');
+                      + '". Invalid date format');
 
     this.set(id, token, validUntilDate, createdAtDate, userId, agencyId)
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, token: string, validUntil: Date, createdAt: Date, userId: string,
       agencyId: string) {
@@ -111,7 +111,7 @@ export class Session extends UnmanagedObject{
         (token.length >= maxTokenLength))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid token format');
+                      + '". Invalid token format');
 
     this.id         = id;
     this.token      = token;

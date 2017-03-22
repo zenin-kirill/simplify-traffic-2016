@@ -1,38 +1,41 @@
 /**
- * Перечисление, содержащее типы управляемых объектов
+ * Enumeration containing types of unmanaged objects
  */
-import { managedObjectTypes } from "./managed-object.type";
+import { sessionAttrs, sessionRel } from "./session";
+import { tripStatusAttrs, tripStatusRel } from "./trip-status";
+import { vehicleStatusAttrs, vehicleStatusRel } from "./vehicle-status";
 export enum UnmanagedObjectType {
-  session,        // рабочая сессия пользователя
-  tripStatus,     // статус рейса
-  vehicleStatus   // статус транспортного средства
-}
-;
+  session,        // user work session
+  tripStatus,     // trip status
+  vehicleStatus   // vehicle status
+};
 
 /**
- * Объект, содержащий сведения о типах управляемых объектов
+ * Object containing additional information about types of unmanaged objects
  */
 export const unmanagedObjectTypes: any = {
   session: {
-    jsonRel: 'session',
-    json: 'user-sessions',
-    type: UnmanagedObjectType.session,
     name: 'Session',
-    relationships: [managedObjectTypes.user, managedObjectTypes.agency]
+    json: 'user-sessions',
+    jsonRel: 'user-session',
+    type: UnmanagedObjectType.session,
+    attributes: sessionAttrs,
+    relationships: sessionRel
   },
   tripStatus: {
-    jsonRel: 'trip-status',
-    json: 'trip-statuses',
-    type: UnmanagedObjectType.tripStatus,
     name: 'TripStatus',
-    relationships: [managedObjectTypes.trip]
+    json: 'trip-statuses',
+    jsonRel: 'trip-status',
+    type: UnmanagedObjectType.tripStatus,
+    attributes: tripStatusAttrs,
+    relationships: tripStatusRel
   },
   vehicleStatus: {
-    jsonRel: 'vehicle-status',
-    json: 'vehicle-statuses',
-    type: UnmanagedObjectType.vehicleStatus,
     name: 'VehicleStatus',
-    relationships: [managedObjectTypes.vehicle, managedObjectTypes.driver, managedObjectTypes.route,
-      managedObjectTypes.trip]
+    json: 'vehicle-statuses',
+    jsonRel: 'vehicle-status',
+    type: UnmanagedObjectType.vehicleStatus,
+    attributes: vehicleStatusAttrs,
+    relationships: vehicleStatusRel
   }
 };

@@ -1,116 +1,144 @@
+import { agencyRel, agencyAttrs } from "./agency";
+import { cityRel, cityAttrs } from "./city";
+import { userRel, userAttrs } from "./user";
+import { driverRel, driverAttrs } from "./driver";
+import { routeRel, routeAttrs } from "./route";
+import { vehicleRel, vehicleAttrs } from "./vehicle";
+import { stopRel, stopAttrs } from "./stop";
+import { tripRel, tripAttrs } from "./trip";
+import { calendarRel, calendarAttrs } from "./calendar";
+import { calendarDateRel, calendarDateAttrs } from "./calendar-date";
+import { shapeRel, shapeAttrs } from "./shape";
+import { stopTimeRel } from "./stop-time";
+import { countryAttrs } from "./country";
+
 /**
- * Перечисление, содержащее типы управляемых объектов
+ * Enumeration containing types of managed objects
  */
+
 export enum ManagedObjectType {
-  user,           // пользователь
-  country,        // страна
-  city,           // населенный пункт
-  agency,         // агенство
-  route,          // маршрут
-  vehicle,        // ТС
-  driver,         // водитель
-  stop,           // остановка
-  trip,           // рейс
-  calendar,       // дни работы маршрутов
-  calendarDate,   // дни особой работы маршрутов
-  shape,          // геометр. фигура на карте
-  stopTime        // время остановки
+  user,           // user as user type
+  country,        // country
+  city,           // city as a location
+  agency,         // agency
+  route,          // route
+  vehicle,        // vehicle
+  driver,         // driver
+  stop,           // stop
+  trip,           // trip (on route)
+  calendar,       // days on which route is carried out
+  calendarDate,   // days of special work of routes
+  shape,          // geometric figure on the map
+  stopTime        // stop time
 }
 ;
 
 /**
- * Объект, содержащий сведения о типах управляемых объектов
+ * Object containing additional information about types of managed objects
  */
 export const managedObjectTypes: any = {
   user: {
-    jsonRel: 'user',
-    json: 'users',
-    type: ManagedObjectType.user,
     name: 'User',
-    relationships: [this.agency]
+    json: 'users',
+    jsonRel: 'user',
+    type: ManagedObjectType.user,
+    attributes: userAttrs,
+    relationships: userRel
   },
   country: {
-    jsonRel: 'country',
-    json: 'countries',
-    type: ManagedObjectType.country,
     name: 'Country',
-    relationships: []
+    json: 'countries',
+    jsonRel: 'country',
+    type: ManagedObjectType.country,
+    attributes: countryAttrs,
+    relationships: {}
   },
   city: {
-    jsonRel: 'city',
-    json: 'cities',
-    type: ManagedObjectType.city,
     name: 'City',
-    relationships: [this.country]
+    json: 'cities',
+    jsonRel: 'city',
+    type: ManagedObjectType.city,
+    attributes: cityAttrs,
+    relationships: cityRel
   },
   agency: {
-    jsonRel: 'agency',
-    json: 'agencies',
-    type: ManagedObjectType.agency,
     name: 'Agency',
-    relationships: [this.city]
+    json: 'agencies',
+    jsonRel: 'agency',
+    type: ManagedObjectType.agency,
+    attributes: agencyAttrs,
+    relationships: agencyRel
   },
   route: {
-    jsonRel: 'route',
-    json: 'routes',
-    type: ManagedObjectType.route,
     name: 'Route',
-    relationships: [this.agency]
+    json: 'routes',
+    jsonRel: 'route',
+    type: ManagedObjectType.route,
+    attributes: routeAttrs,
+    relationships: routeRel
   },
   vehicle: {
-    jsonRel: 'vehicle',
-    json: 'vehicles',
-    type: ManagedObjectType.vehicle,
     name: 'Vehicle',
-    relationships: [this.agency]
+    json: 'vehicles',
+    jsonRel: 'vehicle',
+    type: ManagedObjectType.vehicle,
+    attributes: vehicleAttrs,
+    relationships: vehicleRel
   },
   driver: {
-    jsonRel: 'driver',
-    json: 'drivers',
-    type: ManagedObjectType.driver,
     name: 'Driver',
-    relationships: [this.agency]
+    json: 'drivers',
+    jsonRel: 'driver',
+    type: ManagedObjectType.driver,
+    attributes: driverAttrs,
+    relationships: driverRel
   },
   stop: {
-    jsonRel: 'stop',
-    json: 'stops',
-    type: ManagedObjectType.stop,
     name: 'Stop',
-    relationships: [this.city, this.stop]
+    json: 'stops',
+    jsonRel: 'stop',
+    type: ManagedObjectType.stop,
+    attributes: stopAttrs,
+    relationships: stopRel
   },
   trip: {
-    jsonRel: 'trip',
-    json: 'trips',
-    type: ManagedObjectType.trip,
     name: 'Trip',
-    relationships: [this.route]
+    json: 'trips',
+    jsonRel: 'trip',
+    type: ManagedObjectType.trip,
+    attributes: tripAttrs,
+    relationships: tripRel
   },
   calendar: {
-    jsonRel: 'calendar',
-    json: 'calendars',
-    type: ManagedObjectType.calendar,
     name: 'Calendar',
-    relationships: [this.route]
+    json: 'calendars',
+    jsonRel: 'calendar',
+    type: ManagedObjectType.calendar,
+    attributes: calendarAttrs,
+    relationships: calendarRel
   },
   calendarDate: {
-    jsonRel: 'calendar-date',
-    json: 'calendar-dates',
-    type: ManagedObjectType.calendarDate,
     name: 'CalendarDate',
-    relationships: [this.route]
+    json: 'calendar-dates',
+    jsonRel: 'calendar-date',
+    type: ManagedObjectType.calendarDate,
+    attributes: calendarDateAttrs,
+    relationships: calendarDateRel
   },
   shape: {
-    jsonRel: 'shape',
-    json: 'shapes',
-    type: ManagedObjectType.shape,
     name: 'Shape',
-    relationships: [this.route]
+    json: 'shapes',
+    jsonRel: 'shape',
+    type: ManagedObjectType.shape,
+    attributes: shapeAttrs,
+    relationships: shapeRel
   },
   stopTime: {
-    jsonRel: 'stop-time',
-    json: 'stop-times',
-    type: ManagedObjectType.stopTime,
     name: 'StopTime',
-    relationships: [this.stop, this.trip]
+    json: 'stop-times',
+    jsonRel: 'stop-time',
+    type: ManagedObjectType.stopTime,
+    attributes: stopAttrs,
+    relationships: stopTimeRel
   }
 };

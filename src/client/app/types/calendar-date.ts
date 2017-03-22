@@ -3,7 +3,7 @@ import { ManagedObjectType, managedObjectTypes } from "./managed-object.type";
 import { ExceptionDateType, exceptionDateTypes } from "./exception-date.type";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const calendarDateAttrs: any = {
   date: {json: 'date'},
@@ -11,20 +11,20 @@ export const calendarDateAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const calendarDateRel: any = {
   route: managedObjectTypes.route
 }
 
 /**
- * Класс, описывающий сущность ОСОБАЯ ДАТА КАЛЕНДАРЯ
+ * Class describing entity EXCEPTION CALENDAR DATE
  */
 export class CalendarDate extends ManagedObject {
-  private date: Date;             // особая дата
-  private exceptionType: ExceptionDateType;  // тип особого дня
+  private date: Date;                        // exception date
+  private exceptionType: ExceptionDateType;  // exception date type
 
-  private routeId: string;        // машрут, подверженный изменениям
+  private routeId: string;  // route that edits for this exceptions
 
   constructor() {
     super(ManagedObjectType.calendarDate);
@@ -55,19 +55,25 @@ export class CalendarDate extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that gets data of class object in JSON-API format
+   */
+  getInJsonObject() : any {
+    super.getInJsonObject();
+  }
+
+  /**
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === managedObjectTypes[this.getObjTypeStr()].json) &&
-          (managedObjectAttrs.id.json in jsonData) &&
-          (managedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          (managedObjectAttrs.updatedAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][calendarDateRel.route.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][calendarDateRel.route.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in calendarDateAttrs) {
       if (!(calendarDateAttrs[obj]['json'] in jsonData['attributes']))
@@ -86,10 +92,10 @@ export class CalendarDate extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnString(id: string, date: string,
               exceptionTypeString: string, createdAt: string, updatedAt: string,
@@ -120,8 +126,8 @@ export class CalendarDate extends ManagedObject {
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, date: Date,
       exceptionTypeString: ExceptionDateType, createdAt: Date, updatedAt: Date, routeId: string) {

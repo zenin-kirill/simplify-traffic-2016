@@ -3,7 +3,7 @@ import { UnmanagedObject, unmanagedObjectAttrs } from "./unmanaged-object";
 import { UnmanagedObjectType, unmanagedObjectTypes } from "./unmanaged-object.type";
 
 /**
- * Объект, содержащий дополнительные сведения об атрибутах класса
+ * Object containing additional information about class attributes
  */
 export const tripStatusAttrs: any = {
   routeShortName: {json: 'route-short-name'},
@@ -20,29 +20,29 @@ export const tripStatusAttrs: any = {
 }
 
 /**
- * Объект содержащий доп. сведения о зависимостях класса
+ * Object containing additional information about class dependencies
  */
 export const tripStatusRel: any = {
   trip: managedObjectTypes.trip
 }
 
 /**
- * Класс, описывающий сущность СТАТУС РЕЙСА
+ * Class describing entity TRIP STATUS
  */
 export class TripStatus extends UnmanagedObject{
-  private routeShortName: string;     // которое название маршрута (номер)
-  private departure: string;          // пункт отправления
-  private depart: Date;               // отправление
-  private distFromDepart: number;     // пройденное расстояние (от п.отпр.)
-  private nextStop: string;           // название следующей остановки
-  private arriveToNextStop: Date;     // прибытия на след. остановку
-  private distToNextStop: number;     // расстояние до след. остановки
-  private destination: string;        // пункт назначения
-  private arriveToDestination: Date;  // прибытия в пункт назначения
-  private distToDestination: number;  // расстояние до п. назначения
-  private status: string;             // статус рейса
+  private routeShortName: string;     // route short name (number)
+  private departure: string;          // point of departure
+  private depart: Date;               // depart time
+  private distFromDepart: number;     // distance from departure
+  private nextStop: string;           // next stop name
+  private arriveToNextStop: Date;     // next stop arrive time
+  private distToNextStop: number;     // distance to next stop
+  private destination: string;        // point of destination
+  private arriveToDestination: Date;  // destination arrive time
+  private distToDestination: number;  // distance to destination
+  private status: string;             // trip status
 
-  private tripId: string;   // рейс, статус которого описан в классе
+  private tripId: string;   // trip whose status is described in class
 
   constructor() {
     super(UnmanagedObjectType.tripStatus);
@@ -92,27 +92,23 @@ export class TripStatus extends UnmanagedObject{
     return this.status;
   }
 
-  getCreatedAt(): Date {
-    return this.createdAt;
-  }
-
   getTripId(): string {
     return this.tripId;
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из объекта в формате JSON-API
-   * Метод проверяет и разбирает объект JSON и передает в строком виде в следующий метод
-   * Входным параметром является объект в формате JSON-API
+   * Method that sets data of class object from object in JSON-API format
+   * The method checks and parses JSON-API object and passes it in string
+   * format to following method
+   * Input parameter is object in JSON-API format
    */
   setOnJsonObject(jsonData: any) {
-    if (!((jsonData['type'] === unmanagedObjectTypes[this.getObjTypeStr()].json) &&
-          (unmanagedObjectAttrs.id.json in jsonData) &&
-          (unmanagedObjectAttrs.createdAt.json in jsonData['attributes']) &&
-          ('id' in jsonData['relationships'][tripStatusRel.trip.jsonRel]['data'])))
+    super.setOnJsonObject(jsonData);
+
+    if ('id' in jsonData['relationships'][tripStatusRel.trip.jsonRel]['data'])
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
-                      +'". Invalid common attrs format');
+                      +'". Invalid relationships format');
 
     for (let obj in  tripStatusAttrs) {
       if (!( tripStatusAttrs[obj]['json'] in jsonData['attributes']))
@@ -139,10 +135,10 @@ export class TripStatus extends UnmanagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные объекта класса из данных в строковом формате
-   * Метод производит проверку и парсинг строковых значений ствойств и передает готовые
-   * значения свойств в следующий метод
-   * Входными параметрами являются все свойства объекта класса в строковом формате
+   * Method that sets data of class object from data in string format
+   * Method checks and parses string property values and passes final property
+   * values to following method
+   * Input parameters are all properties of class object in string format
    */
   setOnStrings(id: string, routeShortName: string, departure: string, depart: string,
                distFromDepart: string, nextStop: string, arriveToNextStop: string,
@@ -179,8 +175,8 @@ export class TripStatus extends UnmanagedObject{
   }
 
   /**
-   * Метод, устанавливающий данные класса из свойств в исходном формате
-   * Входными параметрами являются все свойства класса в исходном формате
+   * Method that sets class data from properties in class attributes formats
+   * The input parameters are all properties of the class in class attributes formats
    */
   set(id: string, routeShortName: string, departure: string, depart: Date,
       distFromDepart: number, nextStop: string, arriveToNextStop: Date,

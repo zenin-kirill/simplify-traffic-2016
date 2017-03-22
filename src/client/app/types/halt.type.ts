@@ -1,15 +1,15 @@
 /**
- * Перечисление, содежащее типы остановок ТС
+ * Enumeration containing types of halts
  */
 export enum HaltType {
-  regularly,            // регулярная остановка
-  notAvailable,         // запрещення остановка
-  coordWithAgency,      // по требованию - по телефону с агенством
-  coordWithDriver       // по требованию - лично с водителем
+  regularly,       // regular halt
+  notAvailable,    // forbidden halt
+  coordWithAgency, // on request, by phone with agency
+  coordWithDriver  // on request, in person with driver
 }
 
 /**
- * Объект, содержащий дополнительные сведения о типах остановок ТС
+ * Object containing additional information about types of halts
  */
 export const haltTypes: any = {
   regularly: {json: '0', type: HaltType.regularly},

@@ -24,7 +24,7 @@ export function cookieServiceFactory() {
 }
 
 /**
- * Главный модуль приложения
+ * Main app module
  */
 @NgModule({
             imports: [
