@@ -43,7 +43,7 @@ export class AuthComponent extends Translation {
   }
 
   /**
-   * A function that attempts to authenticate a user.
+   * A function that attempts to users a user.
    */
   tryAuthorize() {
     this.message = 'Authorization...';
@@ -55,7 +55,7 @@ export class AuthComponent extends Translation {
                     },
 
                     (e: any) => { // if it didn't work - write error
-                      this.message = 'Authorization error, try again!';
+                      alert('Authorization error, please try again!');
                       console.log('AuthComponent: ' + e.message);
                       if (e.stack !== undefined) {
                         console.log(e.stack);

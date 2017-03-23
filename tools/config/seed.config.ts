@@ -10,7 +10,8 @@ import { Environments, InjectableDependency } from './seed.config.interfaces';
  */
 export const ENVIRONMENTS: Environments = {
   DEVELOPMENT: 'dev',
-  PRODUCTION: 'prod'
+  PRODUCTION: 'prod',
+  BACKEND: 'back'
 };
 
 /**
@@ -197,8 +198,7 @@ export class SeedConfig {
    * The folder for the built files in the `prod` environment.
    * @type {string}
    */
-  PROD_DEST = `${this.DIST_DIR}/prod`;
-
+  PROD_DEST = this.ENV === ENVIRONMENTS.PRODUCTION ? `${this.DIST_DIR}/prod` : `${this.DIST_DIR}/backend`;
   /**
    * The folder for temporary files.
    * @type {string}
@@ -532,7 +532,8 @@ export class SeedConfig {
   }
 
   getInjectableStyleExtension() {
-    return this.ENV === ENVIRONMENTS.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
+    return (this.ENV === ENVIRONMENTS.PRODUCTION || this.ENV === ENVIRONMENTS.BACKEND)
+           && this.ENABLE_SCSS ? 'scss' : 'css';
   }
 
 }
@@ -568,7 +569,7 @@ function filterDependency(env: string, d: InjectableDependency): boolean {
  * Returns the applications version as defined in the `package.json`.
  * @return {number} The applications version.
  */
-function appVersion(): number | string {
+export function appVersion(): number | string {
   var pkg = require('../../package.json');
   return pkg.version;
 }
@@ -586,12 +587,19 @@ function customRules(): string[] {
  * Returns the environment of the application.
  */
 function getEnvironment() {
-  let base: string[] = argv['_'];
-  let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
-  let env = (argv['env'] || '').toLowerCase();
-  if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
-    return ENVIRONMENTS.PRODUCTION;
-  } else {
-    return ENVIRONMENTS.DEVELOPMENT;
+  //let base: string[] = argv['_'];
+  //let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
+  //let env = (argv['env'] || '').toLowerCase();
+  //if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {
+  //  return ENVIRONMENTS.PRODUCTION;
+  //} else {
+  //  return ENVIRONMENTS.DEVELOPMENT;
+  //}
+  let configEnvName = argv['config-env'] || 'dev';
+  switch (configEnvName) {
+    case 'dev': return ENVIRONMENTS.DEVELOPMENT;
+    case 'prod': return ENVIRONMENTS.PRODUCTION;
+    case 'back': return ENVIRONMENTS.BACKEND;
+    default: return ENVIRONMENTS.DEVELOPMENT;
   }
 }

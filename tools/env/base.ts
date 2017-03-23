@@ -1,8 +1,8 @@
-import {EnvConfig} from './env-config.interface';
+import { EnvConfig } from './env-config.interface';
+import { appVersion } from "../config/seed.config";
 
 const BaseConfig: EnvConfig = {
-  // Sample API url
-  API: 'https://demo.com'
+  VER: appVersion().toString()
 };
 
 export = BaseConfig;

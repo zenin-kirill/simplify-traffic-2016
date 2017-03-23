@@ -12,7 +12,7 @@ import { TripsStatusComponent } from "./trips-status.component";
 import { SideBarComponent } from "./side-bar.component";
 import { NavBarComponent } from "./nav-bar.component";
 import {
-  TranslationService, TranslationModule, LocaleService, Localization,
+  TranslationService, TranslationModule, LocaleService,
   LocalizationModule
 } from "angular-l10n";
 

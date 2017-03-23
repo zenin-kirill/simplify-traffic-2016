@@ -20,7 +20,7 @@ const processors = [
 
 const reportPostCssError = (e: any) => util.log(util.colors.red(e.message));
 
-const isProd = Config.ENV === 'prod';
+const isProd = Config.ENV === 'prod' || Config.ENV === 'back';
 
 if (isProd) {
   processors.push(

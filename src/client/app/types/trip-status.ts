@@ -105,7 +105,7 @@ export class TripStatus extends UnmanagedObject{
   setOnJsonObject(jsonData: any) {
     super.setOnJsonObject(jsonData);
 
-    if ('id' in jsonData['relationships'][tripStatusRel.trip.jsonRel]['data'])
+    if (!('id' in jsonData['relationships'][tripStatusRel.trip.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
                       +'". Invalid relationships format');

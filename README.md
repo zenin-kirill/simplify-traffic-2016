@@ -87,3 +87,13 @@ Simplify Traffic admin panel web application v.0.4.3
 - в процессе взаимодействия классов и заглушен, протестированы и те и другие
 - авторизация переведена на работу с сервером
 - временно набросан механизм загрузки и парсинга всех объектов (для тестирования)
+
+  0.4.4
+
+- completed translation of the source text into English
+- added and implemented JsonParsingInterface
+- added and implemented JsonSynthesisInterface
+- added environment "backend" and congured others
+- fixed field pick-up-type
+- fixed timepoint type
+- fixed error notification output in AuthComponent

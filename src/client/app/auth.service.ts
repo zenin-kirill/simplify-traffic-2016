@@ -11,6 +11,7 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/timeout";
 import "rxjs/add/observable/throw";
+import { Config } from "./env.config";
 
 /**
  * Service that implements the authorization functionality
@@ -217,9 +218,9 @@ export class AuthService {
    * @returns Observable<Any> observed object with data in JSON-API format
    */
   private dowloadAuthData(login: string, password: string): Observable<any> {
-    return this.http.post('http://api.simplify-traffic.com/v1/users/authentication',
+    return this.http.post(Config.API + '/users/authentication' + Config.SUF,
                           {'email': login, 'password': password})
-    //return this.http.get('../assets/auth.json')
+    //return this.http.get(Config.API + '/users/authentication' + Config.SUF)
                .timeout(this.requestTimeout)
                .map((res: Response) => res.json())
                .catch(AuthService.authDataHandleError);

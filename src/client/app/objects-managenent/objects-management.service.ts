@@ -6,7 +6,7 @@ import "rxjs/add/operator/catch";
 import "rxjs/add/observable/of";
 import "rxjs/add/operator/timeout";
 import "rxjs/add/observable/throw";
-import { ManagedObjectType, managedObjectTypes } from "../types/managed-object.type";
+import { managedObjectTypes } from "../types/managed-object.type";
 import { Agency } from "../types/agency";
 import { Stop } from "../types/stop";
 import { Calendar } from "../types/calendar";
@@ -161,7 +161,7 @@ export class ObjectsManagementService {
    */
   private getData(objectName: string): Observable<any> {
     //return this.http.get('http://api.simplify-traffic.com/v1/users/authentication')
-    return this.http.get('../assets/' + objectName + '.json')
+    return this.http.get('../assets/api-stub/' + objectName + '.json')
                .timeout(this.requestTimeout)
                .map((res: Response) => res.json())
                .catch(ObjectsManagementService.getDataHandleError);

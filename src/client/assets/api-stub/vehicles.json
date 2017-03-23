@@ -1,25 +1,30 @@
 {
   "data": [
     {
-      "type": "users",
+      "type": "vehicles",
       "id": "0001",
       "attributes": {
-        "role": "administrator",
-        "name": "Sashok1",
-        "surname": "Redkov",
-        "email": "redkov@mail.ru",
+        "invertory-id": "301",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
         "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
       "links": {
-        "self": "/users/0001"
+        "self": "/vehicles/0001"
       },
       "relationships": {
         "agency": {
           "links": {
-            "self": "/user/0001/relationships/agency",
-            "related": "/user/0001/agency"
+            "self": "/vehicle/0001/relationships/agency",
+            "related": "/vehicle/0001/agency"
           },
           "data": {
             "type": "agencies",
@@ -29,25 +34,30 @@
       }
     },
     {
-      "type": "users",
+      "type": "vehicles",
       "id": "0002",
       "attributes": {
-        "role": "administrator",
-        "name": "Sashok2",
-        "surname": "Redkov",
-        "email": "redkov@mail.ru",
+        "invertory-id": "302",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
         "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
       "links": {
-        "self": "/users/0002"
+        "self": "/vehicles/0002"
       },
       "relationships": {
         "agency": {
           "links": {
-            "self": "/user/0002/relationships/agency",
-            "related": "/user/0002/agency"
+            "self": "/vehicle/0002/relationships/agency",
+            "related": "/vehicle/0002/agency"
           },
           "data": {
             "type": "agencies",
@@ -57,29 +67,34 @@
       }
     },
     {
-      "type": "users",
-      "id": "0002",
+      "type": "vehicles",
+      "id": "0003",
       "attributes": {
-        "role": "administrator",
-        "name": "Sashok1",
-        "surname": "Redkov",
-        "email": "redkov@mail.ru",
+        "invertory-id": "303",
+        "type": "bus",
+        "manufacturer": "Mersedes",
+        "vehicle-model": "SL600k",
+        "date-manufactured": "1996",
+        "payed-until": "13.02.2018",
+        "license-plate": "ER234EN34",
         "photo-url": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
       "links": {
-        "self": "/users/0002"
+        "self": "/vehicles/0003"
       },
       "relationships": {
         "agency": {
           "links": {
-            "self": "/user/0002/relationships/agency",
-            "related": "/user/0002/agency"
+            "self": "/vehicle/0003/relationships/agency",
+            "related": "/vehicle/0003/agency"
           },
           "data": {
             "type": "agencies",
-            "id": "0002"
+            "id": "0003"
           }
         }
       }

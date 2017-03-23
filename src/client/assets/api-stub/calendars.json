@@ -1,0 +1,194 @@
+{
+  "data": [
+    {
+      "type": "calendars",
+      "id": "0001",
+      "attributes": {
+        "monday": "true",
+        "tuesday": "true",
+        "wednesday": "true",
+        "thursday": "true",
+        "friday": "true",
+        "saturday": "true",
+        "sunday": "true",
+        "start-date": "08.11.2016",
+        "end-date": "08.11.2016",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/calendars/0001"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/calendar/0001/relationships/route",
+            "related": "/calendars/0001/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "calendars",
+      "id": "0002",
+      "attributes": {
+        "monday": "false",
+        "tuesday": "true",
+        "wednesday": "true",
+        "thursday": "true",
+        "friday": "true",
+        "saturday": "true",
+        "sunday": "true",
+        "start-date": "08.11.2016",
+        "end-date": "08.11.2016",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/calendars/0002"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/calendar/0002/relationships/route",
+            "related": "/calendars/0002/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "calendars",
+      "id": "0003",
+      "attributes": {
+        "monday": "false",
+        "tuesday": "false",
+        "wednesday": "true",
+        "thursday": "true",
+        "friday": "true",
+        "saturday": "true",
+        "sunday": "true",
+        "start-date": "08.11.2016",
+        "end-date": "08.11.2016",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/calendars/0003"
+      },
+      "relationships": {
+        "route": {
+          "links": {
+            "self": "/calendar/0003/relationships/route",
+            "related": "/calendar/0003/route"
+          },
+          "data": {
+            "type": "routes",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ],
+
+
+  "included": [
+    {
+      "type": "routes",
+      "id": "0001",
+      "attributes": {
+        "type": "bus",
+        "short-name": "401",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0001"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0001/relationships/agency",
+            "related": "/route/0001/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0001"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0002",
+      "attributes": {
+        "type": "bus",
+        "short-name": "402",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0002"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0002/relationships/agency",
+            "related": "/route/0002/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0002"
+          }
+        }
+      }
+    },
+    {
+      "type": "routes",
+      "id": "0003",
+      "attributes": {
+        "type": "bus",
+        "short-name": "403",
+        "long-name": "Zelenograd - Moskva",
+        "color": "22AAFF",
+        "description": "lalala",
+        "bikes-allowed": "true",
+        "wheelchair-accessible": "true",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      },
+      "links": {
+        "self": "/routes/0003"
+      },
+      "relationships": {
+        "agency": {
+          "links": {
+            "self": "/route/0003/relationships/agency",
+            "related": "/route/0003/agency"
+          },
+          "data": {
+            "type": "agencies",
+            "id": "0003"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -11,8 +11,8 @@ import Config from '../../config';
 function codegen(
     ngOptions: tsc.AngularCompilerOptions, cliOptions: tsc.NgcCliOptions, program: ts.Program,
     host: ts.CompilerHost) {
-  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen({transitiveModules: true});
-}
+  return CodeGenerator.create(ngOptions, cliOptions, program, host).codegen();
+} //{transitiveModules: true}
 
 const copyFile = (name: string, from: string, to: string, mod: any = (f: string) => f) => {
   const file = readFileSync(join(from, name));

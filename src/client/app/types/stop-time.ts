@@ -141,7 +141,7 @@ export class StopTime extends ManagedObject {
   setOnJsonObject(jsonData: any) {
     super.setOnJsonObject(jsonData);
 
-    if (('id' in jsonData['relationships'][stopTimeRel.trip.jsonRel]['data']) &&
+    if (!('id' in jsonData['relationships'][stopTimeRel.trip.jsonRel]['data']) &&
           ('id' in jsonData['relationships'][stopTimeRel.stop.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name

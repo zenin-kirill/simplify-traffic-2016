@@ -86,7 +86,7 @@ export class VehicleStatus extends UnmanagedObject {
   setOnJsonObject(jsonData: any) {
     super.setOnJsonObject(jsonData);
 
-    if (('id' in jsonData['relationships'][vehicleStatusRel.vehicle.jsonRel]['data']) &&
+    if (!('id' in jsonData['relationships'][vehicleStatusRel.vehicle.jsonRel]['data']) &&
         ('id' in jsonData['relationships'][vehicleStatusRel.driver.jsonRel]['data']) &&
         ('id' in jsonData['relationships'][vehicleStatusRel.route.jsonRel]['data']) &&
         ('id' in jsonData['relationships'][vehicleStatusRel.trip.jsonRel]['data']))

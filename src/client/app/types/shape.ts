@@ -89,7 +89,7 @@ export class Shape extends ManagedObject {
   setOnJsonObject(jsonData: any) {
     super.setOnJsonObject(jsonData);
 
-    if ('id' in jsonData['relationships'][shapeRel.route.jsonRel]['data'])
+    if (!('id' in jsonData['relationships'][shapeRel.route.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
                       +'". Invalid relationships format');

@@ -1,25 +1,25 @@
 {
   "data": [
     {
-      "type": "users",
+      "type": "drivers",
       "id": "0001",
       "attributes": {
-        "role": "administrator",
-        "name": "Sashok1",
-        "surname": "Redkov",
-        "email": "redkov@mail.ru",
+        "name": "Aleksey1",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
         "photo-url": "lalala",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
       "links": {
-        "self": "/users/0001"
+        "self": "/drivers/0001"
       },
       "relationships": {
         "agency": {
           "links": {
-            "self": "/user/0001/relationships/agency",
-            "related": "/user/0001/agency"
+            "self": "/driver/0001/relationships/agency",
+            "related": "/driver/0001/agency"
           },
           "data": {
             "type": "agencies",
@@ -29,25 +29,25 @@
       }
     },
     {
-      "type": "users",
+      "type": "drivers",
       "id": "0002",
       "attributes": {
-        "role": "administrator",
-        "name": "Sashok2",
-        "surname": "Redkov",
-        "email": "redkov@mail.ru",
+        "name": "Aleksey2",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
         "photo-url": "lalala",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
       "links": {
-        "self": "/users/0002"
+        "self": "/drivers/0002"
       },
       "relationships": {
         "agency": {
           "links": {
-            "self": "/user/0002/relationships/agency",
-            "related": "/user/0002/agency"
+            "self": "/driver/0002/relationships/agency",
+            "related": "/driver/0002/agency"
           },
           "data": {
             "type": "agencies",
@@ -57,29 +57,29 @@
       }
     },
     {
-      "type": "users",
-      "id": "0002",
+      "type": "drivers",
+      "id": "0003",
       "attributes": {
-        "role": "administrator",
-        "name": "Sashok1",
-        "surname": "Redkov",
-        "email": "redkov@mail.ru",
+        "name": "Aleksey3",
+        "surname": "Zvornov",
+        "birth-date": "04.12.1991",
+        "license-number": "RU23S232343",
         "photo-url": "lalala",
         "created-at": "08.11.2016",
         "updated-at": "10.11.2016"
       },
       "links": {
-        "self": "/users/0002"
+        "self": "/drivers/0003"
       },
       "relationships": {
         "agency": {
           "links": {
-            "self": "/user/0002/relationships/agency",
-            "related": "/user/0002/agency"
+            "self": "/driver/0003/relationships/agency",
+            "related": "/driver/0003/agency"
           },
           "data": {
             "type": "agencies",
-            "id": "0002"
+            "id": "0003"
           }
         }
       }

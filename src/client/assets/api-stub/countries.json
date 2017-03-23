@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "type": "countries",
+      "id": "0001",
+      "attributes": {
+        "name": "Russia1",
+        "iso-str": "RU",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      }
+    },
+
+    {
+      "type": "countries",
+      "id": "0001",
+      "attributes": {
+        "name": "Russia2",
+        "iso-str": "RU",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      }
+    },
+
+    {
+      "type": "countries",
+      "id": "0001",
+      "attributes": {
+        "name": "Russia3",
+        "iso-str": "RU",
+        "created-at": "08.11.2016",
+        "updated-at": "10.11.2016"
+      }
+    }
+  ]
+}

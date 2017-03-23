@@ -120,7 +120,7 @@ export class Route extends ManagedObject {
   setOnJsonObject(jsonData: any) {
     super.setOnJsonObject(jsonData);
 
-    if ('id' in jsonData['relationships'][routeRel.agency.jsonRel]['data'])
+    if (!('id' in jsonData['relationships'][routeRel.agency.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + managedObjectTypes[this.getObjTypeStr()].name
                       +'". Invalid relationships format');

@@ -59,7 +59,7 @@ export class Session extends UnmanagedObject {
   setOnJsonObject(jsonData: any) {
     super.setOnJsonObject(jsonData);
 
-    if (('id' in jsonData['relationships'][sessionRel.user.jsonRel]['data']) &&
+    if (!('id' in jsonData['relationships'][sessionRel.user.jsonRel]['data']) &&
         ('id' in jsonData['relationships'][sessionRel.agency.jsonRel]['data']))
       throw new Error('Impossible to set an object "'
                       + unmanagedObjectTypes[this.getObjTypeStr()].name
