@@ -1,6 +1,6 @@
 {
   "name": "st-app",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Administration panel for transport management",
   "scripts": {
     "build.dev": "gulp build.dev --color --b --config-env dev",

@@ -97,3 +97,8 @@ Simplify Traffic admin panel web application v.0.4.3
 - fixed field pick-up-type
 - fixed timepoint type
 - fixed error notification output in AuthComponent
+
+  0.4.5
+
+- added missing file app.js to the repository
+- fixed API links
