@@ -1,6 +1,6 @@
 # Simplify Traffic admin panel web application v.0.4.3 on Angular 2 
 
-Опубликовано с соглашением правобладателя @SamyRai
+Опубликовано с согласием правобладателя @SamyRai
 
 ## Текущие версии компонентов:
 
