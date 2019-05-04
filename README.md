@@ -2,6 +2,9 @@
 
 **Опубликовано с согласием правобладателя @SamyRai**
 
+**Ссылка на наглядную информацию (документы/ фото):**  
+https://drive.google.com/open?id=1IaNpuuPhKBwK-_A3dnKeFyAhqWbt5TSD
+
 ## Текущие версии компонентов:
 
 - Node.js v.6.9.4
